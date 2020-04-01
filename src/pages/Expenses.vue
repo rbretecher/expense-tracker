@@ -12,16 +12,7 @@
           v-for="(expense, key) in expenses"
           :key="key"
         >
-          <q-item
-            clickable
-            v-ripple
-          >
-            <q-item-section>{{ expense.name }}</q-item-section>
-            <q-item-section side>
-              <q-item-label>{{ expense.price }}€</q-item-label>
-              <q-item-label caption>{{ expense.date }}</q-item-label>
-            </q-item-section>
-          </q-item>
+          <expense-item :expense="expense" />
         </q-list>
       </q-scroll-area>
 
@@ -48,6 +39,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import ExpenseItem from 'src/components/Expenses/ExpenseItem';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 
 export default {
@@ -61,6 +53,7 @@ export default {
   },
   components: {
     AddExpense,
+    ExpenseItem,
   },
 };
 </script>
