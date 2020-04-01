@@ -7,7 +7,10 @@
       <modal-expense-header>Add expense</modal-expense-header>
 
       <q-card-section class="q-pt-none">
-        <modal-expense-name :name.sync="formData.name" />
+        <modal-expense-name
+          :name.sync="formData.name"
+          :autofocus="true"
+        />
         <modal-expense-price :price.sync="formData.price" />
         <modal-expense-date :date.sync="formData.date" />
       </q-card-section>

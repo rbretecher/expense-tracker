@@ -7,11 +7,18 @@
     :rules="[ val => val && val.length > 0 || 'Please enter a name']"
     clearable
     label="Name"
+    :autofocus="autofocus"
   />
 </template>
 
 <script>
 export default {
-  props: ['name'],
+  props: [
+    'name',
+    {
+      autofocus: {
+        default: false,
+      },
+    }],
 };
 </script>
