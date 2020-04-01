@@ -12,7 +12,10 @@
           v-for="(expense, key) in expenses"
           :key="key"
         >
-          <expense-item :expense="expense" />
+          <expense-item
+            :expense="expense"
+            :id="key"
+          />
         </q-list>
       </q-scroll-area>
 

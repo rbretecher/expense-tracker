@@ -2,9 +2,8 @@
   <q-input
     outlined
     label="Date"
-    :value="date"
-    mask="date"
-    :rules="['date']"
+    :value="formattedDate"
+    :rules="[ validateDate ]"
   >
     <template v-slot:append>
       <q-icon
@@ -17,8 +16,9 @@
           transition-hide="scale"
         >
           <q-date
-            :value="date"
+            :value="formattedDate"
             @input="onDateSelected"
+            mask="DD/MM/YYYY"
           />
         </q-popup-proxy>
       </q-icon>
@@ -27,12 +27,29 @@
 </template>
 
 <script>
+import { date } from 'quasar';
+
 export default {
   props: ['date'],
+  computed: {
+    formattedDate() {
+      return date.formatDate(this.date, 'DD/MM/YYYY');
+    },
+  },
   methods: {
-    onDateSelected($event) {
+    onDateSelected(selectedDate) {
+      const dateExtracted = date.extractDate(selectedDate, 'DD/MM/YYYY');
+      const formattedDate = date.formatDate(dateExtracted, 'YYYY/MM/DD');
+
       this.$refs.qDateProxy.hide();
-      this.$emit('update:date', $event);
+      this.$emit('update:date', formattedDate);
+    },
+    validateDate(value) {
+      // DD/MM/YYYY validation
+      if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+        return 'Please enter a valid date';
+      }
+      return true;
     },
   },
 };
