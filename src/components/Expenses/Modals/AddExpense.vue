@@ -9,7 +9,7 @@
       <q-card-section class="q-pt-none">
         <modal-expense-name
           :name.sync="formData.name"
-          :autofocus="true"
+          autofocus="true"
           class="q-mb-sm"
         />
         <modal-expense-price
