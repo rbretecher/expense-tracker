@@ -5,7 +5,6 @@
     @input="$emit('update:name', $event)"
     lazy-rules
     :rules="[ val => val && val.length > 0 || 'Please enter a name']"
-    clearable
     label="Name"
   >
     <template v-slot:prepend>
