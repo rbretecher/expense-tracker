@@ -14,7 +14,7 @@
 
     <q-item-section>
       <q-item-label>{{ expense.name }}</q-item-label>
-      <q-item-label caption>Payed by {{ expense.payedBy }}</q-item-label>
+      <q-item-label caption>Payed by {{ payedByName }}</q-item-label>
     </q-item-section>
     <q-item-section side>
       <q-item-label>{{ expense.price }}€</q-item-label>
@@ -37,14 +37,24 @@
 <script>
 import { date } from 'quasar';
 import EditExpense from 'src/components/Expenses/Modals/EditExpense';
+import { mapState } from 'vuex';
 
 export default {
+  props: ['id', 'expense'],
   data() {
     return {
       showEditExpense: false,
     };
   },
-  props: ['id', 'expense'],
+  computed: {
+    ...mapState('users', ['users']),
+    payedByName() {
+      if (!this.users[this.expense.payedBy]) {
+        return 'Unknown';
+      }
+      return this.users[this.expense.payedBy].name;
+    },
+  },
   components: {
     EditExpense,
   },
