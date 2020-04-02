@@ -4,15 +4,20 @@
       @submit="submitForm"
       ref="form"
     >
-      <modal-expense-header>Add expense</modal-expense-header>
+      <modal-expense-header class="q-mb-sm">Add expense</modal-expense-header>
 
       <q-card-section class="q-pt-none">
         <modal-expense-name
           :name.sync="formData.name"
           :autofocus="true"
+          class="q-mb-sm"
         />
-        <modal-expense-price :price.sync="formData.price" />
+        <modal-expense-price
+          :price.sync="formData.price"
+          class="q-mb-sm"
+        />
         <modal-expense-date :date.sync="formData.date" />
+        <modal-expense-payed-by :payedBy.sync="formData.payedBy" />
       </q-card-section>
 
       <modal-expense-actions />

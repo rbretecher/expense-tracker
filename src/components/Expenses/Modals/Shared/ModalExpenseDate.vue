@@ -5,7 +5,7 @@
     :value="formattedDate"
     :rules="[ validateDate ]"
   >
-    <template v-slot:append>
+    <template v-slot:prepend>
       <q-icon
         name="event"
         class="cursor-pointer"

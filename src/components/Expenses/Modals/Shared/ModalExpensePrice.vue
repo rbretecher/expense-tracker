@@ -7,7 +7,12 @@
     :rules="[ val => val && val != 0 || 'Please enter a valid price']"
     clearable
     label="Price"
-  />
+    suffix="€"
+  >
+    <template v-slot:prepend>
+      <q-icon name="euro_symbol" />
+    </template>
+  </q-input>
 </template>
 
 <script>

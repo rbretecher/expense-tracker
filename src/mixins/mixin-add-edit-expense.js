@@ -1,6 +1,7 @@
 import ModalExpenseName from 'src/components/Expenses/Modals/Shared/ModalExpenseName';
 import ModalExpensePrice from 'src/components/Expenses/Modals/Shared/ModalExpensePrice';
 import ModalExpenseDate from 'src/components/Expenses/Modals/Shared/ModalExpenseDate';
+import ModalExpensePayedBy from 'src/components/Expenses/Modals/Shared/ModalExpensePayedBy';
 import ModalExpenseActions from 'src/components/Expenses/Modals/Shared/ModalExpenseActions';
 import ModalExpenseHeader from 'src/components/Expenses/Modals/Shared/ModalExpenseHeader';
 
@@ -11,6 +12,7 @@ export default {
         name: null,
         price: null,
         date: null,
+        payedBy: null,
       },
     };
   },
@@ -27,6 +29,7 @@ export default {
     ModalExpenseName,
     ModalExpensePrice,
     ModalExpenseDate,
+    ModalExpensePayedBy,
     ModalExpenseActions,
     ModalExpenseHeader,
   },

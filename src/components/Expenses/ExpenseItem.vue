@@ -4,7 +4,18 @@
     v-ripple
     @click="showEditExpense = true"
   >
-    <q-item-section>{{ expense.name }}</q-item-section>
+    <q-item-section avatar>
+      <q-icon
+        name="payment"
+        color="green"
+      />
+
+    </q-item-section>
+
+    <q-item-section>
+      <q-item-label>{{ expense.name }}</q-item-label>
+      <q-item-label caption>Payed by {{ expense.payedBy }}</q-item-label>
+    </q-item-section>
     <q-item-section side>
       <q-item-label>{{ expense.price }}€</q-item-label>
       <q-item-label caption>{{ expense.date | formatDate }}</q-item-label>

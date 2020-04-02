@@ -8,7 +8,11 @@
     clearable
     label="Name"
     :autofocus="autofocus"
-  />
+  >
+    <template v-slot:prepend>
+      <q-icon name="list_alt" />
+    </template>
+  </q-input>
 </template>
 
 <script>

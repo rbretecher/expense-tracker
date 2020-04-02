@@ -4,12 +4,21 @@
       @submit="submitForm"
       ref="form"
     >
-      <modal-expense-header>Edit expense</modal-expense-header>
+      <modal-expense-header class="q-mb-sm">
+        {{ formData.name || 'Edit expense' }}
+      </modal-expense-header>
 
       <q-card-section class="q-pt-none">
-        <modal-expense-name :name.sync="formData.name" />
-        <modal-expense-price :price.sync="formData.price" />
+        <modal-expense-name
+          :name.sync="formData.name"
+          class="q-mb-sm"
+        />
+        <modal-expense-price
+          :price.sync="formData.price"
+          class="q-mb-sm"
+        />
         <modal-expense-date :date.sync="formData.date" />
+        <modal-expense-payed-by :payedBy.sync="formData.payedBy" />
       </q-card-section>
 
       <modal-expense-actions />

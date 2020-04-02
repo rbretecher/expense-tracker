@@ -5,18 +5,22 @@
       <h5>Expenses</h5>
 
       <q-scroll-area class="q-scroll-area-expenses">
-
         <q-list
           bordered
           separator
           v-for="(expense, key) in expenses"
           :key="key"
+          class="q-mb-sm"
         >
           <expense-item
             :expense="expense"
             :id="key"
           />
         </q-list>
+
+        <q-separator />
+
+        <h6 class="float-right">Total : {{ totalAmount }}€</h6>
       </q-scroll-area>
 
       <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
@@ -41,7 +45,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import ExpenseItem from 'src/components/Expenses/ExpenseItem';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 
@@ -53,6 +57,7 @@ export default {
   },
   computed: {
     ...mapState('expenses', ['expenses']),
+    ...mapGetters('expenses', ['totalAmount']),
   },
   components: {
     AddExpense,
