@@ -3,7 +3,7 @@
     outlined
     :value="payedBy"
     @input="$emit('update:payedBy', $event)"
-    :options="users"
+    :options="usernames"
     :rules="[val => !!val || 'Please choose a value']"
     label="Payed by"
   >
@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   props: ['payedBy'],
   computed: {
-    ...mapState('users', ['users']),
+    ...mapGetters('users', ['usernames']),
   },
 };
 </script>
