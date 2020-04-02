@@ -14,16 +14,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   props: ['payedBy'],
-  data() {
-    return {
-      // @TODO : Create and add this to users-store
-      users: [
-        'Romain',
-        'Madeline',
-      ],
-    };
+  computed: {
+    ...mapState('users', ['users']),
   },
 };
 </script>
