@@ -3,7 +3,5 @@ export function users(state) {
 }
 
 export function getUser(state, userId) {
-  console.log('state', state);
-  console.log('get user', userId);
   return state.users[userId];
 }

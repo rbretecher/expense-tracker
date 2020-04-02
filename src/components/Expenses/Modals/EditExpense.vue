@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { buildPathFromDate } from 'src/functions/build-path-from-date';
 import mixinAddEditExpense from 'src/mixins/mixin-add-edit-expense';
 import { mapActions } from 'vuex';
 
@@ -36,11 +37,16 @@ export default {
   methods: {
     ...mapActions('expenses', ['updateExpense']),
     saveExpense() {
-      this.updateExpense({ id: this.id, updates: this.formData });
+      this.updateExpense({
+        id: this.id,
+        path: this.path,
+        updates: this.formData,
+      });
       this.$emit('close');
     },
   },
   mounted() {
+    this.path = buildPathFromDate(this.expense.date);
     this.formData = {
       ...this.expense,
     };

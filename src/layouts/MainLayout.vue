@@ -3,15 +3,10 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
+        <q-icon
+          name="credit_card"
+          size="24px"
         />
-
         <q-toolbar-title>
           Expense Tracker
         </q-toolbar-title>
@@ -24,19 +19,7 @@
       bordered
       content-class="bg-grey-1"
     >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Navigation
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
+      <app-menu />
     </q-drawer>
 
     <q-page-container>
@@ -46,32 +29,16 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink';
+import AppMenu from 'components/Menu/Menu';
 
 export default {
   name: 'MainLayout',
-
   components: {
-    EssentialLink,
+    AppMenu,
   },
-
   data() {
     return {
       leftDrawerOpen: false,
-      essentialLinks: [
-        {
-          title: 'Expenses',
-          caption: 'Manage your expenses',
-          icon: 'attach_money',
-          link: '/',
-        },
-        {
-          title: 'Categories',
-          caption: 'Manage the categories',
-          icon: 'category',
-          link: '/categories',
-        },
-      ],
     };
   },
 };

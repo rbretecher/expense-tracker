@@ -1,8 +1,11 @@
+export function years(state) {
+  return Object.keys(state.expenses).sort().reverse();
+}
 
-export function totalAmount(state) {
-  let total = 0;
-  Object.keys(state.expenses).forEach((key) => {
-    total += parseInt(state.expenses[key].price, 10);
-  });
-  return total;
+export function months(state) {
+  return (year) => Object.keys(state.expenses[year]).sort();
+}
+
+export function expensesInMonth(state) {
+  return (year, month) => state.expenses[year][month];
 }

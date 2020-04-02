@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import ExpenseItem from 'src/components/Expenses/ExpenseItem';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 
@@ -56,8 +56,17 @@ export default {
     };
   },
   computed: {
-    ...mapState('expenses', ['expenses']),
-    ...mapGetters('expenses', ['totalAmount']),
+    ...mapGetters('expenses', ['expensesInMonth']),
+    expenses() {
+      return this.expensesInMonth(this.$route.params.year, this.$route.params.month);
+    },
+    totalAmount() {
+      let total = 0;
+      Object.keys(this.expenses).forEach((key) => {
+        total += parseInt(this.expenses[key].price, 10);
+      });
+      return total;
+    },
   },
   components: {
     AddExpense,
