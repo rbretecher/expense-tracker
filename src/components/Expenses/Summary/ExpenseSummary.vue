@@ -36,7 +36,7 @@ export default {
       Object.keys(this.expenses).forEach((key) => {
         const expense = this.expenses[key];
 
-        const price = parseInt(expense.price, 10);
+        const price = parseFloat(expense.price, 10);
         expensesPerUser[expense.paidBy].paid += price;
 
         Object.keys(expensesPerUser).forEach((userId) => {
@@ -50,7 +50,7 @@ export default {
     totalAmount() {
       return Object
         .keys(this.expenses)
-        .reduce((acc, key) => acc + parseInt(this.expenses[key].price, 10), 0);
+        .reduce((acc, key) => acc + parseFloat(this.expenses[key].price, 10), 0);
     },
   },
 };
