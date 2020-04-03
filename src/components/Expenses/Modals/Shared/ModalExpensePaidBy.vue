@@ -1,13 +1,13 @@
 <template>
   <q-select
     outlined
-    :value="payedBy"
-    @input="$emit('update:payedBy', $event)"
+    :value="paidBy"
+    @input="$emit('update:paidBy', $event)"
     :options="selectOptions"
     map-options
     emit-value
     :rules="[val => !!val || 'Please choose a value']"
-    label="Payed by"
+    label="Paid by"
   >
     <template v-slot:prepend>
       <q-icon name="person" />
@@ -19,7 +19,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  props: ['payedBy'],
+  props: ['paidBy'],
   computed: {
     ...mapState('users', ['users']),
     selectOptions() {

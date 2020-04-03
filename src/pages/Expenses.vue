@@ -2,25 +2,13 @@
   <q-page>
     <div class="q-pa-md absolute full-width full-height column">
 
-      <h5>Expenses</h5>
-
       <q-scroll-area class="q-scroll-area-expenses">
-        <q-list
-          bordered
-          separator
-          v-for="(expense, key) in expenses"
-          :key="key"
-          class="q-mb-sm"
-        >
-          <expense-item
-            :expense="expense"
-            :id="key"
-          />
-        </q-list>
 
-        <q-separator />
+        <h5>Expenses</h5>
+        <expense-list :expenses="expenses" />
 
-        <h6 class="float-right">Total : {{ totalAmount }}€</h6>
+        <h5>Summary</h5>
+        <expense-summary :expenses="expenses" />
       </q-scroll-area>
 
       <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
@@ -46,8 +34,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import ExpenseItem from 'src/components/Expenses/ExpenseItem';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
+import ExpenseList from 'src/components/Expenses/List/ExpenseList';
+import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
 
 export default {
   data() {
@@ -60,17 +49,11 @@ export default {
     expenses() {
       return this.expensesInMonthSortedByDate(this.$route.params.year, this.$route.params.month);
     },
-    totalAmount() {
-      let total = 0;
-      Object.keys(this.expenses).forEach((key) => {
-        total += parseInt(this.expenses[key].price, 10);
-      });
-      return total;
-    },
   },
   components: {
     AddExpense,
-    ExpenseItem,
+    ExpenseList,
+    ExpenseSummary,
   },
 };
 </script>

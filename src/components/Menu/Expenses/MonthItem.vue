@@ -7,7 +7,7 @@
     active-class="active"
   >
     <q-item-section avatar>
-      <q-badge>{{ count }}</q-badge>
+      <q-badge color="primary">{{ count }}</q-badge>
     </q-item-section>
 
     <q-item-section>

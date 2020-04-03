@@ -14,7 +14,7 @@
 
     <q-item-section>
       <q-item-label>{{ expense.name }}</q-item-label>
-      <q-item-label caption>Payed by {{ payedByName }}</q-item-label>
+      <q-item-label caption>Paid by {{ paidByName }}</q-item-label>
     </q-item-section>
     <q-item-section side>
       <q-item-label>{{ expense.price }}€</q-item-label>
@@ -62,11 +62,11 @@ export default {
   computed: {
     ...mapState('users', ['users']),
     ...mapState('categories', ['categories']),
-    payedByName() {
-      if (!this.users[this.expense.payedBy]) {
+    paidByName() {
+      if (!this.users[this.expense.paidBy]) {
         return 'Unknown';
       }
-      return this.users[this.expense.payedBy].name;
+      return this.users[this.expense.paidBy].name;
     },
     categoryIcon() {
       if (!this.categories[this.expense.category]) {
