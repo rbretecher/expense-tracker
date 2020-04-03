@@ -6,7 +6,7 @@
   >
     <q-item-section avatar>
       <q-icon
-        name="payment"
+        :name="categoryIcon"
         color="green"
       />
 
@@ -48,11 +48,18 @@ export default {
   },
   computed: {
     ...mapState('users', ['users']),
+    ...mapState('categories', ['categories']),
     payedByName() {
       if (!this.users[this.expense.payedBy]) {
         return 'Unknown';
       }
       return this.users[this.expense.payedBy].name;
+    },
+    categoryIcon() {
+      if (!this.categories[this.expense.category]) {
+        return 'payment';
+      }
+      return this.categories[this.expense.category].icon;
     },
   },
   components: {

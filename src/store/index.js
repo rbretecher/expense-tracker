@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import expenses from './expenses';
 import users from './users';
+import categories from './categories';
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default function (/* { ssrContext } */) {
     modules: {
       expenses,
       users,
+      categories,
     },
 
     // enable strict mode (adds overhead!)

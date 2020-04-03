@@ -19,6 +19,7 @@
         />
         <modal-expense-date :date.sync="formData.date" />
         <modal-expense-payed-by :payedBy.sync="formData.payedBy" />
+        <modal-expense-category :category.sync="formData.category" />
       </q-card-section>
 
       <modal-expense-actions />
