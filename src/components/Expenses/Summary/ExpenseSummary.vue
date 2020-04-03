@@ -46,12 +46,6 @@ export default {
 
       return expensesPerUser;
     },
-    // To be removed ?
-    totalAmount() {
-      return Object
-        .keys(this.expenses)
-        .reduce((acc, key) => acc + parseFloat(this.expenses[key].price, 10), 0);
-    },
   },
 };
 </script>
