@@ -2,8 +2,10 @@
   <q-page>
     <div class="q-pa-md absolute full-width full-height column">
 
-      <q-scroll-area class="q-scroll-area-expenses">
-
+      <q-scroll-area
+        class="q-scroll-area-expenses"
+        v-if="Object.keys(expenses).length"
+      >
         <h5>Expenses</h5>
         <expense-list :expenses="expenses" />
 
@@ -11,9 +13,14 @@
         <expense-summary :expenses="expenses" />
       </q-scroll-area>
 
+      <no-expense-banner
+        :showAddExpense.sync="showAddExpense"
+        v-else
+      />
+
       <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
         <q-btn
-          @click="showAddExpense = true"
+          @click="showAddExpenseDialog"
           round
           color="primary"
           size="24px"
@@ -37,6 +44,7 @@ import { mapGetters } from 'vuex';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import ExpenseList from 'src/components/Expenses/List/ExpenseList';
 import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
+import NoExpenseBanner from 'src/components/Expenses/NoExpenseBanner';
 
 export default {
   data() {
@@ -50,10 +58,16 @@ export default {
       return this.expensesInMonthSortedByDate(this.$route.params.year, this.$route.params.month);
     },
   },
+  methods: {
+    showAddExpenseDialog() {
+      this.showAddExpense = true;
+    },
+  },
   components: {
     AddExpense,
     ExpenseList,
     ExpenseSummary,
+    NoExpenseBanner,
   },
 };
 </script>

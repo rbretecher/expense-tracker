@@ -70,7 +70,7 @@ export default {
     },
     categoryIcon() {
       if (!this.categories[this.expense.category]) {
-        return 'payment';
+        return 'help_outline';
       }
       return this.categories[this.expense.category].icon;
     },
