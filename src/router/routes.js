@@ -4,11 +4,23 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '/expenses/:year/:month', component: () => import('pages/Expenses.vue'), props: true },
-      { path: '/categories', component: () => import('pages/Categories.vue') },
+      {
+        path: '/',
+        component: () => import('pages/Index.vue'),
+      },
+      {
+        path: '/expenses/:year/:month',
+        component: () => import('pages/Expenses.vue'),
+        props: true,
+      },
+      {
+        path: '/categories',
+        component: () => import('pages/Categories.vue'),
+      },
     ],
   },
 ];
+
 
 // Always leave this as last one
 if (process.env.MODE !== 'ssr') {
