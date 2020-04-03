@@ -20,6 +20,22 @@
         :year="year"
       />
     </q-expansion-item>
+
+    <q-item
+      clickable
+      tag="a"
+      to="/categories"
+      exact
+      active-class="active"
+    >
+      <q-item-section avatar>
+        <q-icon name="category" />
+      </q-item-section>
+
+      <q-item-section>
+        <q-item-label>Categories</q-item-label>
+      </q-item-section>
+    </q-item>
   </q-list>
 </template>
 
