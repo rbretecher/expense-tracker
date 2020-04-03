@@ -56,9 +56,9 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('expenses', ['expensesInMonth']),
+    ...mapGetters('expenses', ['expensesInMonthSortedByDate']),
     expenses() {
-      return this.expensesInMonth(this.$route.params.year, this.$route.params.month);
+      return this.expensesInMonthSortedByDate(this.$route.params.year, this.$route.params.month);
     },
     totalAmount() {
       let total = 0;
