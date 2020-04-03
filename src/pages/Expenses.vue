@@ -33,7 +33,11 @@
         v-model="showAddExpense"
         position="top"
       >
-        <add-expense @close="showAddExpense = false" />
+        <add-expense
+          @close="showAddExpense = false"
+          :year="year"
+          :month="month"
+        />
       </q-dialog>
     </div>
   </q-page>
@@ -47,6 +51,7 @@ import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
 import NoExpenseBanner from 'src/components/Expenses/NoExpenseBanner';
 
 export default {
+  props: ['year', 'month'],
   data() {
     return {
       showAddExpense: false,
@@ -55,7 +60,7 @@ export default {
   computed: {
     ...mapGetters('expenses', ['expensesInMonthSortedByDate']),
     expenses() {
-      return this.expensesInMonthSortedByDate(this.$route.params.year, this.$route.params.month);
+      return this.expensesInMonthSortedByDate(this.year, this.month);
     },
   },
   methods: {

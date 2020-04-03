@@ -32,7 +32,7 @@
 import { date } from 'quasar';
 
 export default {
-  props: ['date'],
+  props: ['date', 'defaultDate'],
   data() {
     return {
       // This is used as the "date" prop cannot be muted.
@@ -63,6 +63,12 @@ export default {
     dateIsValid(value) {
       return /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/.test(value);
     },
+  },
+  created() {
+    if (this.defaultDate) {
+      this.$emit('update:date', this.convertDate(this.defaultDate));
+      this.internalDate = this.defaultDate;
+    }
   },
 };
 </script>
