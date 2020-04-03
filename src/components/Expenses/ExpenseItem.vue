@@ -20,6 +20,18 @@
       <q-item-label>{{ expense.price }}€</q-item-label>
       <q-item-label caption>{{ expense.date | formatDate }}</q-item-label>
     </q-item-section>
+    <q-item-section side>
+      <div class="row">
+        <q-btn
+          @click.stop="confirmDeleteExpense"
+          flat
+          round
+          dense
+          color="red-5"
+          icon="delete"
+        />
+      </div>
+    </q-item-section>
 
     <q-dialog
       v-model="showEditExpense"
@@ -36,8 +48,9 @@
 
 <script>
 import { date } from 'quasar';
+import { mapState, mapActions } from 'vuex';
+import { buildPathFromDate } from 'src/functions/build-path-from-date';
 import EditExpense from 'src/components/Expenses/Modals/EditExpense';
-import { mapState } from 'vuex';
 
 export default {
   props: ['id', 'expense'],
@@ -68,6 +81,23 @@ export default {
   filters: {
     formatDate(value) {
       return date.formatDate(value, 'DD/MM/YYYY');
+    },
+  },
+  methods: {
+    ...mapActions('expenses', ['deleteExpense']),
+    confirmDeleteExpense() {
+      this.$q.dialog({
+        icon: 'delete',
+        title: 'Delete expense',
+        message: 'Are you sure you want to delete this expense ?',
+        ok: true,
+        cancel: true,
+      }).onOk(() => {
+        this.deleteExpense({
+          id: this.id,
+          path: buildPathFromDate(this.expense.date),
+        });
+      });
     },
   },
 };
