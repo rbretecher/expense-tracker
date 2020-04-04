@@ -6,7 +6,7 @@
     <q-btn
       unelevated
       outline
-      icon="save"
+      icon="edit"
       type="submit"
       color="primary"
       label="Save"

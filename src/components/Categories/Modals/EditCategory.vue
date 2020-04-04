@@ -3,24 +3,21 @@
     title="Edit category"
     @success="saveCategory"
   >
-    <q-input
-      outlined
-      v-model="formData.name"
-      lazy-rules
-      :rules="[ val => val && val.length > 0 || 'Please enter a name']"
-      label="Name"
-      autofocus
-    >
-      <template v-slot:prepend>
-        <q-icon name="list_alt" />
-      </template>
-    </q-input>
+    <modal-category-name
+      :name.sync="formData.name"
+      autofocus="true"
+      class="q-mb-sm"
+    />
+
+    <modal-category-icon :icon.sync="formData.icon" />
   </modal>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import Modal from 'src/components/Shared/Modals/Modal';
+import ModalCategoryName from 'src/components/Categories/Modals/Shared/ModalCategoryName';
+import ModalCategoryIcon from 'src/components/Categories/Modals/Shared/ModalCategoryIcon';
 
 export default {
   props: ['id', 'category'],
@@ -28,6 +25,7 @@ export default {
     return {
       formData: {
         name: null,
+        icon: null,
       },
     };
   },
@@ -43,6 +41,8 @@ export default {
   },
   components: {
     Modal,
+    ModalCategoryName,
+    ModalCategoryIcon,
   },
   mounted() {
     this.formData = { ...this.category };
