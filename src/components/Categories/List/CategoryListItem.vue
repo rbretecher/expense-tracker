@@ -16,6 +16,7 @@
     <q-dialog
       v-model="showEditCategory"
       position="top"
+      no-refocus
     >
       <edit-category
         :id="id"

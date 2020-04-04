@@ -36,6 +36,7 @@
     <q-dialog
       v-model="showEditExpense"
       position="top"
+      no-refocus
     >
       <edit-expense
         :id="id"

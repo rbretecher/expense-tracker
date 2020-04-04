@@ -31,6 +31,7 @@
       <q-dialog
         v-model="showAddExpense"
         position="top"
+        no-refocus
       >
         <add-expense
           @close="showAddExpense = false"
