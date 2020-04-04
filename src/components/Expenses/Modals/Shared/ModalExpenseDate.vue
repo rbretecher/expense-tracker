@@ -21,7 +21,7 @@
             mask="DD/MM/YYYY"
             v-model="internalDate"
             @input="onDateSelected"
-          ></q-date>
+          />
         </q-popup-proxy>
       </q-icon>
     </template>
@@ -32,7 +32,7 @@
 import { date } from 'quasar';
 
 export default {
-  props: ['date', 'defaultDate'],
+  props: ['date'],
   data() {
     return {
       // This is used as the "date" prop cannot be muted.
@@ -49,9 +49,9 @@ export default {
       this.$refs.qDateProxy.hide();
       this.$emit('update:date', this.convertDate(selectedDate));
     },
-    convertDate(aDate) {
-      const dateExtracted = date.extractDate(aDate, 'DD/MM/YYYY');
-      return date.formatDate(dateExtracted, 'YYYY/MM/DD');
+    convertDate(aDate, inputMask = 'DD/MM/YYYY', outputMask = 'YYYY/MM/DD') {
+      const dateExtracted = date.extractDate(aDate, inputMask);
+      return date.formatDate(dateExtracted, outputMask);
     },
     validateDate(value) {
       if (!this.dateIsValid(value)) {
@@ -65,10 +65,9 @@ export default {
     },
   },
   created() {
-    if (this.defaultDate) {
-      this.$emit('update:date', this.convertDate(this.defaultDate));
-      this.internalDate = this.defaultDate;
-    }
+    this.$nextTick(() => {
+      this.internalDate = this.convertDate(this.date, 'YYYY/MM/DD', 'DD/MM/YYYY');
+    });
   },
 };
 </script>
