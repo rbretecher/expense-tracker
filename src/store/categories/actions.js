@@ -1,4 +1,4 @@
-/*
-export function someAction (context) {
+
+export function updateCategory({ commit }, payload) {
+  commit('updateCategory', payload);
 }
-*/
