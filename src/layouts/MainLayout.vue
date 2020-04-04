@@ -17,9 +17,8 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      content-class="bg-grey-1"
     >
-      <app-menu />
+      <app-menu class="q-mt-sm" />
     </q-drawer>
 
     <q-page-container>
@@ -43,3 +42,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.q-toolbar {
+  height: 64px;
+}
+</style>

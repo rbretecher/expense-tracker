@@ -1,12 +1,5 @@
 <template>
   <q-list>
-    <q-item-label
-      header
-      class="text-grey-8"
-    >
-      Navigation
-    </q-item-label>
-
     <menu-item
       to="/"
       icon="dashboard"
