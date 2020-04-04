@@ -9,6 +9,7 @@
       lazy-rules
       :rules="[ val => val && val.length > 0 || 'Please enter a name']"
       label="Name"
+      autofocus
     >
       <template v-slot:prepend>
         <q-icon name="list_alt" />

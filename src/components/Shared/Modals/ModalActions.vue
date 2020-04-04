@@ -5,7 +5,8 @@
   >
     <q-btn
       unelevated
-      rounded
+      outline
+      icon="save"
       type="submit"
       color="primary"
       label="Save"

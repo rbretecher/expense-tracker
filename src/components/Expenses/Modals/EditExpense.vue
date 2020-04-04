@@ -6,6 +6,7 @@
     <modal-expense-name
       :name.sync="formData.name"
       class="q-mb-sm"
+      autofocus
     />
     <modal-expense-price
       :price.sync="formData.price"

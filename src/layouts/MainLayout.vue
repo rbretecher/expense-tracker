@@ -1,13 +1,16 @@
 
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated>
+    <q-header
+      elevated
+      class="bg-white text-primary"
+    >
       <q-toolbar>
         <q-icon
-          name="credit_card"
+          name="timeline"
           size="24px"
         />
-        <q-toolbar-title>
+        <q-toolbar-title class="text-bold">
           Expense Tracker
         </q-toolbar-title>
       </q-toolbar>
