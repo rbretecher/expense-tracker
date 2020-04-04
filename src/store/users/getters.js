@@ -1,7 +1,5 @@
-export function users(state) {
-  return Object.keys(state.users).map((key) => ({ ...state.users[key] }));
-}
+import { orderObjectByProp } from 'src/functions/order-object-by-prop';
 
-export function getUser(state, userId) {
-  return state.users[userId];
+export function users(state) {
+  return orderObjectByProp(state.users, 'name');
 }

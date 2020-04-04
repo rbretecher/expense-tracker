@@ -2,8 +2,8 @@
   <q-item>
     <q-item-section avatar>
       <q-icon
-        :name="user.icon"
-        :color="user.color"
+        :name="user.icon.name"
+        :color="user.icon.color"
       />
     </q-item-section>
 

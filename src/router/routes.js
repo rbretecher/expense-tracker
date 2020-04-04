@@ -17,6 +17,10 @@ const routes = [
         path: '/categories',
         component: () => import('pages/PageCategories.vue'),
       },
+      {
+        path: '/users',
+        component: () => import('pages/PageUsers.vue'),
+      },
     ],
   },
 ];

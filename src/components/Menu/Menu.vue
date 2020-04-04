@@ -21,31 +21,30 @@
       />
     </q-expansion-item>
 
-    <q-item
-      clickable
-      tag="a"
+    <menu-item
       to="/categories"
-      exact
-      active-class="active"
-    >
-      <q-item-section avatar>
-        <q-icon name="category" />
-      </q-item-section>
+      icon="category"
+      label="Categories"
+    />
 
-      <q-item-section>
-        <q-item-label>Categories</q-item-label>
-      </q-item-section>
-    </q-item>
+    <menu-item
+      to="/users"
+      icon="account_circle"
+      label="Users"
+    />
+
   </q-list>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import YearItem from 'components/Menu/Expenses/YearItem';
+import MenuItem from 'components/Menu/MenuItem';
 
 export default {
   components: {
     YearItem,
+    MenuItem,
   },
   computed: {
     ...mapGetters('expenses', ['years']),
