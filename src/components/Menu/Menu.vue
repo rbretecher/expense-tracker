@@ -7,6 +7,12 @@
       Navigation
     </q-item-label>
 
+    <menu-item
+      to="/"
+      icon="dashboard"
+      label="Dashboard"
+    />
+
     <q-expansion-item
       expand-separator
       icon="euro_symbol"
@@ -51,3 +57,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.q-item__section--avatar .q-icon {
+  color: $primary;
+}
+</style>

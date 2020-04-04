@@ -40,7 +40,7 @@ export default {
         expensesPerUser[expense.paidBy].paid += price;
 
         Object.keys(expensesPerUser).forEach((userId) => {
-          expensesPerUser[userId].shouldHavePaid += price * this.users[userId].weight;
+          expensesPerUser[userId].shouldHavePaid += price * this.users[userId].settings.weight;
         });
       });
 
