@@ -1,5 +1,17 @@
 <template>
-  <q-page padding>
-    <h5>Categories</h5>
-  </q-page>
+  <scroll-page>
+    <big-title>Categories</big-title>
+  </scroll-page>
 </template>
+
+<script>
+import ScrollPage from 'src/components/Shared/ScrollPage';
+import BigTitle from 'src/components/Shared/BigTitle';
+
+export default {
+  components: {
+    ScrollPage,
+    BigTitle,
+  },
+};
+</script>

@@ -1,26 +1,22 @@
 <template>
-  <q-page>
-    <div class="q-pa-md absolute full-width full-height column">
-
-      <q-scroll-area
-        class="q-scroll-area-expenses"
-        v-if="Object.keys(expenses).length"
-      >
-        <big-title>Expenses</big-title>
-        <expense-list
-          :expenses="expenses"
-          class="q-mb-xl"
-        />
-
-        <big-title>Summary</big-title>
-        <expense-summary :expenses="expenses" />
-      </q-scroll-area>
-
-      <no-expense-banner
-        :showAddExpense.sync="showAddExpense"
-        v-else
+  <scroll-page>
+    <div v-if="Object.keys(expenses).length">
+      <big-title>Expenses</big-title>
+      <expense-list
+        :expenses="expenses"
+        class="q-mb-xl"
       />
 
+      <big-title>Summary</big-title>
+      <expense-summary :expenses="expenses" />
+    </div>
+
+    <no-expense-banner
+      :showAddExpense.sync="showAddExpense"
+      v-else
+    />
+
+    <template v-slot:after-scroll-area>
       <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
         <q-btn
           @click="showAddExpenseDialog"
@@ -42,8 +38,8 @@
           :month="month"
         />
       </q-dialog>
-    </div>
-  </q-page>
+    </template>
+  </scroll-page>
 </template>
 
 <script>
@@ -53,6 +49,7 @@ import ExpenseList from 'src/components/Expenses/List/ExpenseList';
 import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
 import NoExpenseBanner from 'src/components/Expenses/NoExpenseBanner';
 import BigTitle from 'src/components/Shared/BigTitle';
+import ScrollPage from 'src/components/Shared/ScrollPage';
 
 export default {
   props: ['year', 'month'],
@@ -78,6 +75,7 @@ export default {
     ExpenseSummary,
     NoExpenseBanner,
     BigTitle,
+    ScrollPage,
   },
 };
 </script>
