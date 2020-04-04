@@ -6,10 +6,13 @@
         class="q-scroll-area-expenses"
         v-if="Object.keys(expenses).length"
       >
-        <h5>Expenses</h5>
-        <expense-list :expenses="expenses" />
+        <big-title>Expenses</big-title>
+        <expense-list
+          :expenses="expenses"
+          class="q-mb-xl"
+        />
 
-        <h5>Summary</h5>
+        <big-title>Summary</big-title>
         <expense-summary :expenses="expenses" />
       </q-scroll-area>
 
@@ -49,6 +52,7 @@ import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import ExpenseList from 'src/components/Expenses/List/ExpenseList';
 import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
 import NoExpenseBanner from 'src/components/Expenses/NoExpenseBanner';
+import BigTitle from 'src/components/Shared/BigTitle';
 
 export default {
   props: ['year', 'month'],
@@ -73,6 +77,7 @@ export default {
     ExpenseList,
     ExpenseSummary,
     NoExpenseBanner,
+    BigTitle,
   },
 };
 </script>
