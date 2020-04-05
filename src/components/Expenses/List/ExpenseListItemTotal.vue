@@ -8,14 +8,17 @@
       />
     </q-item-section>
     <q-item-section side>
-      <q-item-label><strong>{{ amount }}€</strong></q-item-label>
+      <q-item-label><strong>{{ amount | formatPrice }}</strong></q-item-label>
       <q-item-label caption>{{ countLabel }}</q-item-label>
     </q-item-section>
   </q-item>
 </template>
 
 <script>
+import mixinPrice from 'src/mixins/mixin-price';
+
 export default {
+  mixins: [mixinPrice],
   props: ['count', 'amount'],
   computed: {
     countLabel() {

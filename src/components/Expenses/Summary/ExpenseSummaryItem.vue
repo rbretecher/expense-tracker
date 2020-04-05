@@ -13,16 +13,16 @@
 
     <q-item-section>
       <q-item-label>
-        Paid {{ expenseSummary.paid | round }}€
+        Paid {{ expenseSummary.paid | formatPrice }}
       </q-item-label>
       <q-item-label caption>
-        Should have paid {{ expenseSummary.shouldHavePaid | round }}€
+        Should have paid {{ expenseSummary.shouldHavePaid | formatPrice }}
       </q-item-label>
     </q-item-section>
 
     <q-item-section side>
       <q-item-label>
-        <q-badge :color="color">{{ toPay | abs | round }}€</q-badge>
+        <q-badge :color="color">{{ toPay | abs | formatPrice }}€</q-badge>
       </q-item-label>
     </q-item-section>
   </q-item>
@@ -30,8 +30,10 @@
 
 <script>
 import { mapState } from 'vuex';
+import mixinPrice from 'src/mixins/mixin-price';
 
 export default {
+  mixins: [mixinPrice],
   props: ['expenseSummary'],
   computed: {
     ...mapState('users', ['users']),
@@ -43,14 +45,6 @@ export default {
     },
     color() {
       return this.toPay > 0 ? 'red' : 'green';
-    },
-  },
-  filters: {
-    abs(value) {
-      return Math.abs(value);
-    },
-    round(value) {
-      return Math.round(value * 100) / 100;
     },
   },
 };
