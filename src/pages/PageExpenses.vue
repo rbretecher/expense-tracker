@@ -11,7 +11,7 @@
         type="submit"
         color="primary"
         label="Add new expense"
-        class="absolute-top-right q-mr-lg q-mt-sm"
+        class="absolute-top-right q-mt-sm"
         @click="showAddExpense = true"
       />
       <big-title>Expenses</big-title>

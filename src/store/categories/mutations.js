@@ -7,3 +7,7 @@ export function addCategory(state, payload) {
 export function updateCategory(state, payload) {
   Object.assign(state.categories[payload.id], payload.updates);
 }
+
+export function deleteCategory(state, id) {
+  Vue.delete(state.categories, id);
+}

@@ -7,3 +7,6 @@ export function addCategory({ commit }, payload) {
 export function updateCategory({ commit }, payload) {
   commit('updateCategory', payload);
 }
+export function deleteCategory({ commit }, id) {
+  commit('deleteCategory', id);
+}

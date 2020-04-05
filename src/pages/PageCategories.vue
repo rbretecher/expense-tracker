@@ -7,7 +7,7 @@
       type="submit"
       color="primary"
       label="Add new category"
-      class="absolute-top-right q-mr-lg q-mt-sm"
+      class="absolute-top-right q-mt-sm"
       @click="showAddCategory = true"
     />
     <big-title>Categories</big-title>
