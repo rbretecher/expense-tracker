@@ -10,9 +10,11 @@
   </q-page>
 </template>
 
+
 <style scoped>
 .q-scroll-area {
   display: flex;
   flex-grow: 1;
+  padding-right: 25px;
 }
 </style>

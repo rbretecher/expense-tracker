@@ -1,7 +1,9 @@
 <template>
   <scroll-page>
-    <div v-if="Object.keys(expenses).length">
-      <big-title>Expenses</big-title>
+    <div
+      v-if="Object.keys(expenses).length"
+      class="q-mb-xl"
+    >
       <q-btn
         unelevated
         outline
@@ -12,6 +14,7 @@
         class="absolute-top-right q-mr-lg q-mt-sm"
         @click="showAddExpense = true"
       />
+      <big-title>Expenses</big-title>
       <expense-list
         :expenses="expenses"
         class="q-mb-xl"
