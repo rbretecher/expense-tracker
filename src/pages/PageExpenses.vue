@@ -29,19 +29,17 @@
       v-else
     />
 
-    <template v-slot:after-scroll-area>
-      <q-dialog
-        v-model="showAddExpense"
-        position="top"
-        no-refocus
-      >
-        <add-expense
-          @close="showAddExpense = false"
-          :year="year"
-          :month="month"
-        />
-      </q-dialog>
-    </template>
+    <q-dialog
+      v-model="showAddExpense"
+      position="top"
+      no-refocus
+    >
+      <add-expense
+        @close="showAddExpense = false"
+        :year="year"
+        :month="month"
+      />
+    </q-dialog>
   </scroll-page>
 </template>
 

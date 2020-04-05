@@ -1,6 +1,6 @@
 <template>
   <modal
-    title="Edit category"
+    title="Add category"
     @success="saveCategory"
   >
     <modal-category-name
@@ -14,24 +14,17 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import mixinAddEditCategory from 'src/mixins/mixin-add-edit-category';
+import { mapActions } from 'vuex';
 
 export default {
   mixins: [mixinAddEditCategory],
-  props: ['id', 'category'],
   methods: {
-    ...mapActions('categories', ['updateCategory']),
+    ...mapActions('categories', ['addCategory']),
     saveCategory() {
-      this.updateCategory({
-        id: this.id,
-        updates: this.formData,
-      });
+      this.addCategory(this.formData);
       this.$emit('close');
     },
-  },
-  mounted() {
-    this.formData = { ...this.category };
   },
 };
 </script>

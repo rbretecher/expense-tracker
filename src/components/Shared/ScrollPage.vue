@@ -4,8 +4,6 @@
       <q-scroll-area class="q-scroll-area">
         <slot></slot>
       </q-scroll-area>
-
-      <slot name="after-scroll-area"></slot>
     </div>
   </q-page>
 </template>
