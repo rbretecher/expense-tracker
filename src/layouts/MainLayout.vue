@@ -32,6 +32,7 @@
 
 <script>
 import AppMenu from 'components/Menu/Menu';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'MainLayout',
@@ -42,6 +43,12 @@ export default {
     return {
       leftDrawerOpen: false,
     };
+  },
+  methods: {
+    ...mapActions('categories', ['firebaseReadData']),
+  },
+  mounted() {
+    this.firebaseReadData();
   },
 };
 </script>
