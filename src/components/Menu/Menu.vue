@@ -13,10 +13,11 @@
       caption="Manage your expenses"
       default-opened
     >
-      <year-item
-        v-for="year in years"
-        :key="year"
-        :year="year"
+      <collection-item
+        v-for="(collection, key) in rootCollections"
+        :key="key"
+        :id="key"
+        :collection="collection"
       />
     </q-expansion-item>
 
@@ -37,16 +38,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import YearItem from 'components/Menu/Expenses/YearItem';
+import CollectionItem from 'components/Menu/Expenses/CollectionItem';
 import MenuItem from 'components/Menu/MenuItem';
 
 export default {
   components: {
-    YearItem,
+    CollectionItem,
     MenuItem,
   },
   computed: {
-    ...mapGetters('expenses', ['years']),
+    ...mapGetters('collections', ['rootCollections']),
   },
 };
 </script>

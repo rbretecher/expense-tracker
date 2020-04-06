@@ -16,6 +16,7 @@
       />
       <big-title>Expenses</big-title>
       <expense-list
+        :collectionId="collectionId"
         :expenses="expenses"
         class="q-mb-xl"
       />
@@ -36,8 +37,7 @@
     >
       <add-expense
         @close="showAddExpense = false"
-        :year="year"
-        :month="month"
+        :collectionId="collectionId"
       />
     </q-dialog>
   </scroll-page>
@@ -53,16 +53,16 @@ import BigTitle from 'src/components/Shared/BigTitle';
 import ScrollPage from 'src/components/Shared/ScrollPage';
 
 export default {
-  props: ['year', 'month'],
+  props: ['collectionId'],
   data() {
     return {
       showAddExpense: false,
     };
   },
   computed: {
-    ...mapGetters('expenses', ['expensesInMonthSortedByDate']),
+    ...mapGetters('expenses', ['expensesSortedByDate']),
     expenses() {
-      return this.expensesInMonthSortedByDate(this.year, this.month);
+      return this.expensesSortedByDate(this.collectionId);
     },
   },
   methods: {

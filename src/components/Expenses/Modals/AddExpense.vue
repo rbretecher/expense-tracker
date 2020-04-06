@@ -24,19 +24,11 @@ import { mapActions } from 'vuex';
 
 export default {
   mixins: [mixinAddEditExpense],
-  props: ['year', 'month'],
-  data() {
-    const defaultDate = `${this.year.padStart(4, '0')}/${this.month.padStart(2, '0')}/01`;
-    return {
-      formData: {
-        date: defaultDate,
-      },
-    };
-  },
+  props: ['collectionId'],
   methods: {
     ...mapActions('expenses', ['addExpense']),
     saveExpense() {
-      this.addExpense(this.formData);
+      this.addExpense({ collectionId: this.collectionId, expense: this.formData });
       this.$emit('close');
     },
   },

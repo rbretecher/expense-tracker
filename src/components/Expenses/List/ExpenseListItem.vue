@@ -41,6 +41,7 @@
       <edit-expense
         :id="id"
         :expense="expense"
+        :collectionId="collectionId"
         @close="showEditExpense = false"
       />
     </q-dialog>
@@ -50,11 +51,10 @@
 <script>
 import { date } from 'quasar';
 import { mapState, mapActions } from 'vuex';
-import { buildPathFromDate } from 'src/functions/build-path-from-date';
 import EditExpense from 'src/components/Expenses/Modals/EditExpense';
 
 export default {
-  props: ['id', 'expense'],
+  props: ['id', 'expense', 'collectionId'],
   data() {
     return {
       showEditExpense: false,
@@ -96,7 +96,7 @@ export default {
       }).onOk(() => {
         this.deleteExpense({
           id: this.id,
-          path: buildPathFromDate(this.expense.date),
+          collectionId: this.collectionId,
         });
       });
     },

@@ -9,7 +9,7 @@
         color="primary"
       />
     </template>
-    There is no expense for this month. Add a new expense and it will show up here.
+    There is no expense in this collection. Add a new expense and it will show up here.
     <template v-slot:action>
       <q-btn
         unelevated

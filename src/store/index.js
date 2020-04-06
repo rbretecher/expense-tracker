@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import collections from './collections';
 import expenses from './expenses';
 import users from './users';
 import categories from './categories';
@@ -19,6 +20,7 @@ Vue.use(Vuex);
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
+      collections,
       expenses,
       users,
       categories,

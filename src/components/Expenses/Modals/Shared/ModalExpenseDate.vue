@@ -66,7 +66,9 @@ export default {
   },
   created() {
     this.$nextTick(() => {
-      this.internalDate = this.convertDate(this.date, 'YYYY/MM/DD', 'DD/MM/YYYY');
+      if (this.date) {
+        this.internalDate = this.convertDate(this.date, 'YYYY/MM/DD', 'DD/MM/YYYY');
+      }
     });
   },
 };

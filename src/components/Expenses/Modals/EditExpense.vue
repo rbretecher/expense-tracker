@@ -19,26 +19,24 @@
 </template>
 
 <script>
-import { buildPathFromDate } from 'src/functions/build-path-from-date';
 import mixinAddEditExpense from 'src/mixins/mixin-add-edit-expense';
 import { mapActions } from 'vuex';
 
 export default {
   mixins: [mixinAddEditExpense],
-  props: ['id', 'expense'],
+  props: ['id', 'expense', 'collectionId'],
   methods: {
     ...mapActions('expenses', ['updateExpense']),
     saveExpense() {
       this.updateExpense({
         id: this.id,
-        path: this.path,
+        collectionId: this.collectionId,
         updates: this.formData,
       });
       this.$emit('close');
     },
   },
   mounted() {
-    this.path = buildPathFromDate(this.expense.date);
     this.formData = {
       ...this.expense,
     };

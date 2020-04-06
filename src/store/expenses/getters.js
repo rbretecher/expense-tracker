@@ -1,19 +1,11 @@
-export function years(state) {
-  return Object.keys(state.expenses).sort().reverse();
-}
-
-export function months(state) {
-  return (year) => Object.keys(state.expenses[year]).sort();
-}
-
-export function expensesInMonth(state) {
-  return (year, month) => state.expenses[year][month];
-}
-
-export function expensesInMonthSortedByDate(state, getters) {
-  return (year, month) => {
+export function expensesSortedByDate(state) {
+  return (collectionId) => {
     const expensesOrdered = {};
-    const expenses = getters.expensesInMonth(year, month);
+    const expenses = state.expenses[collectionId];
+
+    if (!expenses) {
+      return {};
+    }
 
     const keys = Object.keys(expenses);
 

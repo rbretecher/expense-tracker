@@ -9,7 +9,7 @@ const routes = [
         component: () => import('pages/PageDashboard.vue'),
       },
       {
-        path: '/expenses/:year/:month',
+        path: '/expenses/:collectionId',
         component: () => import('pages/PageExpenses.vue'),
         props: true,
       },
