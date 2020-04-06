@@ -11,9 +11,11 @@
     </template>
     There is no expense in this collection. Add a new expense and it will show up here.
     <template v-slot:action>
+
       <q-btn
         unelevated
-        rounded
+        outline
+        icon="add_circle"
         type="submit"
         color="primary"
         label="Add an expense"
