@@ -7,7 +7,7 @@
       icon="calendar_today"
       :label="collection.name"
       default-opened
-      caption="X expenses"
+      :caption="`${collection.count} expenses`"
     >
       <q-list>
         <collection-item

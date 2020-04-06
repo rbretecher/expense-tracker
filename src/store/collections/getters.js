@@ -27,3 +27,15 @@ export function children(state) {
     return collections;
   };
 }
+
+export function parents(state, getters) {
+  return (id) => {
+    if (state.collections[id].collection) {
+      return [
+        state.collections[id].collection,
+        ...getters.parents(state.collections[id].collection),
+      ];
+    }
+    return [];
+  };
+}
