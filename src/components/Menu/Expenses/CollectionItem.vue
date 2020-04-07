@@ -2,9 +2,9 @@
   <div>
     <q-expansion-item
       v-if="hasChildren"
-      :header-inset-level="0.25"
+      :header-inset-level="0"
       :content-inset-level="0.5"
-      icon="calendar_today"
+      :icon="collection.icon"
       :label="collection.name"
       default-opened
       :caption="`${collection.count} expenses`"
@@ -28,11 +28,12 @@
       active-class="active"
     >
       <q-item-section avatar>
-        <q-badge color="primary">{{ collection.count }}</q-badge>
+        <q-icon :name="collection.icon" />
       </q-item-section>
 
       <q-item-section>
         <q-item-label>{{ collection.name }}</q-item-label>
+        <q-item-label caption>{{ collection.count }} expenses</q-item-label>
       </q-item-section>
     </q-item>
   </div>

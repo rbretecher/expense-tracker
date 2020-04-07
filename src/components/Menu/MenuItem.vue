@@ -12,12 +12,16 @@
 
     <q-item-section>
       <q-item-label>{{ label }}</q-item-label>
+      <q-item-label
+        caption
+        v-if="caption"
+      >{{ caption }}</q-item-label>
     </q-item-section>
   </q-item>
 </template>
 
 <script>
 export default {
-  props: ['to', 'icon', 'label'],
+  props: ['to', 'icon', 'label', 'caption'],
 };
 </script>

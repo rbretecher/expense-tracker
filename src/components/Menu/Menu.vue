@@ -22,6 +22,13 @@
     </q-expansion-item>
 
     <menu-item
+      to="/collections"
+      icon="account_tree"
+      label="Collections"
+      caption="Organize your expenses"
+    />
+
+    <menu-item
       to="/categories"
       icon="category"
       label="Categories"
@@ -55,5 +62,13 @@ export default {
 <style lang="scss">
 .q-item__section--avatar .q-icon {
   color: $primary;
+}
+
+.q-drawer__content
+  > .q-list
+  > .q-expansion-item
+  > .q-expansion-item__container
+  > .q-expansion-item__content {
+  padding-left: 15px;
 }
 </style>

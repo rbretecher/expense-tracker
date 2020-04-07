@@ -21,6 +21,15 @@ const routes = [
         path: '/users',
         component: () => import('pages/PageUsers.vue'),
       },
+      {
+        path: '/collections',
+        component: () => import('pages/PageCollections.vue'),
+      },
+      {
+        path: '/collections/:collectionId',
+        component: () => import('pages/PageCollections.vue'),
+        props: true,
+      },
     ],
   },
 ];
