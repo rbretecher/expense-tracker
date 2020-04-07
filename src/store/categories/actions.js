@@ -16,10 +16,11 @@ export function deleteCategory({ dispatch }, id) {
   dispatch('firebaseDeleteCategory', id);
 }
 
-export function firebaseReadData({ commit }) {
+export function firebaseReadData({ commit, dispatch }) {
   const categories = firebaseDb.ref('categories');
 
   categories.once('value', () => {
+    dispatch('app/setCategoriesLoaded', true, { root: true });
   }, (error) => {
     showErrorMessage(error.message);
   });

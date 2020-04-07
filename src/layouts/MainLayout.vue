@@ -1,6 +1,9 @@
 
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout
+    view="hHh lpR fFf"
+    v-if="appReady"
+  >
     <q-header
       elevated
       class="bg-white text-primary"
@@ -32,7 +35,7 @@
 
 <script>
 import AppMenu from 'components/Menu/Menu';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'MainLayout',
@@ -45,10 +48,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions('categories', ['firebaseReadData']),
+    ...mapActions('app', ['loadData']),
+  },
+  computed: {
+    ...mapGetters('app', ['appReady']),
   },
   mounted() {
-    this.firebaseReadData();
+    this.loadData();
   },
 };
 </script>
