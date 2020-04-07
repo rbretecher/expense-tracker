@@ -1,6 +1,6 @@
 import Modal from 'src/components/Shared/Modals/Modal';
-import ModalCategoryName from 'src/components/Categories/Modals/Shared/ModalCategoryName';
-import ModalCategoryIcon from 'src/components/Categories/Modals/Shared/ModalCategoryIcon';
+import ModalNameInput from 'src/components/Shared/Modals/ModalNameInput';
+import ModalIconInput from 'src/components/Shared/Modals/ModalIconInput';
 
 export default {
   data() {
@@ -13,7 +13,7 @@ export default {
   },
   components: {
     Modal,
-    ModalCategoryName,
-    ModalCategoryIcon,
+    ModalNameInput,
+    ModalIconInput,
   },
 };

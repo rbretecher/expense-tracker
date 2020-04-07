@@ -3,13 +3,13 @@
     title="Add category"
     @success="saveCategory"
   >
-    <modal-category-name
+    <modal-name-input
       :name.sync="formData.name"
       autofocus="true"
       class="q-mb-sm"
     />
 
-    <modal-category-icon :icon.sync="formData.icon" />
+    <modal-icon-input :icon.sync="formData.icon" />
   </modal>
 </template>
 

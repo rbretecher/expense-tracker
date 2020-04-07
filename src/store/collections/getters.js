@@ -30,7 +30,6 @@ export function children(state) {
 
 export function parents(state, getters) {
   return (id) => {
-    console.log('> Getting parents for ', id);
     if (state.collections[id].collection) {
       return {
         [id]: state.collections[id],

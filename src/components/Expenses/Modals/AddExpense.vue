@@ -3,7 +3,7 @@
     title="Add expense"
     @success="saveExpense"
   >
-    <modal-expense-name
+    <modal-name-input
       :name.sync="formData.name"
       autofocus="true"
       class="q-mb-sm"

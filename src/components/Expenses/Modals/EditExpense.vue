@@ -3,7 +3,7 @@
     :title="formData.name || 'Edit expense'"
     @success="saveExpense"
   >
-    <modal-expense-name
+    <modal-name-input
       :name.sync="formData.name"
       class="q-mb-sm"
       autofocus

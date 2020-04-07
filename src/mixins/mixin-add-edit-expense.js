@@ -1,5 +1,5 @@
 import Modal from 'src/components/Shared/Modals/Modal';
-import ModalExpenseName from 'src/components/Expenses/Modals/Shared/ModalExpenseName';
+import ModalNameInput from 'src/components/Shared/Modals/ModalNameInput';
 import ModalExpensePrice from 'src/components/Expenses/Modals/Shared/ModalExpensePrice';
 import ModalExpenseDate from 'src/components/Expenses/Modals/Shared/ModalExpenseDate';
 import ModalExpensePaidBy from 'src/components/Expenses/Modals/Shared/ModalExpensePaidBy';
@@ -19,7 +19,7 @@ export default {
   },
   components: {
     Modal,
-    ModalExpenseName,
+    ModalNameInput,
     ModalExpensePrice,
     ModalExpenseDate,
     ModalExpensePaidBy,
