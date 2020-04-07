@@ -6,6 +6,11 @@ export function loadData({ dispatch }) {
   dispatch('collections/firebaseReadData', null, { root: true });
 }
 
+export function loadExpenseData({ dispatch }, collectionId) {
+  dispatch('setExpensesLoaded', false);
+  dispatch('expenses/firebaseReadData', collectionId, { root: true });
+}
+
 export function setCategoriesLoaded({ commit, getters }, value) {
   commit('setCategoriesLoaded', value);
 
@@ -20,4 +25,8 @@ export function setCollectionsLoaded({ commit, getters }, value) {
   if (getters.appReady) {
     Loading.hide();
   }
+}
+
+export function setExpensesLoaded({ commit }, value) {
+  commit('setExpensesLoaded', value);
 }

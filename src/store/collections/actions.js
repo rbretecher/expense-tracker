@@ -17,20 +17,6 @@ export function deleteCollection({ dispatch }, id) {
   dispatch('firebaseDeleteCollection', id);
 }
 
-// TODO : Use firebase database triggers instead.
-export function expenseAdded({ commit, getters }, id) {
-  Object.keys(getters.parents(id)).forEach((collectionId) => {
-    commit('incrementCount', collectionId);
-  });
-}
-
-// TODO : Use firebase database triggers instead.
-export function expenseDeleted({ commit, getters }, id) {
-  Object.keys(getters.parents(id)).forEach((collectionId) => {
-    commit('decrementCount', collectionId);
-  });
-}
-
 export function firebaseReadData({ commit, dispatch }) {
   const collections = firebaseDb.ref('collections');
 

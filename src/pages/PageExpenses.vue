@@ -1,50 +1,62 @@
 <template>
-  <scroll-page>
-    <div
-      v-if="Object.keys(expenses).length"
-      class="q-mb-xl"
-    >
-      <q-btn
-        unelevated
-        outline
-        icon="add_circle"
-        type="submit"
-        color="primary"
-        label="Add new expense"
-        class="absolute-top-right q-mt-sm"
-        @click="showAddExpense = true"
-      />
-      <big-title>Expenses</big-title>
-      <expense-list
-        :collectionId="collectionId"
-        :expenses="expenses"
+  <div class="relative-position">
+    <q-page v-if="!expensesLoaded">
+      <q-inner-loading :showing="!expensesLoaded">
+        <q-spinner
+          color="primary"
+          size="3em"
+          :thickness="10"
+        />
+      </q-inner-loading>
+    </q-page>
+
+    <scroll-page v-else>
+      <div
+        v-if="Object.keys(expenses).length"
         class="q-mb-xl"
+      >
+        <q-btn
+          unelevated
+          outline
+          icon="add_circle"
+          type="submit"
+          color="primary"
+          label="Add new expense"
+          class="absolute-top-right q-mt-sm"
+          @click="showAddExpense = true"
+        />
+        <big-title>Expenses</big-title>
+        <expense-list
+          :collectionId="collectionId"
+          :expenses="expenses"
+          class="q-mb-xl"
+        />
+
+        <big-title>Summary</big-title>
+        <expense-summary :expenses="expenses" />
+      </div>
+
+      <no-expense-banner
+        :showAddExpense.sync="showAddExpense"
+        v-else
       />
 
-      <big-title>Summary</big-title>
-      <expense-summary :expenses="expenses" />
-    </div>
-
-    <no-expense-banner
-      :showAddExpense.sync="showAddExpense"
-      v-else
-    />
-
-    <q-dialog
-      v-model="showAddExpense"
-      position="top"
-      no-refocus
-    >
-      <add-expense
-        @close="showAddExpense = false"
-        :collectionId="collectionId"
-      />
-    </q-dialog>
-  </scroll-page>
+      <q-dialog
+        v-model="showAddExpense"
+        position="top"
+        no-refocus
+      >
+        <add-expense
+          @close="showAddExpense = false"
+          :collectionId="collectionId"
+        />
+      </q-dialog>
+    </scroll-page>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import ExpenseList from 'src/components/Expenses/List/ExpenseList';
 import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
@@ -60,12 +72,14 @@ export default {
     };
   },
   computed: {
+    ...mapState('app', ['expensesLoaded']),
     ...mapGetters('expenses', ['expensesSortedByDate']),
     expenses() {
       return this.expensesSortedByDate(this.collectionId);
     },
   },
   methods: {
+    ...mapActions('app', ['loadExpenseData']),
     showAddExpenseDialog() {
       this.showAddExpense = true;
     },
@@ -77,6 +91,14 @@ export default {
     NoExpenseBanner,
     BigTitle,
     ScrollPage,
+  },
+  watch: {
+    collectionId() {
+      this.loadExpenseData(this.collectionId);
+    },
+  },
+  mounted() {
+    this.loadExpenseData(this.collectionId);
   },
 };
 </script>
