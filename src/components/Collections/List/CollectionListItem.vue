@@ -28,6 +28,7 @@
           dense
           color="red-5"
           icon="delete"
+          :disabled="collection.count !== 0"
         />
       </div>
     </q-item-section>
