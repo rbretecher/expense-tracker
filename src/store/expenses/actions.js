@@ -1,5 +1,7 @@
+import firebase from 'firebase/app';
+import 'firebase/database';
+
 import { uid } from 'quasar';
-import { firebaseDb } from 'src/boot/firebase';
 import { firebaseAction } from 'vuexfire';
 import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
 
@@ -16,7 +18,7 @@ export function deleteExpense(context, payload) {
 }
 
 export const firebaseReadData = firebaseAction(
-  ({ bindFirebaseRef, dispatch }, collectionId) => bindFirebaseRef('expenses', firebaseDb.ref('expenses').child(collectionId)).then(() => {
+  ({ bindFirebaseRef, dispatch }, collectionId) => bindFirebaseRef('expenses', firebase.database().ref('expenses').child(collectionId)).then(() => {
     dispatch('app/setExpensesLoaded', true, { root: true });
   }),
 );

@@ -1,5 +1,7 @@
+import firebase from 'firebase/app';
+import 'firebase/database';
+
 import { uid } from 'quasar';
-import { firebaseDb } from 'src/boot/firebase';
 import { firebaseAction } from 'vuexfire';
 import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
 
@@ -16,7 +18,7 @@ export function deleteUser(context, id) {
 }
 
 export const firebaseReadData = firebaseAction(
-  ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('users', firebaseDb.ref('users')).then(() => {
+  ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('users', firebase.database().ref('users')).then(() => {
     dispatch('app/setUsersLoaded', true, { root: true });
   }),
 );

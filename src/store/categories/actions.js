@@ -1,5 +1,7 @@
+import firebase from 'firebase/app';
+import 'firebase/database';
+
 import { uid } from 'quasar';
-import { firebaseDb } from 'src/boot/firebase';
 import { firebaseAction } from 'vuexfire';
 import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
 
@@ -15,7 +17,7 @@ export function deleteCategory(context, id) {
 }
 
 export const firebaseReadData = firebaseAction(
-  ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('categories', firebaseDb.ref('categories')).then(() => {
+  ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('categories', firebase.database().ref('categories')).then(() => {
     dispatch('app/setCategoriesLoaded', true, { root: true });
   }),
 );
