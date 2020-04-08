@@ -29,18 +29,11 @@ Then run this command to login :
 $ firebase-tools login
 ```
 
-### Build the project
+### Build and deploy the project
 
-Clone the `expense-tracker` project and edit the `hosting.site` value of the `firebase.json` file with the URL of your Web application (without the `.web.app` extension).
-
-For example, if your Web application URL is : `my-awesome-app.web.app`, update the file like this :
-```json
-  ...
-  "hosting": {
-    "site": "my-awesome-app",
-    "public": "dist/spa"
-  },
-  ...
+Clone the `expense-tracker` project and build it :
+```
+$ npm run build
 ```
 
 Then run this command (replace `PROJECT_NAME` with the name of your project) so that firebase knows which project to deploy :

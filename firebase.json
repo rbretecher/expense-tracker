@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "web-expense-tracker-demo",
     "public": "dist/spa"
   },
   "functions": {
