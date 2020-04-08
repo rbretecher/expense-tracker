@@ -17,7 +17,7 @@
       <q-item-label caption>Paid by {{ paidByName }}</q-item-label>
     </q-item-section>
     <q-item-section side>
-      <q-item-label>{{ expense.price }}€</q-item-label>
+      <q-item-label>{{ expense.price | formatPrice }}</q-item-label>
       <q-item-label caption>{{ expense.date | formatDate }}</q-item-label>
     </q-item-section>
     <q-item-section side>
@@ -52,8 +52,10 @@
 import { date } from 'quasar';
 import { mapState, mapActions } from 'vuex';
 import EditExpense from 'src/components/Expenses/Modals/EditExpense';
+import mixinPrice from 'src/mixins/mixin-price';
 
 export default {
+  mixins: [mixinPrice],
   props: ['id', 'expense', 'collectionId'],
   data() {
     return {

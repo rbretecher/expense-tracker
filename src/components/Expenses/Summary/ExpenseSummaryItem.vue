@@ -22,7 +22,7 @@
 
     <q-item-section side>
       <q-item-label>
-        <q-badge :color="color">{{ toPay | abs | formatPrice }}€</q-badge>
+        <q-badge :color="color">{{ toPay | abs | formatPrice }}</q-badge>
       </q-item-label>
     </q-item-section>
   </q-item>
