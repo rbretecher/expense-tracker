@@ -1,20 +1,17 @@
-import { uid, Notify } from 'quasar';
+import { uid } from 'quasar';
 import { firebaseDb } from 'src/boot/firebase';
-import { showErrorMessage } from 'src/functions/show-error-message';
 import { firebaseAction } from 'vuexfire';
+import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
 
-export function addCategory({ dispatch }, category) {
-  dispatch('firebaseAddCategory', {
-    id: uid(),
-    category,
-  });
+export function addCategory(context, category) {
+  firebaseSetValue(`categories/${uid()}`, category, { successMessage: 'Category added!' });
 }
 
-export function updateCategory({ dispatch }, payload) {
-  dispatch('firebaseUpdateCategory', payload);
+export function updateCategory(context, payload) {
+  firebaseUpdateValue(`categories/${payload.id}`, payload.updates, { successMessage: 'Category updated!' });
 }
-export function deleteCategory({ dispatch }, id) {
-  dispatch('firebaseDeleteCategory', id);
+export function deleteCategory(context, id) {
+  firebaseRemoveValue(`categories/${id}`, { successMessage: 'Category deleted!' });
 }
 
 export const firebaseReadData = firebaseAction(
@@ -22,33 +19,3 @@ export const firebaseReadData = firebaseAction(
     dispatch('app/setCategoriesLoaded', true, { root: true });
   }),
 );
-
-export function firebaseAddCategory(state, payload) {
-  firebaseDb.ref(`categories/${payload.id}`).set(payload.category, (error) => {
-    if (error) {
-      showErrorMessage(error.message);
-    } else {
-      Notify.create('Category added!');
-    }
-  });
-}
-
-export function firebaseUpdateCategory(state, payload) {
-  firebaseDb.ref(`categories/${payload.id}`).update(payload.updates, (error) => {
-    if (error) {
-      showErrorMessage(error.message);
-    } else {
-      Notify.create('Category updated!');
-    }
-  });
-}
-
-export function firebaseDeleteCategory(state, id) {
-  firebaseDb.ref(`categories/${id}`).remove((error) => {
-    if (error) {
-      showErrorMessage(error.message);
-    } else {
-      Notify.create('Category deleted!');
-    }
-  });
-}

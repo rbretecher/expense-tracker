@@ -1,22 +1,18 @@
-import { uid, Notify } from 'quasar';
+import { uid } from 'quasar';
 import { firebaseDb } from 'src/boot/firebase';
-import { showErrorMessage } from 'src/functions/show-error-message';
 import { firebaseAction } from 'vuexfire';
+import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
 
-export function addExpense({ dispatch }, payload) {
-  dispatch('firebaseAddExpense', {
-    id: uid(),
-    collectionId: payload.collectionId,
-    expense: payload.expense,
-  });
+export function addExpense(context, payload) {
+  firebaseSetValue(`expenses/${payload.collectionId}/${uid()}`, payload.expense, { successMessage: 'Expense added!' });
 }
 
-export function updateExpense({ dispatch }, payload) {
-  dispatch('firebaseUpdateExpense', payload);
+export function updateExpense(context, payload) {
+  firebaseUpdateValue(`expenses/${payload.collectionId}/${payload.id}`, payload.updates, { successMessage: 'Expense updated!' });
 }
 
-export function deleteExpense({ dispatch }, payload) {
-  dispatch('firebaseDeleteExpense', payload);
+export function deleteExpense(context, payload) {
+  firebaseRemoveValue(`expenses/${payload.collectionId}/${payload.id}`, { successMessage: 'Expense deleted!' });
 }
 
 export const firebaseReadData = firebaseAction(
@@ -24,39 +20,3 @@ export const firebaseReadData = firebaseAction(
     dispatch('app/setExpensesLoaded', true, { root: true });
   }),
 );
-
-export function firebaseAddExpense(state, payload) {
-  firebaseDb
-    .ref(`expenses/${payload.collectionId}/${payload.id}`)
-    .set(payload.expense, (error) => {
-      if (error) {
-        showErrorMessage(error.message);
-      } else {
-        Notify.create('Expense added!');
-      }
-    });
-}
-
-export function firebaseUpdateExpense(state, payload) {
-  firebaseDb
-    .ref(`expenses/${payload.collectionId}/${payload.id}`)
-    .update(payload.updates, (error) => {
-      if (error) {
-        showErrorMessage(error.message);
-      } else {
-        Notify.create('Expense updated!');
-      }
-    });
-}
-
-export function firebaseDeleteExpense(state, payload) {
-  firebaseDb
-    .ref(`expenses/${payload.collectionId}/${payload.id}`)
-    .remove((error) => {
-      if (error) {
-        showErrorMessage(error.message);
-      } else {
-        Notify.create('Expense deleted!');
-      }
-    });
-}
