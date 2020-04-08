@@ -9,13 +9,11 @@ If you want to give it a try, you can install it for free (see section below) or
 ## How to install
 
 ### Requirements
-You can install this application for free, you just need a Google account to create a Firebase project and a Firebase application.
+You can install this application for free, you just need a Google account to create a Firebase project.
 
-### Configure Firebase project and application
+### Create a Firebase project
 
 Sign in on the [Firebase Console](https://console.firebase.google.com) with your Google Account and create a new Firebase project.
-
-Add a Firebase Web application to this project and enable Firebase Hosting. Configure the URL of your Web application.
 
 ### Install firebase-tools
 
