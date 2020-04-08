@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   props: ['paidBy'],
   computed: {
-    ...mapState('users', ['users']),
+    ...mapGetters('users', ['users']),
     selectOptions() {
       return Object.keys(this.users).map((key) => ({ label: this.users[key].name, value: key }));
     },
