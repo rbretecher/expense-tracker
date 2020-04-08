@@ -30,12 +30,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   props: ['category'],
   computed: {
-    ...mapState('categories', ['categories']),
+    ...mapGetters('categories', ['categories']),
     selectOptions() {
       return Object.keys(this.categories).map(
         (key) => ({
