@@ -24,6 +24,7 @@ export default {
     ...mapState('users', ['users']),
     expenseSummaryPerUser() {
       const expensesPerUser = {};
+      let totalWeight = 0;
 
       Object.keys(this.users).forEach((key) => {
         expensesPerUser[key] = {
@@ -31,6 +32,8 @@ export default {
           paid: 0,
           shouldHavePaid: 0,
         };
+
+        totalWeight += this.users[key].settings.weight;
       });
 
       Object.keys(this.expenses).forEach((key) => {
@@ -42,7 +45,8 @@ export default {
           expensesPerUser[expense.paidBy].paid += price;
 
           Object.keys(expensesPerUser).forEach((userId) => {
-            expensesPerUser[userId].shouldHavePaid += price * this.users[userId].settings.weight;
+            const shouldHavePaid = (price / totalWeight) * this.users[userId].settings.weight;
+            expensesPerUser[userId].shouldHavePaid += shouldHavePaid;
           });
         }
       });
