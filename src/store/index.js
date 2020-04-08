@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import { vuexfireMutations } from 'vuexfire';
 import app from './app';
 import collections from './collections';
 import expenses from './expenses';
@@ -26,6 +27,10 @@ export default function (/* { ssrContext } */) {
       expenses,
       users,
       categories,
+    },
+
+    mutations: {
+      ...vuexfireMutations,
     },
 
     // enable strict mode (adds overhead!)

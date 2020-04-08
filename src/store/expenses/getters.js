@@ -1,33 +1,30 @@
 export function expensesSortedByDate(state) {
-  return (collectionId) => {
-    const expensesOrdered = {};
-    const expenses = state.expenses[collectionId];
+  const expensesOrdered = {};
 
-    if (!expenses) {
-      return {};
+  if (!state.expenses) {
+    return {};
+  }
+
+  const keys = Object.keys(state.expenses);
+
+  keys.sort((a, b) => {
+    const expenseAProp = state.expenses[a].date;
+    const expenseBProp = state.expenses[b].date;
+
+    let result = 0;
+
+    if (expenseAProp > expenseBProp) {
+      result = 1;
+    } else if (expenseAProp < expenseBProp) {
+      result = -1;
     }
 
-    const keys = Object.keys(expenses);
+    return result;
+  });
 
-    keys.sort((a, b) => {
-      const expenseAProp = expenses[a].date;
-      const expenseBProp = expenses[b].date;
+  keys.forEach((key) => {
+    expensesOrdered[key] = state.expenses[key];
+  });
 
-      let result = 0;
-
-      if (expenseAProp > expenseBProp) {
-        result = 1;
-      } else if (expenseAProp < expenseBProp) {
-        result = -1;
-      }
-
-      return result;
-    });
-
-    keys.forEach((key) => {
-      expensesOrdered[key] = expenses[key];
-    });
-
-    return expensesOrdered;
-  };
+  return expensesOrdered;
 }

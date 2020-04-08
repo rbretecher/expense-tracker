@@ -1,6 +1,7 @@
 import { uid, Notify } from 'quasar';
 import { firebaseDb } from 'src/boot/firebase';
 import { showErrorMessage } from 'src/functions/show-error-message';
+import { firebaseAction } from 'vuexfire';
 
 export function addCategory({ dispatch }, category) {
   dispatch('firebaseAddCategory', {
@@ -16,32 +17,14 @@ export function deleteCategory({ dispatch }, id) {
   dispatch('firebaseDeleteCategory', id);
 }
 
-export function firebaseReadData({ commit, dispatch }) {
-  const categories = firebaseDb.ref('categories');
-
-  categories.once('value', () => {
+export const firebaseReadData = firebaseAction(
+  ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('categories', firebaseDb.ref('categories')).then(() => {
     dispatch('app/setCategoriesLoaded', true, { root: true });
-  }, (error) => {
-    showErrorMessage(error.message);
-  });
-
-  categories.on('child_added', (snapshot) => {
-    const category = snapshot.val();
-    commit('addCategory', { id: snapshot.key, category });
-  });
-
-  categories.on('child_changed', (snapshot) => {
-    commit('updateCategory', { id: snapshot.key, updates: snapshot.val() });
-  });
-
-  categories.on('child_removed', (snapshot) => {
-    commit('deleteCategory', snapshot.key);
-  });
-}
+  }),
+);
 
 export function firebaseAddCategory(state, payload) {
-  const categoryRef = firebaseDb.ref(`categories/${payload.id}`);
-  categoryRef.set(payload.category, (error) => {
+  firebaseDb.ref(`categories/${payload.id}`).set(payload.category, (error) => {
     if (error) {
       showErrorMessage(error.message);
     } else {
@@ -51,8 +34,7 @@ export function firebaseAddCategory(state, payload) {
 }
 
 export function firebaseUpdateCategory(state, payload) {
-  const categoryRef = firebaseDb.ref(`categories/${payload.id}`);
-  categoryRef.update(payload.updates, (error) => {
+  firebaseDb.ref(`categories/${payload.id}`).update(payload.updates, (error) => {
     if (error) {
       showErrorMessage(error.message);
     } else {
@@ -62,8 +44,7 @@ export function firebaseUpdateCategory(state, payload) {
 }
 
 export function firebaseDeleteCategory(state, id) {
-  const categoryRef = firebaseDb.ref(`categories/${id}`);
-  categoryRef.remove((error) => {
+  firebaseDb.ref(`categories/${id}`).remove((error) => {
     if (error) {
       showErrorMessage(error.message);
     } else {

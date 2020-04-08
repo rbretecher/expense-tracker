@@ -1,6 +1,7 @@
 import { uid, Notify } from 'quasar';
 import { firebaseDb } from 'src/boot/firebase';
 import { showErrorMessage } from 'src/functions/show-error-message';
+import { firebaseAction } from 'vuexfire';
 
 export function addCollection({ dispatch }, collection) {
   dispatch('firebaseAddCollection', {
@@ -17,32 +18,14 @@ export function deleteCollection({ dispatch }, id) {
   dispatch('firebaseDeleteCollection', id);
 }
 
-export function firebaseReadData({ commit, dispatch }) {
-  const collections = firebaseDb.ref('collections');
-
-  collections.once('value', () => {
+export const firebaseReadData = firebaseAction(
+  ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('collections', firebaseDb.ref('collections')).then(() => {
     dispatch('app/setCollectionsLoaded', true, { root: true });
-  }, (error) => {
-    showErrorMessage(error.message);
-  });
-
-  collections.on('child_added', (snapshot) => {
-    const collection = snapshot.val();
-    commit('addCollection', { id: snapshot.key, collection });
-  });
-
-  collections.on('child_changed', (snapshot) => {
-    commit('updateCollection', { id: snapshot.key, updates: snapshot.val() });
-  });
-
-  collections.on('child_removed', (snapshot) => {
-    commit('deleteCollection', snapshot.key);
-  });
-}
+  }),
+);
 
 export function firebaseAddCollection(state, payload) {
-  const collectionRef = firebaseDb.ref(`collections/${payload.id}`);
-  collectionRef.set(payload.collection, (error) => {
+  firebaseDb.ref(`collections/${payload.id}`).set(payload.collection, (error) => {
     if (error) {
       showErrorMessage(error.message);
     } else {
@@ -52,8 +35,7 @@ export function firebaseAddCollection(state, payload) {
 }
 
 export function firebaseUpdateCollection(state, payload) {
-  const collectionRef = firebaseDb.ref(`collections/${payload.id}`);
-  collectionRef.update(payload.updates, (error) => {
+  firebaseDb.ref(`collections/${payload.id}`).update(payload.updates, (error) => {
     if (error) {
       showErrorMessage(error.message);
     } else {
@@ -63,8 +45,7 @@ export function firebaseUpdateCollection(state, payload) {
 }
 
 export function firebaseDeleteCollection(state, id) {
-  const collectionRef = firebaseDb.ref(`collections/${id}`);
-  collectionRef.remove((error) => {
+  firebaseDb.ref(`collections/${id}`).remove((error) => {
     if (error) {
       showErrorMessage(error.message);
     } else {

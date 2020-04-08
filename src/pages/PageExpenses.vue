@@ -75,7 +75,7 @@ export default {
     ...mapState('app', ['expensesLoaded']),
     ...mapGetters('expenses', ['expensesSortedByDate']),
     expenses() {
-      return this.expensesSortedByDate(this.collectionId);
+      return this.expensesSortedByDate;
     },
   },
   methods: {
