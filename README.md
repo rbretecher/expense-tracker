@@ -34,7 +34,7 @@ Clone the `expense-tracker` project and build it :
 $ npm run build
 ```
 
-Then run this command (replace `PROJECT_NAME` with the name of your project) so that firebase knows which project to deploy :
+Then run this command so that firebase knows which project to deploy :
 ```bash
 $ firebase use PROJECT_NAME
 ```
