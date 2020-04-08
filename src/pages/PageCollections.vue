@@ -1,15 +1,11 @@
 <template>
   <scroll-page>
-    <q-btn
-      unelevated
-      outline
-      icon="add_circle"
-      type="submit"
-      color="primary"
+    <right-side-button
       label="Add new collection"
-      class="absolute-top-right q-mt-sm"
+      icon="add_circle"
       @click="showAddCollection = true"
     />
+
     <big-title>Collections</big-title>
 
     <collection-breadcrumbs
@@ -22,7 +18,9 @@
       :collections="currentCollections"
     />
 
-    <no-collection-banner v-else />
+    <no-resource-banner v-else>
+      There is no collection yet. Add a new collection and it will show up here.
+    </no-resource-banner>
 
     <q-dialog
       v-model="showAddCollection"
@@ -43,8 +41,9 @@ import ScrollPage from 'src/components/Shared/ScrollPage';
 import BigTitle from 'src/components/Shared/BigTitle';
 import CollectionList from 'src/components/Collections/List/CollectionList';
 import AddCollection from 'src/components/Collections/Modals/AddCollection';
-import NoCollectionBanner from 'src/components/Collections/NoCollectionBanner';
+import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
 import CollectionBreadcrumbs from 'src/components/Collections/CollectionBreadcrumbs';
+import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 
 export default {
   props: ['collectionId'],
@@ -58,8 +57,9 @@ export default {
     BigTitle,
     CollectionList,
     AddCollection,
-    NoCollectionBanner,
+    NoResourceBanner,
     CollectionBreadcrumbs,
+    RightSideButton,
   },
   computed: {
     ...mapState('collections', ['collections']),

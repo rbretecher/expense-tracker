@@ -36,12 +36,15 @@ export default {
       Object.keys(this.expenses).forEach((key) => {
         const expense = this.expenses[key];
 
-        const price = parseFloat(expense.price, 10);
-        expensesPerUser[expense.paidBy].paid += price;
+        // Ensure the referenced user exists.
+        if (expensesPerUser[expense.paidBy]) {
+          const price = parseFloat(expense.price, 10);
+          expensesPerUser[expense.paidBy].paid += price;
 
-        Object.keys(expensesPerUser).forEach((userId) => {
-          expensesPerUser[userId].shouldHavePaid += price * this.users[userId].settings.weight;
-        });
+          Object.keys(expensesPerUser).forEach((userId) => {
+            expensesPerUser[userId].shouldHavePaid += price * this.users[userId].settings.weight;
+          });
+        }
       });
 
       return expensesPerUser;

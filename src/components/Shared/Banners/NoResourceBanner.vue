@@ -9,6 +9,6 @@
         color="primary"
       />
     </template>
-    There is no collection yet. Add a new collection and it will show up here.
+    <slot></slot>
   </q-banner>
 </template>

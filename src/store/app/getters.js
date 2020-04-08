@@ -1,3 +1,3 @@
 export function appReady(state) {
-  return state.categoriesLoaded && state.collectionsLoaded;
+  return state.categoriesLoaded && state.collectionsLoaded && state.usersLoaded;
 }

@@ -1,27 +1,29 @@
 <template>
   <scroll-page>
+    <right-side-button
+      label="Add new user"
+      icon="add_circle"
+      @click="showAddUser = true"
+    />
+
     <big-title>Users</big-title>
 
-    <q-list
-      bordered
-      separator
-    >
-      <q-item
-        clickable
-        v-ripple
-        v-for="(user, key) in users"
-        :key="key"
-      >
-        <q-item-section avatar>
-          <q-icon
-            :name="user.icon.name"
-            :color="user.icon.color"
-          />
+    <user-list
+      v-if="Object.keys(users).length"
+      :users="users"
+    />
 
-        </q-item-section>
-        <q-item-section>{{ user.name }}</q-item-section>
-      </q-item>
-    </q-list>
+    <no-resource-banner v-else>
+      There is no user. Add a user and it will have access to your collections.
+    </no-resource-banner>
+
+    <q-dialog
+      v-model="showAddUser"
+      position="top"
+      no-refocus
+    >
+      <add-user @close="showAddUser = false" />
+    </q-dialog>
 
   </scroll-page>
 </template>
@@ -30,11 +32,24 @@
 import { mapGetters } from 'vuex';
 import ScrollPage from 'src/components/Shared/ScrollPage';
 import BigTitle from 'src/components/Shared/BigTitle';
+import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
+import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
+import UserList from 'src/components/Users/List/UserList';
+import AddUser from 'src/components/Users/Modals/AddUser';
 
 export default {
+  data() {
+    return {
+      showAddUser: false,
+    };
+  },
   components: {
     ScrollPage,
     BigTitle,
+    NoResourceBanner,
+    RightSideButton,
+    UserList,
+    AddUser,
   },
   computed: {
     ...mapGetters('users', ['users']),

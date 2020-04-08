@@ -11,21 +11,19 @@
     </q-page>
 
     <scroll-page v-else>
+
+      <right-side-button
+        label="Add new expense"
+        icon="add_circle"
+        @click="showAddExpense = true"
+      />
+
+      <big-title>Expenses</big-title>
+
       <div
         v-if="Object.keys(expenses).length"
         class="q-mb-xl"
       >
-        <q-btn
-          unelevated
-          outline
-          icon="add_circle"
-          type="submit"
-          color="primary"
-          label="Add new expense"
-          class="absolute-top-right q-mt-sm"
-          @click="showAddExpense = true"
-        />
-        <big-title>Expenses</big-title>
         <expense-list
           :collectionId="collectionId"
           :expenses="expenses"
@@ -36,10 +34,12 @@
         <expense-summary :expenses="expenses" />
       </div>
 
-      <no-expense-banner
+      <no-resource-banner
         :showAddExpense.sync="showAddExpense"
         v-else
-      />
+      >
+        There is no expense in this collection. Add a new expense and it will show up here.
+      </no-resource-banner>
 
       <q-dialog
         v-model="showAddExpense"
@@ -60,9 +60,10 @@ import { mapGetters, mapActions, mapState } from 'vuex';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import ExpenseList from 'src/components/Expenses/List/ExpenseList';
 import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
-import NoExpenseBanner from 'src/components/Expenses/NoExpenseBanner';
+import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
 import BigTitle from 'src/components/Shared/BigTitle';
 import ScrollPage from 'src/components/Shared/ScrollPage';
+import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 
 export default {
   props: ['collectionId'],
@@ -88,9 +89,10 @@ export default {
     AddExpense,
     ExpenseList,
     ExpenseSummary,
-    NoExpenseBanner,
+    NoResourceBanner,
     BigTitle,
     ScrollPage,
+    RightSideButton,
   },
   watch: {
     collectionId() {

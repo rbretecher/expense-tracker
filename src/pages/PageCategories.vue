@@ -1,17 +1,21 @@
 <template>
   <scroll-page>
-    <q-btn
-      unelevated
-      outline
-      icon="add_circle"
-      type="submit"
-      color="primary"
+    <right-side-button
       label="Add new category"
-      class="absolute-top-right q-mt-sm"
+      icon="add_circle"
       @click="showAddCategory = true"
     />
+
     <big-title>Categories</big-title>
-    <category-list :categories="categories" />
+
+    <category-list
+      :categories="categories"
+      v-if="Object.keys(categories).length"
+    />
+
+    <no-resource-banner v-else>
+      There is no category yet. Add a first category to sort your expenses.
+    </no-resource-banner>
 
     <q-dialog
       v-model="showAddCategory"
@@ -29,6 +33,8 @@ import ScrollPage from 'src/components/Shared/ScrollPage';
 import BigTitle from 'src/components/Shared/BigTitle';
 import CategoryList from 'src/components/Categories/List/CategoryList';
 import AddCategory from 'src/components/Categories/Modals/AddCategory';
+import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
+import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 
 export default {
   data() {
@@ -41,6 +47,8 @@ export default {
     BigTitle,
     CategoryList,
     AddCategory,
+    NoResourceBanner,
+    RightSideButton,
   },
   computed: {
     ...mapGetters('categories', ['categories']),

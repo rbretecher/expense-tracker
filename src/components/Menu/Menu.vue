@@ -32,12 +32,14 @@
       to="/categories"
       icon="category"
       label="Categories"
+      caption="Sort your expenses by category"
     />
 
     <menu-item
       to="/users"
       icon="account_circle"
       label="Users"
+      caption="Manage users to split the bill"
     />
 
   </q-list>
