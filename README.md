@@ -44,4 +44,4 @@ Finally, execute this command to deploy the project
 $ firebase deploy
 ```
 
-Ta-da! Your project is now deployed and available on firebase !
+Ta-da! Your project is now deployed and available on Firebase.
