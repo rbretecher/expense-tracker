@@ -5,6 +5,8 @@
     @input="$emit('update:price', $event)"
     lazy-rules
     :rules="[ val => val && val != 0 || 'Please enter a valid price']"
+    type="number"
+    step="0.01"
     label="Price"
     suffix="€"
   >
