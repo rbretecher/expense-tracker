@@ -6,8 +6,8 @@
   >
     <q-item-section avatar>
       <q-icon
-        :name="category.icon"
-        color="green"
+        :name="category.icon.name"
+        :color="category.icon.color"
       />
 
     </q-item-section>

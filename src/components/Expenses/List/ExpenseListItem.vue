@@ -6,8 +6,8 @@
   >
     <q-item-section avatar>
       <q-icon
-        :name="categoryIcon"
-        color="green"
+        :name="categoryIconName"
+        :color="categoryIconColor"
       />
 
     </q-item-section>
@@ -71,11 +71,17 @@ export default {
       }
       return this.users[this.expense.paidBy].name;
     },
-    categoryIcon() {
+    categoryIconName() {
       if (!this.categories[this.expense.category]) {
         return 'help_outline';
       }
-      return this.categories[this.expense.category].icon;
+      return this.categories[this.expense.category].icon.name;
+    },
+    categoryIconColor() {
+      if (!this.categories[this.expense.category]) {
+        return 'primary';
+      }
+      return this.categories[this.expense.category].icon.color;
     },
   },
   components: {

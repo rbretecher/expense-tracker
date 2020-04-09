@@ -7,7 +7,7 @@
       :name.sync="formData.name"
       autofocus="true"
     />
-    <modal-icon-input :icon.sync="formData.icon" />
+    <modal-icon-input :name.sync="formData.icon.name" />
   </modal>
 </template>
 
@@ -29,7 +29,10 @@ export default {
     },
   },
   mounted() {
-    this.formData = { ...this.collection };
+    this.formData = {
+      ...this.collection,
+      icon: { ...this.collection.icon },
+    };
   },
 };
 </script>

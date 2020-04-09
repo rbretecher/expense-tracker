@@ -4,7 +4,7 @@
       v-if="hasChildren"
       :header-inset-level="0"
       :content-inset-level="0.5"
-      :icon="collection.icon"
+      :icon="collection.icon.name"
       :label="collection.name"
       default-opened
       :caption="`${collection.count} expenses`"
@@ -28,7 +28,10 @@
       active-class="active"
     >
       <q-item-section avatar>
-        <q-icon :name="collection.icon" />
+        <q-icon
+          :name="collection.icon.name"
+          :color="collection.icon.color"
+        />
       </q-item-section>
 
       <q-item-section>

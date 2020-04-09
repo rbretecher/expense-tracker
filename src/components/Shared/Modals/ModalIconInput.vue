@@ -6,9 +6,9 @@
     use-input
     fill-input
     hide-selected
-    :value="icon"
+    :value="name"
     :options="options"
-    @input="$emit('update:icon', $event)"
+    @input="$emit('update:name', $event)"
     @filter="filter"
     :rules="[val => !!val || 'Please choose a value']"
     label="Icon"
@@ -22,7 +22,10 @@
         v-on="scope.itemEvents"
       >
         <q-item-section avatar>
-          <q-icon :name="scope.opt" />
+          <q-icon
+            :name="scope.opt"
+            :color="color"
+          />
         </q-item-section>
         <q-item-section>
           <q-item-label>{{ scope.opt }}</q-item-label>
@@ -36,7 +39,7 @@
 import materialIcons from 'src/data/material-icons';
 
 export default {
-  props: ['icon'],
+  props: ['name', 'color'],
   data() {
     return {
       options: materialIcons,

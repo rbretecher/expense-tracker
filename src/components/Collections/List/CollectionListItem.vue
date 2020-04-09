@@ -6,8 +6,8 @@
   >
     <q-item-section avatar>
       <q-icon
-        :name="collection.icon"
-        color="green"
+        :name="collection.icon.name"
+        :color="collection.icon.color"
       />
     </q-item-section>
     <q-item-section>{{ collection.name }}</q-item-section>

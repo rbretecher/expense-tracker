@@ -8,7 +8,10 @@ export default {
       formData: {
         name: null,
         count: 0,
-        icon: 'calendar_today',
+        icon: {
+          name: 'calendar_today',
+          color: 'primary',
+        },
       },
     };
   },
