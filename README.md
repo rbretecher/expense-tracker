@@ -6,16 +6,18 @@ It is mostly an experiment for my personal use and also to discover new tools/fr
 
 If you want to give it a try, you can install it for free (see section below) or you can just use the [online demo](https://web-expense-tracker-demo.web.app) hosted on Firebase Hosting.
 
-## How to install
+## Getting started
 
-### Requirements
+### How to deploy on Firebase
+
+#### Requirements
 You can install this application for free, you just need a Google account to create a Firebase project.
 
-### Create a Firebase project
+#### Create a Firebase project
 
 Sign in on the [Firebase Console](https://console.firebase.google.com) with your Google Account and create a new Firebase project.
 
-### Install firebase-tools
+#### Install firebase-tools
 
 You need to install `firebase-tools` with [npm](https://www.npmjs.com/) :
 ```bash
@@ -27,10 +29,13 @@ Then run this command to login :
 $ firebase-tools login
 ```
 
-### Build and deploy the project
+#### Build and deploy the project
 
-Clone the `expense-tracker` project and build it :
+Before you can deploy the project to Firebase, you need to clone it, install it and build it :
 ```
+$ git clone git@github.com:rbretecher/expense-tracker.git
+$ cd expense-tracker
+$ npm install
 $ npm run build
 ```
 
@@ -39,7 +44,7 @@ Then run this command so that firebase knows which project to deploy :
 $ firebase use PROJECT_NAME
 ```
 
-Finally, execute this command to deploy the project
+Finally, execute this command to deploy the project :
 ```
 $ firebase deploy
 ```
