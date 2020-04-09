@@ -6,7 +6,7 @@ Expense Tracker is an application that allows you to keep track of shared expens
 
 It is mostly an experiment for my personal use and also to discover new tools/frameworks. Frontend is built thanks to the awesome [Quasar framework](https://github.com/quasarframework/quasar) and uses [Firebase Realtime Database](https://firebase.google.com/docs/database) for the storage with [Cloud Functions for Firebase](https://firebase.google.com/docs/functions) for the backend part.
 
-If you want to give it a try, you can install it for free (see section below) or you can just use the [online demo](https://web-expense-tracker-demo.web.app) hosted on Firebase Hosting.
+If you want to give it a try, you can install it for free (see section below) or you can just use the [online demo](https://expense-tracker-demo-42250.firebaseapp.com) hosted on Firebase Hosting.
 
 ## Getting started
 
