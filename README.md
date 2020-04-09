@@ -1,3 +1,5 @@
+[![Deploy to Firebase](https://github.com/rbretecher/expense-tracker/workflows/Deploy%20to%20Firebase/badge.svg?branch=master)](https://github.com/rbretecher/expense-tracker/actions?query=workflow%3A%22Deploy+to+Firebase%22+branch%3Amaster)
+
 # Expense Tracker
 
 Expense Tracker is an application that allows you to keep track of shared expenses to easily split bills with friends and family.
