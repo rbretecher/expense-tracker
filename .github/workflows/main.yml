@@ -11,15 +11,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - run: npm install
-      - run: npm run build
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install project
+        run: npm install
+      - name: Build project
+        run: npm run build
+      - name: Archive dist
+        uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - name: Download dist
+        uses: actions/download-artifact@master
+        with:
+          name: dist
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
