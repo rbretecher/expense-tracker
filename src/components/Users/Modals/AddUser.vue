@@ -7,8 +7,8 @@
       :name.sync="formData.name"
       autofocus="true"
     />
-
     <modal-icon-input :icon.sync="formData.icon.name" />
+    <modal-color-input :color.sync="formData.icon.color" />
   </modal>
 </template>
 

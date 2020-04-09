@@ -1,6 +1,7 @@
 import Modal from 'src/components/Shared/Modals/Modal';
 import ModalNameInput from 'src/components/Shared/Modals/ModalNameInput';
 import ModalIconInput from 'src/components/Shared/Modals/ModalIconInput';
+import ModalColorInput from 'src/components/Shared/Modals/ModalColorInput';
 
 export default {
   data() {
@@ -21,5 +22,6 @@ export default {
     Modal,
     ModalNameInput,
     ModalIconInput,
+    ModalColorInput,
   },
 };
