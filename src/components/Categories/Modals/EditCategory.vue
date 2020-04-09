@@ -6,7 +6,6 @@
     <modal-name-input
       :name.sync="formData.name"
       autofocus="true"
-      class="q-mb-sm"
     />
 
     <modal-icon-input :icon.sync="formData.icon" />

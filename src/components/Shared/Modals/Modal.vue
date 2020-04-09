@@ -3,8 +3,9 @@
     <q-form
       @submit="submitForm"
       ref="form"
+      class="q-gutter-md"
     >
-      <modal-header class="q-mb-sm">{{ title }}</modal-header>
+      <modal-header>{{ title }}</modal-header>
 
       <q-card-section class="q-pt-none">
         <slot></slot>
