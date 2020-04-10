@@ -43,7 +43,7 @@ $ npm run build
 
 Then run this command so that firebase knows which project to deploy :
 ```bash
-$ firebase use PROJECT_NAME
+$ firebase use PROJECT_ID
 ```
 
 Finally, execute this command to deploy the project :
@@ -52,3 +52,16 @@ $ firebase deploy
 ```
 
 Ta-da! Your project is now deployed and available on Firebase.
+
+## Next steps
+
+About the project :
+- Dockerize it
+- Code cleaning/refactoring
+- UI/UX improvements
+
+New features :
+- Add authentication (Firebase Authentication)
+    - For now, everyone can access the Firebase Realtime Database (read/write)
+- Add mobile support
+- Set parts to split expenses unevenly
