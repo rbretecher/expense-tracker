@@ -14,5 +14,6 @@
   display: flex;
   flex-grow: 1;
   padding-right: 25px;
+  height: 100%;
 }
 </style>
