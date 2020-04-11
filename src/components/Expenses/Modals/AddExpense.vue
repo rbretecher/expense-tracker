@@ -5,7 +5,7 @@
   >
     <modal-name-input
       :name.sync="formData.name"
-      autofocus="true"
+      :autofocus="$q.platform.is.desktop"
     />
     <modal-expense-price :price.sync="formData.price" />
     <modal-expense-date :date.sync="formData.date" />

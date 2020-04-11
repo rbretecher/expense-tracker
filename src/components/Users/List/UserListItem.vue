@@ -24,23 +24,20 @@
       </div>
     </q-item-section>
 
-    <q-dialog
-      v-model="showEditUser"
-      position="top"
-      no-refocus
-    >
+    <app-dialog :showDialog.sync="showEditUser">
       <edit-user
         :id="id"
         :user="user"
         @close="showEditUser = false"
       />
-    </q-dialog>
+    </app-dialog>
   </q-item>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import EditUser from 'src/components/Users/Modals/EditUser';
+import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   props: ['id', 'user'],
@@ -51,6 +48,7 @@ export default {
   },
   components: {
     EditUser,
+    AppDialog,
   },
   methods: {
     ...mapActions('users', ['deleteUser']),

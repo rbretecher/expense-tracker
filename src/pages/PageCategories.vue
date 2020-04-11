@@ -17,13 +17,9 @@
       There is no category yet. Add a first category to sort your expenses.
     </no-resource-banner>
 
-    <q-dialog
-      v-model="showAddCategory"
-      position="top"
-      no-refocus
-    >
+    <app-dialog :showDialog.sync="showAddCategory">
       <add-category @close="showAddCategory = false" />
-    </q-dialog>
+    </app-dialog>
   </scroll-page>
 </template>
 
@@ -35,6 +31,7 @@ import CategoryList from 'src/components/Categories/List/CategoryList';
 import AddCategory from 'src/components/Categories/Modals/AddCategory';
 import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
 import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
+import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   data() {
@@ -49,6 +46,7 @@ export default {
     AddCategory,
     NoResourceBanner,
     RightSideButton,
+    AppDialog,
   },
   computed: {
     ...mapGetters('categories', ['categories']),

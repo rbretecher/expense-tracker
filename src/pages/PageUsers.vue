@@ -17,14 +17,9 @@
       There is no user. Add a user and it will have access to your collections.
     </no-resource-banner>
 
-    <q-dialog
-      v-model="showAddUser"
-      position="top"
-      no-refocus
-    >
+    <app-dialog :showDialog.sync="showAddUser">
       <add-user @close="showAddUser = false" />
-    </q-dialog>
-
+    </app-dialog>
   </scroll-page>
 </template>
 
@@ -36,6 +31,7 @@ import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
 import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 import UserList from 'src/components/Users/List/UserList';
 import AddUser from 'src/components/Users/Modals/AddUser';
+import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   data() {
@@ -50,6 +46,7 @@ export default {
     RightSideButton,
     UserList,
     AddUser,
+    AppDialog,
   },
   computed: {
     ...mapGetters('users', ['users']),

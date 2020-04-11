@@ -41,16 +41,12 @@
         There is no expense in this collection. Add a new expense and it will show up here.
       </no-resource-banner>
 
-      <q-dialog
-        v-model="showAddExpense"
-        position="top"
-        no-refocus
-      >
+      <app-dialog :showDialog.sync="showAddExpense">
         <add-expense
           @close="showAddExpense = false"
           :collectionId="collectionId"
         />
-      </q-dialog>
+      </app-dialog>
     </scroll-page>
   </div>
 </template>
@@ -64,6 +60,7 @@ import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
 import BigTitle from 'src/components/Shared/BigTitle';
 import ScrollPage from 'src/components/Shared/ScrollPage';
 import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
+import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   props: ['collectionId'],
@@ -93,6 +90,7 @@ export default {
     BigTitle,
     ScrollPage,
     RightSideButton,
+    AppDialog,
   },
   watch: {
     collectionId() {

@@ -25,23 +25,20 @@
       </div>
     </q-item-section>
 
-    <q-dialog
-      v-model="showEditCategory"
-      position="top"
-      no-refocus
-    >
+    <app-dialog :showDialog.sync="showEditCategory">
       <edit-category
         :id="id"
         :category="category"
         @close="showEditCategory = false"
       />
-    </q-dialog>
+    </app-dialog>
   </q-item>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import EditCategory from 'src/components/Categories/Modals/EditCategory';
+import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   props: ['id', 'category'],
@@ -52,6 +49,7 @@ export default {
   },
   components: {
     EditCategory,
+    AppDialog,
   },
   methods: {
     ...mapActions('categories', ['deleteCategory']),

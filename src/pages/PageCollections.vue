@@ -22,16 +22,12 @@
       There is no collection yet. Add a new collection and it will show up here.
     </no-resource-banner>
 
-    <q-dialog
-      v-model="showAddCollection"
-      position="top"
-      no-refocus
-    >
+    <app-dialog :showDialog.sync="showAddCollection">
       <add-collection
         @close="showAddCollection = false"
         :collectionId="collectionId"
       />
-    </q-dialog>
+    </app-dialog>
   </scroll-page>
 </template>
 
@@ -44,6 +40,7 @@ import AddCollection from 'src/components/Collections/Modals/AddCollection';
 import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
 import CollectionBreadcrumbs from 'src/components/Collections/CollectionBreadcrumbs';
 import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
+import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   props: ['collectionId'],
@@ -60,6 +57,7 @@ export default {
     NoResourceBanner,
     CollectionBreadcrumbs,
     RightSideButton,
+    AppDialog,
   },
   computed: {
     ...mapState('collections', ['collections']),

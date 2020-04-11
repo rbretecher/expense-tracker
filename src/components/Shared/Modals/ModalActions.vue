@@ -1,6 +1,6 @@
 <template>
   <q-card-actions
-    class="q-pa-md"
+    class="q-pr-md q-pb-md no-margin"
     align="right"
   >
     <q-btn
