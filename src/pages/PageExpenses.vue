@@ -10,16 +10,12 @@
       </q-inner-loading>
     </q-page>
 
-    <scroll-page v-else>
-
-      <right-side-button
-        label="Add new expense"
-        icon="add_circle"
-        @click="showAddExpense = true"
-      />
-
-      <big-title>Expenses</big-title>
-
+    <scroll-page
+      v-else
+      title="Expenses"
+      actionName="Add new expense"
+      :actionModel.sync="showAddExpense"
+    >
       <div
         v-if="Object.keys(expenses).length"
         class="q-mb-xl"
@@ -41,31 +37,25 @@
         There is no expense in this collection. Add a new expense and it will show up here.
       </no-resource-banner>
 
-      <q-dialog
-        v-model="showAddExpense"
-        position="top"
-        no-refocus
-      >
+      <app-dialog :showDialog.sync="showAddExpense">
         <add-expense
           @close="showAddExpense = false"
           :collectionId="collectionId"
         />
-      </q-dialog>
+      </app-dialog>
     </scroll-page>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions, mapState } from 'vuex';
+import mixinPage from 'src/mixins/mixin-page';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import ExpenseList from 'src/components/Expenses/List/ExpenseList';
 import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
-import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
-import BigTitle from 'src/components/Shared/BigTitle';
-import ScrollPage from 'src/components/Shared/ScrollPage';
-import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 
 export default {
+  mixins: [mixinPage],
   props: ['collectionId'],
   data() {
     return {
@@ -89,10 +79,6 @@ export default {
     AddExpense,
     ExpenseList,
     ExpenseSummary,
-    NoResourceBanner,
-    BigTitle,
-    ScrollPage,
-    RightSideButton,
   },
   watch: {
     collectionId() {

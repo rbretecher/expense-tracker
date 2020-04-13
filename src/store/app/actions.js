@@ -39,3 +39,11 @@ export function setUsersLoaded({ commit, getters }, value) {
 export function setExpensesLoaded({ commit }, value) {
   commit('setExpensesLoaded', value);
 }
+
+export function setCurrentPage({ commit }, value) {
+  commit('setCurrentPage', value);
+}
+
+export function setToolbarAction({ commit }, value) {
+  commit('setToolbarAction', value);
+}

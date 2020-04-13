@@ -63,5 +63,5 @@ About the project :
 New features :
 - Add authentication (Firebase Authentication)
     - For now, everyone can access the Firebase Realtime Database (read/write)
-- Add mobile support
+- Improve mobile support
 - Set parts to split expenses unevenly

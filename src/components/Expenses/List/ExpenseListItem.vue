@@ -33,18 +33,14 @@
       </div>
     </q-item-section>
 
-    <q-dialog
-      v-model="showEditExpense"
-      position="top"
-      no-refocus
-    >
+    <app-dialog :showDialog.sync="showEditExpense">
       <edit-expense
         :id="id"
         :expense="expense"
         :collectionId="collectionId"
         @close="showEditExpense = false"
       />
-    </q-dialog>
+    </app-dialog>
   </q-item>
 </template>
 
@@ -53,6 +49,7 @@ import { date } from 'quasar';
 import { mapState, mapActions } from 'vuex';
 import EditExpense from 'src/components/Expenses/Modals/EditExpense';
 import mixinPrice from 'src/mixins/mixin-price';
+import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   mixins: [mixinPrice],
@@ -86,6 +83,7 @@ export default {
   },
   components: {
     EditExpense,
+    AppDialog,
   },
   filters: {
     formatDate(value) {

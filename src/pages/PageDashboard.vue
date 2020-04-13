@@ -1,7 +1,5 @@
 <template>
-  <scroll-page>
-    <big-title>Dashboard</big-title>
-
+  <scroll-page title="Dashboard">
     <div class="dashboard-item-list">
 
       <dashboard-item icon="euro_symbol">
@@ -25,14 +23,12 @@
 
 <script>
 import { mapState } from 'vuex';
-import ScrollPage from 'src/components/Shared/ScrollPage';
-import BigTitle from 'src/components/Shared/BigTitle';
+import mixinPage from 'src/mixins/mixin-page';
 import DashboardItem from 'src/components/Dashboard/DashboardItem';
 
 export default {
+  mixins: [mixinPage],
   components: {
-    ScrollPage,
-    BigTitle,
     DashboardItem,
   },
   computed: {

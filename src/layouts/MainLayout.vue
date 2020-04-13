@@ -4,20 +4,7 @@
     view="hHh lpR fFf"
     v-if="appReady"
   >
-    <q-header
-      elevated
-      class="bg-white text-primary"
-    >
-      <q-toolbar>
-        <q-icon
-          name="timeline"
-          size="24px"
-        />
-        <q-toolbar-title class="text-bold">
-          Expense Tracker
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
+    <app-header :leftDrawerOpen.sync="leftDrawerOpen" />
 
     <q-drawer
       v-model="leftDrawerOpen"
@@ -34,12 +21,14 @@
 </template>
 
 <script>
-import AppMenu from 'components/Menu/Menu';
+import AppHeader from 'components/Layout/Header/Header';
+import AppMenu from 'components/Layout/Menu/Menu';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'MainLayout',
   components: {
+    AppHeader,
     AppMenu,
   },
   data() {

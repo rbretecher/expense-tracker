@@ -47,8 +47,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import CollectionItem from 'components/Menu/Expenses/CollectionItem';
-import MenuItem from 'components/Menu/MenuItem';
+import CollectionItem from 'components/Layout/Menu/Expenses/CollectionItem';
+import MenuItem from 'components/Layout/Menu/MenuItem';
 
 export default {
   components: {

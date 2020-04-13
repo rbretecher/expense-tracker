@@ -1,13 +1,9 @@
 <template>
-  <scroll-page>
-    <right-side-button
-      label="Add new collection"
-      icon="add_circle"
-      @click="showAddCollection = true"
-    />
-
-    <big-title>Collections</big-title>
-
+  <scroll-page
+    title="Collections"
+    actionName="Add new collection"
+    :actionModel.sync="showAddCollection"
+  >
     <collection-breadcrumbs
       v-if="collectionId"
       :parents="parents(collectionId)"
@@ -22,30 +18,24 @@
       There is no collection yet. Add a new collection and it will show up here.
     </no-resource-banner>
 
-    <q-dialog
-      v-model="showAddCollection"
-      position="top"
-      no-refocus
-    >
+    <app-dialog :showDialog.sync="showAddCollection">
       <add-collection
         @close="showAddCollection = false"
         :collectionId="collectionId"
       />
-    </q-dialog>
+    </app-dialog>
   </scroll-page>
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
-import ScrollPage from 'src/components/Shared/ScrollPage';
-import BigTitle from 'src/components/Shared/BigTitle';
+import { mapGetters } from 'vuex';
+import mixinPage from 'src/mixins/mixin-page';
 import CollectionList from 'src/components/Collections/List/CollectionList';
 import AddCollection from 'src/components/Collections/Modals/AddCollection';
-import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
 import CollectionBreadcrumbs from 'src/components/Collections/CollectionBreadcrumbs';
-import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 
 export default {
+  mixins: [mixinPage],
   props: ['collectionId'],
   data() {
     return {
@@ -53,16 +43,11 @@ export default {
     };
   },
   components: {
-    ScrollPage,
-    BigTitle,
     CollectionList,
     AddCollection,
-    NoResourceBanner,
     CollectionBreadcrumbs,
-    RightSideButton,
   },
   computed: {
-    ...mapState('collections', ['collections']),
     ...mapGetters('collections', ['rootCollections', 'children', 'parents']),
     currentCollections() {
       if (!this.collectionId) {

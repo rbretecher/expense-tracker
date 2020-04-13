@@ -13,3 +13,11 @@ export function setUsersLoaded(state, value) {
 export function setExpensesLoaded(state, value) {
   state.expensesLoaded = value;
 }
+
+export function setCurrentPage(state, value) {
+  state.currentPage = value;
+}
+
+export function setToolbarAction(state, value) {
+  state.toolbarAction = value;
+}

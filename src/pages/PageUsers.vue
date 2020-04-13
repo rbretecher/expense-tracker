@@ -1,13 +1,9 @@
 <template>
-  <scroll-page>
-    <right-side-button
-      label="Add new user"
-      icon="add_circle"
-      @click="showAddUser = true"
-    />
-
-    <big-title>Users</big-title>
-
+  <scroll-page
+    title="Users"
+    actionName="Add new user"
+    :actionModel.sync="showAddUser"
+  >
     <user-list
       v-if="Object.keys(users).length"
       :users="users"
@@ -17,37 +13,26 @@
       There is no user. Add a user and it will have access to your collections.
     </no-resource-banner>
 
-    <q-dialog
-      v-model="showAddUser"
-      position="top"
-      no-refocus
-    >
+    <app-dialog :showDialog.sync="showAddUser">
       <add-user @close="showAddUser = false" />
-    </q-dialog>
-
+    </app-dialog>
   </scroll-page>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import ScrollPage from 'src/components/Shared/ScrollPage';
-import BigTitle from 'src/components/Shared/BigTitle';
-import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
-import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
+import mixinPage from 'src/mixins/mixin-page';
 import UserList from 'src/components/Users/List/UserList';
 import AddUser from 'src/components/Users/Modals/AddUser';
 
 export default {
+  mixins: [mixinPage],
   data() {
     return {
       showAddUser: false,
     };
   },
   components: {
-    ScrollPage,
-    BigTitle,
-    NoResourceBanner,
-    RightSideButton,
     UserList,
     AddUser,
   },

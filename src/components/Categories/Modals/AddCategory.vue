@@ -5,7 +5,7 @@
   >
     <modal-name-input
       :name.sync="formData.name"
-      autofocus="true"
+      :autofocus="$q.platform.is.desktop"
     />
     <modal-icon-color-input :icon.sync="formData.icon" />
   </modal>

@@ -33,23 +33,20 @@
       </div>
     </q-item-section>
 
-    <q-dialog
-      v-model="showEditCollection"
-      position="top"
-      no-refocus
-    >
+    <app-dialog :showDialog.sync="showEditCollection">
       <edit-collection
         :id="id"
         :collection="collection"
         @close="showEditCollection = false"
       />
-    </q-dialog>
+    </app-dialog>
   </q-item>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import EditCollection from 'src/components/Collections/Modals/EditCollection';
+import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   props: ['id', 'collection'],
@@ -60,6 +57,7 @@ export default {
   },
   components: {
     EditCollection,
+    AppDialog,
   },
   methods: {
     ...mapActions('collections', ['deleteCollection']),
