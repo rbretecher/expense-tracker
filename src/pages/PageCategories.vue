@@ -1,12 +1,10 @@
 <template>
-  <scroll-page>
+  <scroll-page title="Categories">
     <right-side-button
       label="Add new category"
       icon="add_circle"
       @click="showAddCategory = true"
     />
-
-    <big-title>Categories</big-title>
 
     <category-list
       :categories="categories"
@@ -26,7 +24,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import ScrollPage from 'src/components/Shared/ScrollPage';
-import BigTitle from 'src/components/Shared/BigTitle';
 import CategoryList from 'src/components/Categories/List/CategoryList';
 import AddCategory from 'src/components/Categories/Modals/AddCategory';
 import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
@@ -41,7 +38,6 @@ export default {
   },
   components: {
     ScrollPage,
-    BigTitle,
     CategoryList,
     AddCategory,
     NoResourceBanner,

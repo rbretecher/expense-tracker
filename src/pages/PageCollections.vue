@@ -1,12 +1,10 @@
 <template>
-  <scroll-page>
+  <scroll-page title="Collections">
     <right-side-button
       label="Add new collection"
       icon="add_circle"
       @click="showAddCollection = true"
     />
-
-    <big-title>Collections</big-title>
 
     <collection-breadcrumbs
       v-if="collectionId"
@@ -34,7 +32,6 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import ScrollPage from 'src/components/Shared/ScrollPage';
-import BigTitle from 'src/components/Shared/BigTitle';
 import CollectionList from 'src/components/Collections/List/CollectionList';
 import AddCollection from 'src/components/Collections/Modals/AddCollection';
 import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
@@ -51,7 +48,6 @@ export default {
   },
   components: {
     ScrollPage,
-    BigTitle,
     CollectionList,
     AddCollection,
     NoResourceBanner,

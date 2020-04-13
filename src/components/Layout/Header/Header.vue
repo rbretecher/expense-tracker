@@ -24,14 +24,20 @@
         class="float-right"
       />
       <q-toolbar-title class="text-bold absolute-center">
-        Expense Tracker
+        {{ currentPage }}
       </q-toolbar-title>
     </q-toolbar>
   </q-header>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   props: ['leftDrawerOpen'],
+  computed: {
+    ...mapState('app', ['currentPage']),
+  },
+
 };
 </script>

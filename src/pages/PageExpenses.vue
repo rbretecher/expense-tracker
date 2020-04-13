@@ -10,15 +10,16 @@
       </q-inner-loading>
     </q-page>
 
-    <scroll-page v-else>
+    <scroll-page
+      v-else
+      title="Expenses"
+    >
 
       <right-side-button
         label="Add new expense"
         icon="add_circle"
         @click="showAddExpense = true"
       />
-
-      <big-title>Expenses</big-title>
 
       <div
         v-if="Object.keys(expenses).length"

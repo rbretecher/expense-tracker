@@ -1,13 +1,10 @@
 <template>
-  <scroll-page>
+  <scroll-page title="Users">
     <right-side-button
       label="Add new user"
       icon="add_circle"
       @click="showAddUser = true"
     />
-
-    <big-title>Users</big-title>
-
     <user-list
       v-if="Object.keys(users).length"
       :users="users"
@@ -26,7 +23,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import ScrollPage from 'src/components/Shared/ScrollPage';
-import BigTitle from 'src/components/Shared/BigTitle';
 import NoResourceBanner from 'src/components/Shared/Banners/NoResourceBanner';
 import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 import UserList from 'src/components/Users/List/UserList';
@@ -41,7 +37,6 @@ export default {
   },
   components: {
     ScrollPage,
-    BigTitle,
     NoResourceBanner,
     RightSideButton,
     UserList,
