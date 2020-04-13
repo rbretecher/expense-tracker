@@ -10,14 +10,17 @@ If you want to give it a try, you can install it for free (see section below) or
 
 ## Getting started
 
-### How to deploy on Firebase
+You can easily deploy this application to Firebase or run it locally.
 
-#### Requirements
+### Requirements
+
 You can install this application for free, you just need a Google account to create a Firebase project.
 
 #### Create a Firebase project
 
 Sign in on the [Firebase Console](https://console.firebase.google.com) with your Google Account and create a new Firebase project.
+
+### How to deploy to Firebase
 
 #### Install firebase-tools
 
@@ -47,11 +50,27 @@ $ firebase use PROJECT_ID
 ```
 
 Finally, execute this command to deploy the project :
-```
+```bash
 $ firebase deploy
 ```
 
 Ta-da! Your project is now deployed and available on Firebase.
+
+### How to run locally
+
+Rename the `.env.example` file by removing the `.example` extension :
+```bash
+mv .env.example .env
+```
+
+Update the `.env` file with your Firebase project settings.
+
+You need [Docker](https://www.docker.com/) installed on your machine. Run :
+```bash
+docker-compose up
+```
+
+You should be able to access the application through this URL : http://localhost:8080/
 
 ## Next steps
 
