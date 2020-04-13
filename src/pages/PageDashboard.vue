@@ -23,12 +23,12 @@
 
 <script>
 import { mapState } from 'vuex';
-import ScrollPage from 'src/components/Shared/ScrollPage';
+import mixinPage from 'src/mixins/mixin-page';
 import DashboardItem from 'src/components/Dashboard/DashboardItem';
 
 export default {
+  mixins: [mixinPage],
   components: {
-    ScrollPage,
     DashboardItem,
   },
   computed: {

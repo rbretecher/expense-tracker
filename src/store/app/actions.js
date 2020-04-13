@@ -43,3 +43,7 @@ export function setExpensesLoaded({ commit }, value) {
 export function setCurrentPage({ commit }, value) {
   commit('setCurrentPage', value);
 }
+
+export function setToolbarAction({ commit }, value) {
+  commit('setToolbarAction', value);
+}

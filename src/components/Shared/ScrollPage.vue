@@ -11,7 +11,16 @@
         class="q-scroll-area"
         :class="{'q-pr-lg': $q.platform.is.desktop}"
       >
-        <big-title v-if="$q.platform.is.desktop">{{ title }}</big-title>
+        <div v-if="$q.platform.is.desktop">
+          <right-side-button
+            v-if="actionName"
+            :label="actionName"
+            icon="add_circle"
+            @click="$emit('update:actionModel', true)"
+          />
+
+          <big-title>{{ title }}</big-title>
+        </div>
         <slot></slot>
       </q-scroll-area>
     </div>
@@ -21,17 +30,31 @@
 <script>
 import { mapActions } from 'vuex';
 import BigTitle from 'src/components/Shared/BigTitle';
+import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 
 export default {
-  props: ['title'],
+  props: ['title', 'actionName', 'actionModel'],
   methods: {
-    ...mapActions('app', ['setCurrentPage']),
+    ...mapActions('app', ['setCurrentPage', 'setToolbarAction']),
   },
   mounted() {
-    this.setCurrentPage(this.title);
+    if (!this.$q.platform.is.desktop) {
+      this.setCurrentPage(this.title);
+      if (this.actionModel !== undefined) {
+        this.setToolbarAction({
+          name: this.actionName,
+          action: () => {
+            this.$emit('update:actionModel', true);
+          },
+        });
+      } else {
+        this.setToolbarAction(null);
+      }
+    }
   },
   components: {
     BigTitle,
+    RightSideButton,
   },
 };
 </script>
