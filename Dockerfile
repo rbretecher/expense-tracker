@@ -1,14 +1,7 @@
-FROM node:lts-alpine
+FROM node:lts-alpine as base
 
 RUN npm install -g @quasar/cli
+RUN npm install -g firebase-tools
 
+RUN mkdir /app
 WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
-EXPOSE 8080
-CMD ["quasar", "dev"]

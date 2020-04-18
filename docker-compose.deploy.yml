@@ -1,0 +1,8 @@
+version: '3.5'
+services:
+  app:
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npm run build && firebase deploy --project "$FIREBASE_PROJECT_ID""
+    environment:
+      FIREBASE_TOKEN: '${FIREBASE_TOKEN}'
