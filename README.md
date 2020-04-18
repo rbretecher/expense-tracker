@@ -26,7 +26,7 @@ Sign in on the [Firebase Console](https://console.firebase.google.com) with your
 
 Rename the `.env.example` file by removing the `.example` extension :
 ```bash
-mv .env.example .env
+$ mv .env.example .env
 ```
 
 Update the `.env` file with your Firebase project settings.
@@ -34,7 +34,7 @@ Update the `.env` file with your Firebase project settings.
 ### How to run locally
 
 ```bash
-make docker-dev
+$ make docker-dev
 ```
 
 You should be able to access the application through this URL : http://localhost:8080/
@@ -58,7 +58,7 @@ Update the `.env` file with your `FIREBASE_TOKEN`.
 #### Build and deploy the project
 
 ```bash
-make docker-deploy
+$ make docker-deploy
 ```
 
 Ta-da! Your project is now deployed and available on Firebase.
