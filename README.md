@@ -10,19 +10,20 @@ If you want to give it a try, you can install it for free (see section below) or
 
 ## How to use
 
-You can easily deploy this application to Firebase or run it locally.
+You can easily deploy this application to Firebase or run it locally, you just need :
+- A Google account to create a Firebase project (free)
+- `npm` to install Firebase CLI
+- `docker` and `docker-compose` to build and/or deploy the project
 
-### Requirements
+### Install firebase-tools
 
-You can install this application for free, you just need :
-- A Google account to create a Firebase project
-- `docker` and `docker-compose` installed to build and/or deploy the project
+```bash
+$ npm install -g firebase-tools
+```
 
-#### Create a Firebase project
+### Create a Firebase project
 
-Sign in on the [Firebase Console](https://console.firebase.google.com) with your Google Account and create a new Firebase project.
-
-#### Configuration
+Sign in on the [Firebase Console](https://console.firebase.google.com) with your Google Account and create a new Firebase project. Add a web application to this Firebase project.
 
 Rename the `.env.example` file by removing the `.example` extension :
 ```bash
@@ -41,22 +42,14 @@ You should be able to access the application through this URL : http://localhost
 
 ### How to deploy to Firebase
 
-#### Install firebase-tools
-
-You need to install `firebase-tools` with npm :
-```bash
-$ npm install -g firebase-tools
-```
-
-Then run this command to get the `FIREBASE_TOKEN` needed to deploy :
+Run this command to get the `FIREBASE_TOKEN` needed to deploy :
 ```bash
 $ firebase-tools login
 ```
 
 Update the `.env` file with your `FIREBASE_TOKEN`.
 
-#### Build and deploy the project
-
+Then run this command to build and deploy the project to Firebase :
 ```bash
 $ make docker-deploy
 ```
