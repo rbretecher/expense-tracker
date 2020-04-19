@@ -12,6 +12,14 @@
       <q-toolbar-title class="text-bold">
         Expense Tracker
       </q-toolbar-title>
+
+      <q-btn
+        flat
+        dense
+        icon="exit_to_app"
+        label="Logout"
+        @click="logoutUser"
+      />
     </q-toolbar>
 
     <q-toolbar
@@ -42,12 +50,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   props: ['leftDrawerOpen'],
   computed: {
     ...mapState('app', ['currentPage', 'toolbarAction']),
+  },
+  methods: {
+    ...mapActions('app', ['logout']),
+    logoutUser() {
+      this.logout();
+    },
   },
 };
 </script>

@@ -5,6 +5,7 @@ import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 
 export function handleAuthStateChanged({ commit, dispatch }) {
   firebase.auth().onAuthStateChanged((user) => {
+    Loading.hide();
     if (user) {
       commit('setIsSignedIn', true);
       LocalStorage.set('signedIn', true);
@@ -12,7 +13,8 @@ export function handleAuthStateChanged({ commit, dispatch }) {
       this.$router.push('/').catch(() => { });
     } else {
       commit('setIsSignedIn', false);
-      LocalStorage.set('signedIn', true);
+      LocalStorage.set('signedIn', false);
+      dispatch('resetState');
       this.$router.push('/login').catch(() => { });
     }
   });
@@ -20,12 +22,23 @@ export function handleAuthStateChanged({ commit, dispatch }) {
 
 export function login(context, { email, password }) {
   Loading.show();
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(() => {
-      Loading.hide();
-    }).catch((error) => {
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .catch((error) => {
       Loading.hide();
       showErrorMessageWithTitle('Could not sign in', error.message);
+    });
+}
+
+export function logout() {
+  Loading.show();
+  firebase
+    .auth()
+    .signOut()
+    .catch((error) => {
+      Loading.hide();
+      showErrorMessageWithTitle('Could not sign out', error.message);
     });
 }
 
@@ -80,4 +93,16 @@ export function setCurrentPage({ commit }, value) {
 
 export function setToolbarAction({ commit }, value) {
   commit('setToolbarAction', value);
+}
+
+export function resetState({ commit }) {
+  commit('setIsSignedIn', false);
+
+  commit('setCurrentPage', null);
+  commit('setToolbarAction', null);
+
+  commit('setCategoriesLoaded', false);
+  commit('setCollectionsLoaded', false);
+  commit('setUsersLoaded', false);
+  commit('setExpensesLoaded', false);
 }
