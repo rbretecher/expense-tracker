@@ -1,7 +1,7 @@
 {
   "name": "expense-tracker",
   "description": "A simple application to track expenses and split bills",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "productName": "Expense Tracker",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
