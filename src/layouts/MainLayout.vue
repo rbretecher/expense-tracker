@@ -37,13 +37,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions('app', ['loadData']),
+    ...mapActions('app', ['handleAuthStateChanged']),
   },
   computed: {
     ...mapGetters('app', ['appReady']),
   },
   mounted() {
-    this.loadData();
+    this.handleAuthStateChanged();
   },
 };
 </script>

@@ -1,3 +1,7 @@
+export function setIsSignedIn(state, value) {
+  state.isSignedIn = value;
+}
+
 export function setCategoriesLoaded(state, value) {
   state.categoriesLoaded = value;
 }

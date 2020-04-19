@@ -1,5 +1,7 @@
 export default function () {
   return {
+    // User
+    isSignedIn: false,
     // Toolbar
     currentPage: null,
     toolbarAction: null,
