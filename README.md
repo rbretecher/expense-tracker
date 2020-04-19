@@ -15,13 +15,15 @@ You can easily deploy this application to Firebase or run it locally, you just n
 - `npm` to install Firebase CLI
 - `docker` and `docker-compose` to build and/or deploy the project
 
-### Install firebase-tools
+### Requirements
+
+#### Install firebase-tools
 
 ```bash
 $ npm install -g firebase-tools
 ```
 
-### Create a Firebase project
+#### Create a Firebase project
 
 Sign in on the [Firebase Console](https://console.firebase.google.com) with your Google Account and create a new Firebase project. Add a web application to this Firebase project.
 
