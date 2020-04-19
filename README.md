@@ -8,47 +8,52 @@ It is mostly an experiment for my personal use and also to discover new tools/fr
 
 If you want to give it a try, you can install it for free (see section below) or you can just use the [online demo](https://expense-tracker-demo-42250.firebaseapp.com) hosted on Firebase Hosting.
 
-## Getting started
+## How to use
 
-### How to deploy on Firebase
+You can easily deploy this application to Firebase or run it locally, you just need :
+- A Google account to create a Firebase project (free)
+- `npm` to install Firebase CLI
+- `docker` and `docker-compose` to build and/or deploy the project
 
-#### Requirements
-You can install this application for free, you just need a Google account to create a Firebase project.
-
-#### Create a Firebase project
-
-Sign in on the [Firebase Console](https://console.firebase.google.com) with your Google Account and create a new Firebase project.
+### Requirements
 
 #### Install firebase-tools
 
-You need to install `firebase-tools` with [npm](https://www.npmjs.com/) :
 ```bash
 $ npm install -g firebase-tools
 ```
 
-Then run this command to login :
+#### Create a Firebase project
+
+Sign in on the [Firebase Console](https://console.firebase.google.com) with your Google Account and create a new Firebase project. Add a web application to this Firebase project.
+
+Rename the `.env.example` file by removing the `.example` extension :
+```bash
+$ mv .env.example .env
+```
+
+Update the `.env` file with your Firebase project settings.
+
+### How to run locally
+
+```bash
+$ make docker-dev
+```
+
+You should be able to access the application through this URL : http://localhost:8080/
+
+### How to deploy to Firebase
+
+Run this command to get the `FIREBASE_TOKEN` needed to deploy :
 ```bash
 $ firebase-tools login
 ```
 
-#### Build and deploy the project
+Update the `.env` file with your `FIREBASE_TOKEN`.
 
-Before you can deploy the project to Firebase, you need to clone it, install it and build it :
-```
-$ git clone git@github.com:rbretecher/expense-tracker.git
-$ cd expense-tracker
-$ npm install
-$ npm run build
-```
-
-Then run this command so that firebase knows which project to deploy :
+Then run this command to build and deploy the project to Firebase :
 ```bash
-$ firebase use PROJECT_ID
-```
-
-Finally, execute this command to deploy the project :
-```
-$ firebase deploy
+$ make docker-deploy
 ```
 
 Ta-da! Your project is now deployed and available on Firebase.
@@ -56,7 +61,6 @@ Ta-da! Your project is now deployed and available on Firebase.
 ## Next steps
 
 About the project :
-- Dockerize it
 - Code cleaning/refactoring
 - UI/UX improvements
 
