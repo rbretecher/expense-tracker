@@ -10,7 +10,9 @@ export function handleAuthStateChanged({ commit, dispatch }) {
       commit('setIsSignedIn', true);
       LocalStorage.set('signedIn', true);
       dispatch('loadData');
-      this.$router.push('/').catch(() => { });
+      if (this.$router.currentRoute.fullPath === '/login') {
+        this.$router.push('/').catch(() => { });
+      }
     } else {
       commit('setIsSignedIn', false);
       LocalStorage.set('signedIn', false);
