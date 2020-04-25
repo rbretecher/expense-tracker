@@ -5,10 +5,10 @@ export default function () {
     // Toolbar
     currentPage: null,
     toolbarAction: null,
-    // Resources loading
+    // Resources for the app.
     categoriesLoaded: false,
-    collectionsLoaded: false,
-    usersLoaded: false,
+    // Resources for the expense page.
+    collectionLoaded: false,
     expensesLoaded: false,
   };
 }

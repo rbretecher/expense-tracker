@@ -9,7 +9,10 @@
     />
     <modal-expense-price :price.sync="formData.price" />
     <modal-expense-date :date.sync="formData.date" />
-    <modal-expense-paid-by :paidBy.sync="formData.paidBy" />
+    <modal-expense-paid-by
+      :paidBy.sync="formData.paidBy"
+      :users="collection.users"
+    />
     <modal-expense-category :category.sync="formData.category" />
   </modal>
 </template>
@@ -20,7 +23,7 @@ import { mapActions } from 'vuex';
 
 export default {
   mixins: [mixinAddEditExpense],
-  props: ['id', 'expense', 'collectionId'],
+  props: ['id', 'expense', 'collectionId', 'collection'],
   methods: {
     ...mapActions('expenses', ['updateExpense']),
     saveExpense() {

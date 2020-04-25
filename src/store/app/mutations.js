@@ -6,12 +6,8 @@ export function setCategoriesLoaded(state, value) {
   state.categoriesLoaded = value;
 }
 
-export function setCollectionsLoaded(state, value) {
-  state.collectionsLoaded = value;
-}
-
-export function setUsersLoaded(state, value) {
-  state.usersLoaded = value;
+export function setCollectionLoaded(state, value) {
+  state.collectionLoaded = value;
 }
 
 export function setExpensesLoaded(state, value) {

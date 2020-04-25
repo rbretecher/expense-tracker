@@ -4,12 +4,12 @@ import { Loading, LocalStorage } from 'quasar';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 
 export function handleAuthStateChanged({ commit, dispatch }) {
-  firebase.auth().onAuthStateChanged((user) => {
+  const unsubscribeOnAuthStateChange = firebase.auth().onAuthStateChanged((user) => {
     Loading.hide();
     if (user) {
       commit('setIsSignedIn', true);
       LocalStorage.set('signedIn', true);
-      dispatch('loadData');
+      dispatch('users/loadCurrentUser', user.uid, { root: true });
       if (this.$router.currentRoute.fullPath === '/login') {
         this.$router.push('/').catch(() => { });
       }
@@ -18,15 +18,24 @@ export function handleAuthStateChanged({ commit, dispatch }) {
       LocalStorage.set('signedIn', false);
       dispatch('resetState');
       this.$router.push('/login').catch(() => { });
+      unsubscribeOnAuthStateChange();
     }
   });
 }
 
-export function login(context, { email, password }) {
+export function login({ commit, dispatch }, { email, password }) {
   Loading.show();
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
+    .then((result) => {
+      commit('setIsSignedIn', true);
+      LocalStorage.set('signedIn', true);
+      dispatch('users/loadCurrentUser', result.user.uid, { root: true });
+      if (this.$router.currentRoute.fullPath === '/login') {
+        this.$router.push('/').catch(() => { });
+      }
+    })
     .catch((error) => {
       Loading.hide();
       showErrorMessageWithTitle('Could not sign in', error.message);
@@ -47,18 +56,19 @@ export function logout() {
 export function loadData({ dispatch }) {
   Loading.show();
   try {
-    dispatch('categories/firebaseReadData', null, { root: true });
-    dispatch('collections/firebaseReadData', null, { root: true });
-    dispatch('users/firebaseReadData', null, { root: true });
+    dispatch('categories/loadCategories', null, { root: true });
   } catch (error) {
     Loading.hide();
     showErrorMessageWithTitle('Could not load Firebase data', 'Please make sure you configured properly Firebase credentials.');
   }
 }
 
-export function loadExpenseData({ dispatch }, collectionId) {
+export function loadCollectionAndExpenses({ dispatch }, collectionId) {
   dispatch('setExpensesLoaded', false);
-  dispatch('expenses/firebaseReadData', collectionId, { root: true });
+  dispatch('setCollectionLoaded', false);
+
+  dispatch('expenses/loadExpenses', collectionId, { root: true });
+  dispatch('collections/loadCollection', collectionId, { root: true });
 }
 
 export function setCategoriesLoaded({ commit, getters }, value) {
@@ -69,20 +79,8 @@ export function setCategoriesLoaded({ commit, getters }, value) {
   }
 }
 
-export function setCollectionsLoaded({ commit, getters }, value) {
-  commit('setCollectionsLoaded', value);
-
-  if (getters.appReady) {
-    Loading.hide();
-  }
-}
-
-export function setUsersLoaded({ commit, getters }, value) {
-  commit('setUsersLoaded', value);
-
-  if (getters.appReady) {
-    Loading.hide();
-  }
+export function setCollectionLoaded({ commit }, value) {
+  commit('setCollectionLoaded', value);
 }
 
 export function setExpensesLoaded({ commit }, value) {
@@ -104,7 +102,7 @@ export function resetState({ commit }) {
   commit('setToolbarAction', null);
 
   commit('setCategoriesLoaded', false);
-  commit('setCollectionsLoaded', false);
-  commit('setUsersLoaded', false);
+
+  commit('setCollectionLoaded', false);
   commit('setExpensesLoaded', false);
 }

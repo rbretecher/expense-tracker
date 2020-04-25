@@ -48,10 +48,10 @@ export default {
     CollectionBreadcrumbs,
   },
   computed: {
-    ...mapGetters('collections', ['rootCollections', 'children', 'parents']),
+    ...mapGetters('users', ['userRootCollections', 'children', 'parents']),
     currentCollections() {
       if (!this.collectionId) {
-        return this.rootCollections;
+        return this.userRootCollections;
       }
       return this.children(this.collectionId);
     },

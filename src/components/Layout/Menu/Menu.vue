@@ -14,7 +14,7 @@
       default-opened
     >
       <collection-item
-        v-for="(collection, key) in rootCollections"
+        v-for="(collection, key) in userRootCollections"
         :key="key"
         :id="key"
         :collection="collection"
@@ -56,7 +56,7 @@ export default {
     MenuItem,
   },
   computed: {
-    ...mapGetters('collections', ['rootCollections']),
+    ...mapGetters('users', ['userRootCollections']),
   },
 };
 </script>

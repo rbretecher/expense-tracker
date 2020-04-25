@@ -76,7 +76,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('app', ['login', 'handleAuthStateChanged']),
+    ...mapActions('app', ['login']),
     submitForm() {
       this.$refs.form.validate().then((success) => {
         if (success) {
@@ -84,9 +84,6 @@ export default {
         }
       });
     },
-  },
-  mounted() {
-    this.handleAuthStateChanged();
   },
 };
 </script>

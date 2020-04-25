@@ -16,12 +16,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
-  props: ['paidBy'],
+  props: ['paidBy', 'users'],
   computed: {
-    ...mapGetters('users', ['users']),
     selectOptions() {
       return Object.keys(this.users).map((key) => ({ label: this.users[key].name, value: key }));
     },

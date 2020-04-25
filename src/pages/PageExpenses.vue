@@ -1,7 +1,7 @@
 <template>
   <div class="relative-position">
-    <q-page v-if="!expensesLoaded">
-      <q-inner-loading :showing="!expensesLoaded">
+    <q-page v-if="!expensePageReady">
+      <q-inner-loading :showing="!expensePageReady">
         <q-spinner
           color="primary"
           size="3em"
@@ -22,12 +22,16 @@
       >
         <expense-list
           :collectionId="collectionId"
+          :collection="currentCollection"
           :expenses="expenses"
           class="q-mb-xl"
         />
 
         <big-title>Summary</big-title>
-        <expense-summary :expenses="expenses" />
+        <expense-summary
+          :collection="currentCollection"
+          :expenses="expenses"
+        />
       </div>
 
       <no-resource-banner
@@ -41,6 +45,7 @@
         <add-expense
           @close="showAddExpense = false"
           :collectionId="collectionId"
+          :collection="currentCollection"
         />
       </app-dialog>
     </scroll-page>
@@ -63,14 +68,15 @@ export default {
     };
   },
   computed: {
-    ...mapState('app', ['expensesLoaded']),
+    ...mapState('collections', ['currentCollection']),
+    ...mapGetters('app', ['expensePageReady']),
     ...mapGetters('expenses', ['expensesSortedByDate']),
     expenses() {
       return this.expensesSortedByDate;
     },
   },
   methods: {
-    ...mapActions('app', ['loadExpenseData']),
+    ...mapActions('app', ['loadCollectionAndExpenses']),
     showAddExpenseDialog() {
       this.showAddExpense = true;
     },
@@ -82,11 +88,11 @@ export default {
   },
   watch: {
     collectionId() {
-      this.loadExpenseData(this.collectionId);
+      this.loadCollectionAndExpenses(this.collectionId);
     },
   },
   mounted() {
-    this.loadExpenseData(this.collectionId);
+    this.loadCollectionAndExpenses(this.collectionId);
   },
 };
 </script>

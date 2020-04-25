@@ -1,6 +1,22 @@
 {
     "rules": {
-        ".read": "auth != null",
-        ".write": "auth != null"
+        "users": {
+            "$uid": {
+                ".read": "$uid == auth.uid",
+                ".write": "$uid == auth.uid"
+            }
+        },
+        "categories": {
+            ".read": true,
+            ".write": true
+        },
+        "collections": {
+            ".read": true,
+            ".write": true
+        },
+        "expenses": {
+            ".read": true,
+            ".write": true
+        }
     }
 }

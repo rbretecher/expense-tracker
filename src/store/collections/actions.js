@@ -17,8 +17,8 @@ export function deleteCollection(context, id) {
   firebaseRemoveValue(`collections/${id}`, { successMessage: 'Collection deleted!' });
 }
 
-export const firebaseReadData = firebaseAction(
-  ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('collections', firebase.database().ref('collections')).then(() => {
-    dispatch('app/setCollectionsLoaded', true, { root: true });
+export const loadCollection = firebaseAction(
+  ({ bindFirebaseRef, dispatch }, collectionId) => bindFirebaseRef('currentCollection', firebase.database().ref(`collections/${collectionId}`)).then(() => {
+    dispatch('app/setCollectionLoaded', true, { root: true });
   }),
 );

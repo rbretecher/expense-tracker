@@ -17,7 +17,7 @@ export function deleteExpense(context, payload) {
   firebaseRemoveValue(`expenses/${payload.collectionId}/${payload.id}`, { successMessage: 'Expense deleted!' });
 }
 
-export const firebaseReadData = firebaseAction(
+export const loadExpenses = firebaseAction(
   ({ bindFirebaseRef, dispatch }, collectionId) => bindFirebaseRef('expenses', firebase.database().ref('expenses').child(collectionId)).then(() => {
     dispatch('app/setExpensesLoaded', true, { root: true });
   }),

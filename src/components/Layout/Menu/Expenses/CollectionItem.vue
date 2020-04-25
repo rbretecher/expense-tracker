@@ -49,7 +49,7 @@ export default {
   name: 'CollectionItem',
   props: ['id', 'collection'],
   computed: {
-    ...mapGetters('collections', ['children']),
+    ...mapGetters('users', ['children']),
     hasChildren() {
       return Object.keys(this.children(this.id)).length !== 0;
     },

@@ -38,6 +38,7 @@
         :id="id"
         :expense="expense"
         :collectionId="collectionId"
+        :collection="collection"
         @close="showEditExpense = false"
       />
     </app-dialog>
@@ -53,20 +54,19 @@ import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   mixins: [mixinPrice],
-  props: ['id', 'expense', 'collectionId'],
+  props: ['id', 'expense', 'collectionId', 'collection'],
   data() {
     return {
       showEditExpense: false,
     };
   },
   computed: {
-    ...mapState('users', ['users']),
     ...mapState('categories', ['categories']),
     paidByName() {
-      if (!this.users[this.expense.paidBy]) {
+      if (!this.collection.users[this.expense.paidBy]) {
         return 'Unknown';
       }
-      return this.users[this.expense.paidBy].name;
+      return this.collection.users[this.expense.paidBy].name;
     },
     categoryIconName() {
       if (!this.categories[this.expense.category]) {
