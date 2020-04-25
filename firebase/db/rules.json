@@ -1,14 +1,15 @@
 {
     "rules": {
         "users": {
+            ".read": "root.child('users').child(auth.uid).child('admin').val() === true",
             "$uid": {
-                ".read": "$uid == auth.uid",
-                ".write": "$uid == auth.uid"
+                ".read": "$uid == auth.uid || root.child('users').child(auth.uid).child('admin').val() === true",
+                ".write": "$uid == auth.uid || root.child('users').child(auth.uid).child('admin').val() === true"
             }
         },
         "categories": {
-            ".read": true,
-            ".write": true
+            ".read": "auth != null",
+            ".write": "root.child('users').child(auth.uid).child('admin').val() === true"
         },
         "collections": {
             ".read": true,

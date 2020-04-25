@@ -4,10 +4,6 @@ export function users(state) {
   return orderObjectByProp(state.users, 'name');
 }
 
-export function getCurrentUser(state) {
-  return state.currentUser;
-}
-
 export function userRootCollections(state) {
   const collections = {};
 

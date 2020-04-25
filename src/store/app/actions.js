@@ -57,6 +57,7 @@ export function loadData({ dispatch }) {
   Loading.show();
   try {
     dispatch('categories/loadCategories', null, { root: true });
+    dispatch('users/loadUsers', null, { root: true });
   } catch (error) {
     Loading.hide();
     showErrorMessageWithTitle('Could not load Firebase data', 'Please make sure you configured properly Firebase credentials.');
@@ -73,6 +74,14 @@ export function loadCollectionAndExpenses({ dispatch }, collectionId) {
 
 export function setCategoriesLoaded({ commit, getters }, value) {
   commit('setCategoriesLoaded', value);
+
+  if (getters.appReady) {
+    Loading.hide();
+  }
+}
+
+export function setUsersLoaded({ commit, getters }, value) {
+  commit('setUsersLoaded', value);
 
   if (getters.appReady) {
     Loading.hide();

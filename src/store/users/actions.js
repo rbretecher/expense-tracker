@@ -17,7 +17,7 @@ export function deleteUser(context, id) {
   firebaseRemoveValue(`users/${id}`, { successMessage: 'User deleted!' });
 }
 
-export const firebaseReadData = firebaseAction(
+export const loadUsers = firebaseAction(
   ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('users', firebase.database().ref('users')).then(() => {
     dispatch('app/setUsersLoaded', true, { root: true });
   }),

@@ -6,6 +6,10 @@ export function setCategoriesLoaded(state, value) {
   state.categoriesLoaded = value;
 }
 
+export function setUsersLoaded(state, value) {
+  state.usersLoaded = value;
+}
+
 export function setCollectionLoaded(state, value) {
   state.collectionLoaded = value;
 }
