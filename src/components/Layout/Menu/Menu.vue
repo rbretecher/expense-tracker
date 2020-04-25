@@ -7,6 +7,7 @@
     />
 
     <q-expansion-item
+      v-if="currentUser.collections"
       expand-separator
       icon="euro_symbol"
       label="Expenses"

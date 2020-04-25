@@ -4,29 +4,29 @@ export function users(state) {
   return orderObjectByProp(state.users, 'name');
 }
 
-export function userRootCollections(state) {
+export function userRootCollections({ currentUser }) {
   const collections = {};
 
   Object
-    .keys(state.currentUser.collections)
+    .keys(currentUser.collections || {})
     .forEach((key) => {
-      if (!state.currentUser.collections[key].collection) {
-        collections[key] = state.currentUser.collections[key];
+      if (!currentUser.collections[key].collection) {
+        collections[key] = currentUser.collections[key];
       }
     });
 
   return collections;
 }
 
-export function children(state) {
+export function children({ currentUser }) {
   return (id) => {
     const collections = {};
 
     Object
-      .keys(state.currentUser.collections)
+      .keys(currentUser.collections)
       .forEach((key) => {
-        if (state.currentUser.collections[key].collection === id) {
-          collections[key] = state.currentUser.collections[key];
+        if (currentUser.collections[key].collection === id) {
+          collections[key] = currentUser.collections[key];
         }
       });
 
@@ -34,14 +34,14 @@ export function children(state) {
   };
 }
 
-export function parents(state, getters) {
+export function parents({ currentUser }, getters) {
   return (id) => {
-    if (state.currentUser.collections[id].collection) {
+    if (currentUser.collections[id].collection) {
       return {
-        [id]: state.currentUser.collections[id],
-        ...getters.parents(state.currentUser.collections[id].collection),
+        [id]: currentUser.collections[id],
+        ...getters.parents(currentUser.collections[id].collection),
       };
     }
-    return { [id]: state.currentUser.collections[id] };
+    return { [id]: currentUser.collections[id] };
   };
 }

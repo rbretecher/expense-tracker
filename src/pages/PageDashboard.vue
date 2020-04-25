@@ -7,7 +7,7 @@
       </dashboard-item>
 
       <dashboard-item icon="account_tree">
-        {{ Object.keys(currentUser.collections).length }} collection
+        {{ collectionCount }} collection
       </dashboard-item>
 
       <dashboard-item icon="category">
@@ -32,9 +32,12 @@ export default {
     ...mapState('categories', ['categories']),
     expenseCount() {
       return Object
-        .keys(this.currentUser.collections)
+        .keys(this.currentUser.collections || {})
         .filter((key) => !this.currentUser.collections[key].collection)
         .reduce((acc, currentKey) => acc + this.currentUser.collections[currentKey].count, 0);
+    },
+    collectionCount() {
+      return Object.keys(this.currentUser.collections || {}).length;
     },
   },
 };
