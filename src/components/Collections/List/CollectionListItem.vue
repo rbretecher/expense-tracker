@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import EditCollection from 'src/components/Collections/Modals/EditCollection';
 import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
@@ -54,6 +54,9 @@ export default {
     return {
       showEditCollection: false,
     };
+  },
+  computed: {
+    ...mapState('users', ['currentUser']),
   },
   components: {
     EditCollection,
