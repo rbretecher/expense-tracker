@@ -1,5 +1,5 @@
 export function appReady(state) {
-  return state.categoriesLoaded && state.usersLoaded;
+  return state.categoriesLoaded;
 }
 
 export function expensePageReady(state) {

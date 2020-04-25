@@ -1,14 +1,6 @@
 <template>
-  <div class="relative-position">
-    <q-page v-if="!expensePageReady">
-      <q-inner-loading :showing="!expensePageReady">
-        <q-spinner
-          color="primary"
-          size="3em"
-          :thickness="10"
-        />
-      </q-inner-loading>
-    </q-page>
+  <div>
+    <page-spinner v-if="!expensePageReady" />
 
     <scroll-page
       v-else
@@ -96,10 +88,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.q-scroll-area-expenses {
-  display: flex;
-  flex-grow: 1;
-}
-</style>
