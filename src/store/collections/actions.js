@@ -3,7 +3,7 @@ import 'firebase/database';
 
 import { uid } from 'quasar';
 import { firebaseAction } from 'vuexfire';
-import { firebaseSetValue } from 'src/database/firebase';
+import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
 
 export function addCollection(context, { collection, user }) {
   const collectionId = uid();
@@ -24,43 +24,11 @@ export function addCollection(context, { collection, user }) {
 }
 
 export function updateCollection(context, payload) {
-  const rootRef = firebase.database().ref();
-  const usersRef = rootRef.child(`collections/${payload.id}/users`);
-
-  // Getting all users that have the collection.
-  return usersRef.once('value').then((snapshot) => {
-    const userKeys = Object.keys(snapshot.val());
-    const updateObj = {};
-
-    userKeys.forEach((key) => {
-      updateObj[`users/${key}/collections/${payload.id}/name`] = payload.updates.name;
-      updateObj[`users/${key}/collections/${payload.id}/icon`] = payload.updates.icon;
-    });
-
-    updateObj[`collections/${payload.id}/name`] = payload.updates.name;
-    updateObj[`collections/${payload.id}/icon`] = payload.updates.icon;
-
-    return rootRef.update(updateObj);
-  });
+  firebaseUpdateValue(`collections/${payload.id}`, payload.updates, { successMessage: 'Collection updated!' });
 }
 
 export function deleteCollection(context, collectionId) {
-  const rootRef = firebase.database().ref();
-  const usersRef = rootRef.child(`collections/${collectionId}/users`);
-
-  // Getting all users that have the collection.
-  return usersRef.once('value').then((snapshot) => {
-    const userKeys = Object.keys(snapshot.val());
-    const updateObj = {};
-
-    userKeys.forEach((key) => {
-      updateObj[`users/${key}/collections/${collectionId}`] = null;
-    });
-
-    updateObj[`collections/${collectionId}`] = null;
-
-    return rootRef.update(updateObj);
-  });
+  firebaseRemoveValue(`collections/${collectionId}`, { successMessage: 'Collection deleted!' });
 }
 
 export const loadCollection = firebaseAction(

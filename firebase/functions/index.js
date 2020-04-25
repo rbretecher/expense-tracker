@@ -46,3 +46,33 @@ exports.updateCountRecursive = functions.database.ref('/collections/{collectionI
         return null;
     });
 
+// Update collections embedded in users when a collection gets updated.
+exports.onCollectionUpdated = functions.database.ref('/collections/{collectionId}')
+    .onUpdate(async (change) => {
+        const collection = change.after.data();
+
+        const userKeys = Object.keys(collection.users);
+        const updateObj = {};
+
+        userKeys.forEach((key) => {
+            updateObj[`users/${key}/collections/${collectionRef.key}/name`] = collection.name;
+            updateObj[`users/${key}/collections/${collectionRef.key}/icon`] = collection.icon;
+            updateObj[`users/${key}/collections/${collectionRef.key}/count`] = collection.count;
+        });
+
+        return rootRef.update(updateObj);
+    });
+
+// Delete collections embedded in users when a collection gets deleted.
+exports.onCollectionDeleted = functions.database.ref('/collections/{collectionId}')
+    .onDelete(async (snapshot, context) => {
+
+        const userKeys = Object.keys(snapshot.data());
+        const updateObj = {};
+
+        userKeys.forEach((key) => {
+            updateObj[`users/${key}/collections/${context.params.collectionId}`] = null;
+        });
+
+        return rootRef.update(updateObj);
+    });
