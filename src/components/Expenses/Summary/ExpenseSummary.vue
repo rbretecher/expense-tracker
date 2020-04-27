@@ -32,7 +32,7 @@ export default {
           shouldHavePaid: 0,
         };
 
-        totalWeight += this.collection.users[key].settings.weight;
+        totalWeight += (this.collection.users[key].weight || 0.5);
       });
 
       Object.keys(this.expenses).forEach((key) => {
@@ -45,7 +45,7 @@ export default {
 
           Object.keys(expensesPerUser).forEach((userId) => {
             const shouldHavePaid = (price / totalWeight)
-              * this.collection.users[userId].settings.weight;
+              * (this.collection.users[userId].weight || 0.5);
             expensesPerUser[userId].shouldHavePaid += shouldHavePaid;
           });
         }

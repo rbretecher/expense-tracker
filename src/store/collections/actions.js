@@ -15,7 +15,6 @@ export function addCollection(context, { collection, user }) {
       [userId]: {
         name: user.name,
         icon: user.icon,
-        settings: user.settings,
       },
     },
   }, { successMessage: 'Collection added!' });

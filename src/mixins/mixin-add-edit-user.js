@@ -11,9 +11,6 @@ export default {
           name: 'face',
           color: 'blue-4',
         },
-        settings: {
-          weight: 0.5,
-        },
       },
     };
   },
