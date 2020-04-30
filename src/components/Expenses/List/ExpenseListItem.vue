@@ -38,7 +38,6 @@
         :id="id"
         :expense="expense"
         :collectionId="collectionId"
-        :collection="collection"
         @close="showEditExpense = false"
       />
     </app-dialog>
@@ -47,14 +46,14 @@
 
 <script>
 import { date } from 'quasar';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import EditExpense from 'src/components/Expenses/Modals/EditExpense';
 import mixinPrice from 'src/mixins/mixin-price';
 import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   mixins: [mixinPrice],
-  props: ['id', 'expense', 'collectionId', 'collection'],
+  props: ['id', 'expense', 'collectionId'],
   data() {
     return {
       showEditExpense: false,
@@ -62,11 +61,12 @@ export default {
   },
   computed: {
     ...mapState('categories', ['categories']),
+    ...mapGetters('users', ['currentCollectionUsers']),
     paidByName() {
-      if (!this.collection.users[this.expense.paidBy]) {
+      if (!this.currentCollectionUsers[this.expense.paidBy]) {
         return 'Unknown';
       }
-      return this.collection.users[this.expense.paidBy].name;
+      return this.currentCollectionUsers[this.expense.paidBy].name;
     },
     categoryIconName() {
       if (!this.categories[this.expense.category]) {

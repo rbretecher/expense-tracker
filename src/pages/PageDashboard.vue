@@ -7,7 +7,7 @@
       </dashboard-item>
 
       <dashboard-item icon="account_tree">
-        {{ collectionCount }} collection
+        {{ Object.keys(collections).length }} collections
       </dashboard-item>
 
       <dashboard-item icon="category">
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
 import DashboardItem from 'src/components/Dashboard/DashboardItem';
 
@@ -30,14 +30,12 @@ export default {
   computed: {
     ...mapState('users', ['currentUser']),
     ...mapState('categories', ['categories']),
+    ...mapGetters('collections', ['collections']),
     expenseCount() {
       return Object
-        .keys(this.currentUser.collections || {})
-        .filter((key) => !this.currentUser.collections[key].collection)
-        .reduce((acc, currentKey) => acc + this.currentUser.collections[currentKey].count, 0);
-    },
-    collectionCount() {
-      return Object.keys(this.currentUser.collections || {}).length;
+        .keys(this.collections || {})
+        .filter((key) => !this.collections[key].collection)
+        .reduce((acc, currentKey) => acc + this.collections[currentKey].count, 0);
     },
   },
 };

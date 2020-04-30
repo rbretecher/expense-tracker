@@ -53,22 +53,15 @@ export function logout() {
     });
 }
 
-export function loadData({ dispatch }) {
+export function loadData({ dispatch }, userId) {
   Loading.show();
   try {
     dispatch('categories/loadCategories', null, { root: true });
+    dispatch('collections/loadCollections', userId, { root: true });
   } catch (error) {
     Loading.hide();
     showErrorMessageWithTitle('Could not load Firebase data', 'Please make sure you configured properly Firebase credentials.');
   }
-}
-
-export function loadCollectionAndExpenses({ dispatch }, collectionId) {
-  dispatch('setExpensesLoaded', false);
-  dispatch('setCollectionLoaded', false);
-
-  dispatch('expenses/loadExpenses', collectionId, { root: true });
-  dispatch('collections/loadCollection', collectionId, { root: true });
 }
 
 export function setCategoriesLoaded({ commit, getters }, value) {
@@ -79,16 +72,16 @@ export function setCategoriesLoaded({ commit, getters }, value) {
   }
 }
 
+export function setCollectionsLoaded({ commit, getters }, value) {
+  commit('setCollectionsLoaded', value);
+
+  if (getters.appReady) {
+    Loading.hide();
+  }
+}
+
 export function setUsersLoaded({ commit }, value) {
   commit('setUsersLoaded', value);
-}
-
-export function setCollectionLoaded({ commit }, value) {
-  commit('setCollectionLoaded', value);
-}
-
-export function setExpensesLoaded({ commit }, value) {
-  commit('setExpensesLoaded', value);
 }
 
 export function setCurrentPage({ commit }, value) {
@@ -106,7 +99,25 @@ export function resetState({ commit }) {
   commit('setToolbarAction', null);
 
   commit('setCategoriesLoaded', false);
+  commit('setCollectionsLoaded', false);
 
-  commit('setCollectionLoaded', false);
   commit('setExpensesLoaded', false);
+}
+
+// Actions related to the expense page.
+
+export function resetExpensePage({ commit, dispatch }) {
+  commit('setExpensesLoaded', false);
+  commit('setCollectionUsersLoaded', false);
+
+  dispatch('expenses/setExpenses', {}, { root: true });
+  dispatch('users/setCurrentCollectionUserIds', [], { root: true });
+}
+
+export function setExpensesLoaded({ commit }, value) {
+  commit('setExpensesLoaded', value);
+}
+
+export function setCollectionUsersLoaded({ commit }, value) {
+  commit('setCollectionUsersLoaded', value);
 }

@@ -22,3 +22,7 @@ export const loadExpenses = firebaseAction(
     dispatch('app/setExpensesLoaded', true, { root: true });
   }),
 );
+
+export function setExpenses({ commit }, value) {
+  commit('setExpenses', value);
+}

@@ -7,7 +7,7 @@
       v-for="(expenseSummary, key) in expenseSummaryPerUser"
       :key="key"
       :expenseSummary="expenseSummary"
-      :user="collection.users[key]"
+      :user="users[key]"
     />
   </q-list>
 </template>
@@ -16,7 +16,7 @@
 import ExpenseSummaryItem from 'src/components/Expenses/Summary/ExpenseSummaryItem';
 
 export default {
-  props: ['collection', 'expenses'],
+  props: ['users', 'expenses'],
   components: {
     ExpenseSummaryItem,
   },
@@ -25,14 +25,14 @@ export default {
       const expensesPerUser = {};
       let totalWeight = 0;
 
-      Object.keys(this.collection.users).forEach((key) => {
+      Object.keys(this.users).forEach((key) => {
         expensesPerUser[key] = {
           user: key,
           paid: 0,
           shouldHavePaid: 0,
         };
 
-        totalWeight += (this.collection.users[key].weight || 0.5);
+        totalWeight += (this.users[key].weight || 0.5);
       });
 
       Object.keys(this.expenses).forEach((key) => {
@@ -45,7 +45,7 @@ export default {
 
           Object.keys(expensesPerUser).forEach((userId) => {
             const shouldHavePaid = (price / totalWeight)
-              * (this.collection.users[userId].weight || 0.5);
+              * (this.users[userId].weight || 0.5);
             expensesPerUser[userId].shouldHavePaid += shouldHavePaid;
           });
         }

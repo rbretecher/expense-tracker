@@ -1,7 +1,11 @@
 export function appReady(state) {
-  return state.categoriesLoaded;
+  return state.categoriesLoaded && state.collectionsLoaded;
+}
+
+export function collectionsLoaded(state) {
+  return state.collectionsLoaded;
 }
 
 export function expensePageReady(state) {
-  return state.collectionLoaded && state.expensesLoaded;
+  return state.expensesLoaded && state.collectionUsersLoaded;
 }

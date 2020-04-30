@@ -7,7 +7,7 @@
     />
 
     <q-expansion-item
-      v-if="currentUser.collections"
+      v-if="rootCollections"
       expand-separator
       icon="euro_symbol"
       label="Expenses"
@@ -15,7 +15,7 @@
       default-opened
     >
       <collection-item
-        v-for="(collection, key) in userRootCollections"
+        v-for="(collection, key) in rootCollections"
         :key="key"
         :id="key"
         :collection="collection"
@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     ...mapState('users', ['currentUser']),
-    ...mapGetters('users', ['userRootCollections']),
+    ...mapGetters('collections', ['rootCollections']),
   },
 };
 </script>

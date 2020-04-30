@@ -4,44 +4,16 @@ export function users(state) {
   return orderObjectByProp(state.users, 'name');
 }
 
-export function userRootCollections({ currentUser }) {
-  const collections = {};
-
-  Object
-    .keys(currentUser.collections || {})
-    .forEach((key) => {
-      if (!currentUser.collections[key].collection) {
-        collections[key] = currentUser.collections[key];
-      }
-    });
-
-  return collections;
+export function currentUser(state) {
+  return state.currentUser;
 }
 
-export function children({ currentUser }) {
-  return (id) => {
-    const collections = {};
+export function currentCollectionUsers(state) {
+  const collectionUsers = {};
 
-    Object
-      .keys(currentUser.collections)
-      .forEach((key) => {
-        if (currentUser.collections[key].collection === id) {
-          collections[key] = currentUser.collections[key];
-        }
-      });
+  state.currentCollectionUserIds.forEach((id) => {
+    collectionUsers[id] = state.users[id];
+  });
 
-    return collections;
-  };
-}
-
-export function parents({ currentUser }, getters) {
-  return (id) => {
-    if (currentUser.collections[id].collection) {
-      return {
-        [id]: currentUser.collections[id],
-        ...getters.parents(currentUser.collections[id].collection),
-      };
-    }
-    return { [id]: currentUser.collections[id] };
-  };
+  return collectionUsers;
 }
