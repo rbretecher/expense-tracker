@@ -10,9 +10,10 @@ export function currentUser(state) {
 
 export function currentCollectionUsers(state) {
   const collectionUsers = {};
-
   state.currentCollectionUserIds.forEach((id) => {
-    collectionUsers[id] = state.users[id];
+    if (state.users[id]) {
+      collectionUsers[id] = state.users[id];
+    }
   });
 
   return collectionUsers;

@@ -30,41 +30,43 @@ export const loadCurrentUser = firebaseAction(
 );
 
 // Load users related to a collection.
-export function loadUsersFromCollection({ dispatch }, collectionId) {
-  const collectionHasUsers = firebase.database().ref(`collection_has_users/${collectionId}`);
+export const loadUsersFromCollection = firebaseAction(
+  ({
+    commit, dispatch, bindFirebaseRef, unbindFirebaseRef, rootGetters,
+  }, collectionId) => {
+    const collectionHasUsers = firebase.database().ref(`collection_has_users/${collectionId}`);
 
-  collectionHasUsers.once('value', (snapshot) => {
-    dispatch('setCurrentCollectionUserIds', Object.keys(snapshot.val()));
-    dispatch('users/loadUsersFromIds', Object.keys(snapshot.val()), { root: true });
-  });
+    collectionHasUsers.once('value', (snapshot) => {
+      dispatch('setCurrentCollectionUserIds', Object.keys(snapshot.val()));
 
-  /*
-  userHasCollections.on('child_added', (snapshot) => {
-    if (!rootGetters['app/collectionsLoaded']) {
-      return;
-    }
-    dispatch('collections/loadCollection', snapshot.key, { root: true });
-  });
+      const promises = [];
 
-  userHasCollections.on('child_removed', (snapshot) => {
-    dispatch('collections/unbindCollection', snapshot.key, { root: true });
-  });
-  */
-}
+      Object.keys(snapshot.val()).forEach((userId) => {
+        commit('initUser', userId);
+        promises.push(
+          bindFirebaseRef(`users.${userId}`, firebase.database().ref(`users/${userId}`)),
+        );
+      });
 
-export const loadUsersFromIds = firebaseAction(
-  ({ bindFirebaseRef, commit, dispatch }, users) => {
-    const promises = [];
-
-    users.forEach((userId) => {
-      commit('initUser', userId);
-      promises.push(
-        bindFirebaseRef(`users.${userId}`, firebase.database().ref(`users/${userId}`)),
-      );
+      Promise.all(promises).then(() => {
+        dispatch('app/setCollectionUsersLoaded', true, { root: true });
+      });
     });
 
-    Promise.all(promises).then(() => {
-      dispatch('app/setCollectionUsersLoaded', true, { root: true });
+    collectionHasUsers.on('child_added', (snapshot) => {
+      if (!rootGetters['app/collectionUsersLoaded']) {
+        return;
+      }
+
+      commit('initUser', snapshot.key);
+      bindFirebaseRef(`users.${snapshot.key}`, firebase.database().ref(`users/${snapshot.key}`));
+      commit('addCurrentCollectionUser', snapshot.key);
+    });
+
+    collectionHasUsers.on('child_removed', (snapshot) => {
+      unbindFirebaseRef(`users.${snapshot.key}`);
+      commit('deleteUser', snapshot.key);
+      commit('deleteUserFromCurrentCollection', snapshot.key);
     });
   },
 );

@@ -9,3 +9,8 @@ export function collectionsLoaded(state) {
 export function expensePageReady(state) {
   return state.expensesLoaded && state.collectionUsersLoaded;
 }
+
+
+export function collectionUsersLoaded(state) {
+  return state.collectionUsersLoaded;
+}
