@@ -37,7 +37,7 @@ export const loadUsersFromCollection = firebaseAction(
     const collectionHasUsers = firebase.database().ref(`collection_has_users/${collectionId}`);
 
     collectionHasUsers.once('value', (snapshot) => {
-      dispatch('setCurrentCollectionUserIds', Object.keys(snapshot.val()));
+      dispatch('setCurrentCollectionUsers', snapshot.val());
 
       const promises = [];
 
@@ -60,7 +60,7 @@ export const loadUsersFromCollection = firebaseAction(
 
       commit('initUser', snapshot.key);
       bindFirebaseRef(`users.${snapshot.key}`, firebase.database().ref(`users/${snapshot.key}`));
-      commit('addCurrentCollectionUser', snapshot.key);
+      commit('addCurrentCollectionUser', { id: snapshot.key, user: snapshot.val() });
     });
 
     collectionHasUsers.on('child_removed', (snapshot) => {
@@ -71,6 +71,6 @@ export const loadUsersFromCollection = firebaseAction(
   },
 );
 
-export function setCurrentCollectionUserIds({ commit }, value) {
-  commit('setCurrentCollectionUserIds', value);
+export function setCurrentCollectionUsers({ commit }, value) {
+  commit('setCurrentCollectionUsers', value);
 }

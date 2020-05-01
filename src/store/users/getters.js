@@ -10,9 +10,13 @@ export function currentUser(state) {
 
 export function currentCollectionUsers(state) {
   const collectionUsers = {};
-  state.currentCollectionUserIds.forEach((id) => {
+
+  Object.keys(state.currentCollectionUsers).forEach((id) => {
     if (state.users[id]) {
-      collectionUsers[id] = state.users[id];
+      collectionUsers[id] = {
+        ...state.users[id],
+        weight: state.currentCollectionUsers[id].weight || 0.5,
+      };
     }
   });
 

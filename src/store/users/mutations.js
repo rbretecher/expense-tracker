@@ -9,13 +9,13 @@ export function deleteUser(state, userId) {
 }
 
 export function deleteUserFromCurrentCollection(state, userId) {
-  state.currentCollectionUserIds.splice(state.currentCollectionUserIds.indexOf(userId), 1);
+  Vue.delete(state.currentCollectionUsers, userId);
 }
 
-export function setCurrentCollectionUserIds(state, users) {
-  state.currentCollectionUserIds = users;
+export function setCurrentCollectionUsers(state, users) {
+  state.currentCollectionUsers = users;
 }
 
-export function addCurrentCollectionUser(state, userId) {
-  state.currentCollectionUserIds.push(userId);
+export function addCurrentCollectionUser(state, { id, user }) {
+  Vue.set(state.currentCollectionUsers, id, user);
 }
