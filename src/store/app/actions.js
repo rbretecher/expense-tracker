@@ -84,27 +84,17 @@ export function setUsersLoaded({ commit }, value) {
   commit('setUsersLoaded', value);
 }
 
-export function setCurrentPage({ commit }, value) {
-  commit('setCurrentPage', value);
+export function setToolbar({ commit }, value) {
+  commit('setToolbar', value);
 }
 
-export function setToolbarAction({ commit }, value) {
-  commit('setToolbarAction', value);
+export function setExpensesLoaded({ commit }, value) {
+  commit('setExpensesLoaded', value);
 }
 
-export function resetState({ commit }) {
-  commit('setIsSignedIn', false);
-
-  commit('setCurrentPage', null);
-  commit('setToolbarAction', null);
-
-  commit('setCategoriesLoaded', false);
-  commit('setCollectionsLoaded', false);
-
-  commit('setExpensesLoaded', false);
+export function setCollectionUsersLoaded({ commit }, value) {
+  commit('setCollectionUsersLoaded', value);
 }
-
-// Actions related to the expense page.
 
 export function resetExpensePage({ commit, dispatch }) {
   commit('setExpensesLoaded', false);
@@ -114,10 +104,18 @@ export function resetExpensePage({ commit, dispatch }) {
   dispatch('users/setCurrentCollectionUserIds', [], { root: true });
 }
 
-export function setExpensesLoaded({ commit }, value) {
-  commit('setExpensesLoaded', value);
-}
+export function resetState({ commit, dispatch }) {
+  commit('setIsSignedIn', false);
 
-export function setCollectionUsersLoaded({ commit }, value) {
-  commit('setCollectionUsersLoaded', value);
+  commit('setToolbar', {
+    title: null,
+    button: null,
+  });
+
+  commit('setCategoriesLoaded', false);
+  commit('setCollectionsLoaded', false);
+
+  dispatch('resetExpensePage');
+
+  commit('setUsersLoaded', false);
 }

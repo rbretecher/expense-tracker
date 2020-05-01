@@ -3,15 +3,17 @@ export default function () {
     // User
     isSignedIn: false,
     // Toolbar
-    currentPage: null,
-    toolbarAction: null,
-    // Resources for the app.
+    toolbar: {
+      title: null,
+      button: null,
+    },
+    // Resources needed to display the app.
     categoriesLoaded: false,
     collectionsLoaded: false,
-    // Resources for the collection page (expenses).
+    // Resources needed to display the expenses page.
     expensesLoaded: false,
     collectionUsersLoaded: false,
-    // Resources for the users page.
+    // Resources needed to display the users page.
     usersLoaded: false,
   };
 }

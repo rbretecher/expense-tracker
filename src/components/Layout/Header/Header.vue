@@ -34,16 +34,16 @@
         @click="$emit('update:leftDrawerOpen', !leftDrawerOpen)"
       />
       <q-toolbar-title class="text-bold absolute-center">
-        {{ currentPage }}
+        {{ toolbar.title }}
       </q-toolbar-title>
 
       <q-btn
-        v-if="toolbarAction"
+        v-if="toolbar.button"
         flat
         dense
         round
         icon="add"
-        @click="toolbarAction.action"
+        @click="toolbar.button.action"
       />
     </q-toolbar>
   </q-header>
@@ -55,7 +55,7 @@ import { mapState, mapActions } from 'vuex';
 export default {
   props: ['leftDrawerOpen'],
   computed: {
-    ...mapState('app', ['currentPage', 'toolbarAction']),
+    ...mapState('app', ['toolbar']),
   },
   methods: {
     ...mapActions('app', ['logout']),

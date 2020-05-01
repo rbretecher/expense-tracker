@@ -2,12 +2,8 @@ export function setIsSignedIn(state, value) {
   state.isSignedIn = value;
 }
 
-export function setCurrentPage(state, value) {
-  state.currentPage = value;
-}
-
-export function setToolbarAction(state, value) {
-  state.toolbarAction = value;
+export function setToolbar(state, value) {
+  state.toolbar = value;
 }
 
 export function setCategoriesLoaded(state, value) {
