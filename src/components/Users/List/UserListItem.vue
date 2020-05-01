@@ -14,6 +14,7 @@
     <q-item-section side>
       <div class="row">
         <q-btn
+          v-if="false"
           @click.stop="confirmDeleteUser"
           flat
           round
