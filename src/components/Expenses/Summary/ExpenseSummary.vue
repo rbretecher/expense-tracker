@@ -7,21 +7,20 @@
       v-for="(expenseSummary, key) in expenseSummaryPerUser"
       :key="key"
       :expenseSummary="expenseSummary"
+      :user="users[key]"
     />
   </q-list>
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import ExpenseSummaryItem from 'src/components/Expenses/Summary/ExpenseSummaryItem';
 
 export default {
-  props: ['expenses'],
+  props: ['users', 'expenses'],
   components: {
     ExpenseSummaryItem,
   },
   computed: {
-    ...mapState('users', ['users']),
     expenseSummaryPerUser() {
       const expensesPerUser = {};
       let totalWeight = 0;
@@ -33,7 +32,7 @@ export default {
           shouldHavePaid: 0,
         };
 
-        totalWeight += this.users[key].settings.weight;
+        totalWeight += (this.users[key].weight || 0.5);
       });
 
       Object.keys(this.expenses).forEach((key) => {
@@ -45,7 +44,8 @@ export default {
           expensesPerUser[expense.paidBy].paid += price;
 
           Object.keys(expensesPerUser).forEach((userId) => {
-            const shouldHavePaid = (price / totalWeight) * this.users[userId].settings.weight;
+            const shouldHavePaid = (price / totalWeight)
+              * (this.users[userId].weight || 0.5);
             expensesPerUser[userId].shouldHavePaid += shouldHavePaid;
           });
         }

@@ -45,4 +45,3 @@ exports.updateCountRecursive = functions.database.ref('/collections/{collectionI
 
         return null;
     });
-

@@ -8,6 +8,10 @@ It is mostly an experiment for my personal use and also to discover new tools/fr
 
 If you want to give it a try, you can install it for free (see section below) or you can just use the [online demo](https://expense-tracker-demo-42250.firebaseapp.com) hosted on Firebase Hosting.
 
+Demo credentials are :
+- Email : admin@demo.com
+- Password : azerty
+
 ## How to use
 
 You can easily deploy this application to Firebase or run it locally, you just need :
@@ -65,7 +69,5 @@ About the project :
 - UI/UX improvements
 
 New features :
-- Add authentication (Firebase Authentication)
-    - For now, everyone can access the Firebase Realtime Database (read/write)
 - Improve mobile support
 - Set parts to split expenses unevenly

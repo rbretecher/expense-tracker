@@ -1,6 +1,38 @@
 {
     "rules": {
-        ".read": true,
-        ".write": true
+        "users": {
+            ".read": "auth != null",
+            "$uid": {
+                ".write": "$uid == auth.uid || root.child('users').child(auth.uid).child('admin').val() === true"
+            }
+        },
+        "categories": {
+            ".read": "auth != null",
+            ".write": "root.child('users').child(auth.uid).child('admin').val() === true"
+        },
+        "collections": {
+            "$collectionId": {
+                ".read": "root.child('user_has_collections').child(auth.uid).child($collectionId).exists()",
+                ".write": "!root.child('collections').child($collectionId).exists() || root.child('user_has_collections').child(auth.uid).child($collectionId).exists()"
+            }
+        },
+        "expenses": {
+            "$collectionId": {
+                ".read": "root.child('user_has_collections').child(auth.uid).child($collectionId).exists()",
+                ".write": "root.child('user_has_collections').child(auth.uid).child($collectionId).exists()"
+            }
+        },
+        "user_has_collections": {
+            "$uid": {
+                ".read": "$uid == auth.uid",
+                ".write": "$uid == auth.uid"
+            }
+        },
+        "collection_has_users": {
+            "$collectionId": {
+                ".read": "root.child('user_has_collections').child(auth.uid).child($collectionId).exists()",
+                ".write": "!root.child('collections').child($collectionId).exists() || root.child('user_has_collections').child(auth.uid).child($collectionId).exists()"
+            }
+        }
     }
 }

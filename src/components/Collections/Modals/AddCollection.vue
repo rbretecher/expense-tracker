@@ -12,16 +12,19 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import mixinAddEditCollection from 'src/mixins/mixin-add-edit-collection';
 
 export default {
   mixins: [mixinAddEditCollection],
   props: ['collectionId'],
+  computed: {
+    ...mapState('users', ['currentUser']),
+  },
   methods: {
     ...mapActions('collections', ['addCollection']),
     saveCollection() {
-      this.addCollection(this.formData);
+      this.addCollection({ collection: this.formData, user: this.currentUser });
       this.$emit('close');
     },
   },

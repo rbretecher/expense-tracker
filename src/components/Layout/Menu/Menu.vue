@@ -7,6 +7,7 @@
     />
 
     <q-expansion-item
+      v-if="rootCollections"
       expand-separator
       icon="euro_symbol"
       label="Expenses"
@@ -29,6 +30,7 @@
     />
 
     <menu-item
+      v-if="currentUser.admin"
       to="/categories"
       icon="category"
       label="Categories"
@@ -36,6 +38,7 @@
     />
 
     <menu-item
+      v-if="currentUser.admin"
       to="/users"
       icon="account_circle"
       label="Users"
@@ -46,7 +49,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import CollectionItem from 'components/Layout/Menu/Expenses/CollectionItem';
 import MenuItem from 'components/Layout/Menu/MenuItem';
 
@@ -56,6 +59,7 @@ export default {
     MenuItem,
   },
   computed: {
+    ...mapState('users', ['currentUser']),
     ...mapGetters('collections', ['rootCollections']),
   },
 };

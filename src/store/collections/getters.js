@@ -1,30 +1,46 @@
-export function rootCollections(state) {
-  const collections = {};
+
+// Filter out empty collections.
+export function collections(state) {
+  const collectionsObj = {};
 
   Object
-    .keys(state.collections)
+    .keys(state.collections || {})
     .forEach((key) => {
-      if (!state.collections[key].collection) {
-        collections[key] = state.collections[key];
+      if (state.collections[key] && Object.keys(state.collections[key]).length) {
+        collectionsObj[key] = state.collections[key];
       }
     });
 
-  return collections;
+  return collectionsObj;
 }
 
-export function children(state) {
+export function rootCollections(state, getters) {
+  const collectionsObj = {};
+
+  Object
+    .keys(getters.collections)
+    .forEach((key) => {
+      if (!state.collections[key].collection) {
+        collectionsObj[key] = state.collections[key];
+      }
+    });
+
+  return collectionsObj;
+}
+
+export function children(state, getters) {
   return (id) => {
-    const collections = {};
+    const collectionsObj = {};
 
     Object
-      .keys(state.collections)
+      .keys(getters.collections)
       .forEach((key) => {
         if (state.collections[key].collection === id) {
-          collections[key] = state.collections[key];
+          collectionsObj[key] = state.collections[key];
         }
       });
 
-    return collections;
+    return collectionsObj;
   };
 }
 

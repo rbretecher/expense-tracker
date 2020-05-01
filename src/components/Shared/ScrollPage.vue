@@ -35,21 +35,24 @@ import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 export default {
   props: ['title', 'actionName', 'actionModel'],
   methods: {
-    ...mapActions('app', ['setCurrentPage', 'setToolbarAction']),
+    ...mapActions('app', ['setToolbar']),
   },
   mounted() {
-    if (!this.$q.platform.is.desktop) {
-      this.setCurrentPage(this.title);
+    if (this.$q.platform.is.mobile) {
+      let button = null;
       if (this.actionModel !== undefined) {
-        this.setToolbarAction({
+        button = {
           name: this.actionName,
           action: () => {
             this.$emit('update:actionModel', true);
           },
-        });
-      } else {
-        this.setToolbarAction(null);
+        };
       }
+
+      this.setToolbar({
+        title: this.title,
+        button,
+      });
     }
   },
   components: {

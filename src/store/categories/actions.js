@@ -16,7 +16,7 @@ export function deleteCategory(context, id) {
   firebaseRemoveValue(`categories/${id}`, { successMessage: 'Category deleted!' });
 }
 
-export const firebaseReadData = firebaseAction(
+export const loadCategories = firebaseAction(
   ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('categories', firebase.database().ref('categories')).then(() => {
     dispatch('app/setCategoriesLoaded', true, { root: true });
   }),

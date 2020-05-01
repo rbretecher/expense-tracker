@@ -32,7 +32,6 @@ export default {
     this.formData = {
       ...this.user,
       icon: { ...this.user.icon },
-      settings: { ...this.user.settings },
     };
   },
 };

@@ -9,18 +9,24 @@
     />
     <modal-expense-price :price.sync="formData.price" />
     <modal-expense-date :date.sync="formData.date" />
-    <modal-expense-paid-by :paidBy.sync="formData.paidBy" />
+    <modal-expense-paid-by
+      :paidBy.sync="formData.paidBy"
+      :users="currentCollectionUsers"
+    />
     <modal-expense-category :category.sync="formData.category" />
   </modal>
 </template>
 
 <script>
 import mixinAddEditExpense from 'src/mixins/mixin-add-edit-expense';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   mixins: [mixinAddEditExpense],
   props: ['id', 'expense', 'collectionId'],
+  computed: {
+    ...mapGetters('users', ['currentCollectionUsers']),
+  },
   methods: {
     ...mapActions('expenses', ['updateExpense']),
     saveExpense() {

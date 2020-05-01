@@ -1,12 +1,19 @@
 export default function () {
   return {
+    // User
+    isSignedIn: false,
     // Toolbar
-    currentPage: null,
-    toolbarAction: null,
-    // Resources loading
+    toolbar: {
+      title: null,
+      button: null,
+    },
+    // Resources needed to display the app.
     categoriesLoaded: false,
     collectionsLoaded: false,
-    usersLoaded: false,
+    // Resources needed to display the expenses page.
     expensesLoaded: false,
+    collectionUsersLoaded: false,
+    // Resources needed to display the users page.
+    usersLoaded: false,
   };
 }

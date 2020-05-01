@@ -4,6 +4,19 @@ import 'firebase/database';
 import { Notify } from 'quasar';
 import { showErrorMessage } from 'src/functions/show-error-message';
 
+export function firebaseMultiPathUpdates(updateObj, options = {}) {
+  return firebase
+    .database()
+    .ref()
+    .update(updateObj, (error) => {
+      if (error) {
+        showErrorMessage(error.message);
+      } else if (options.successMessage) {
+        Notify.create(options.successMessage);
+      }
+    });
+}
+
 export function firebaseSetValue(path, value, options = {}) {
   return firebase
     .database()

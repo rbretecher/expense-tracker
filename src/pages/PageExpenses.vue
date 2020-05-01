@@ -1,14 +1,6 @@
 <template>
-  <div class="relative-position">
-    <q-page v-if="!expensesLoaded">
-      <q-inner-loading :showing="!expensesLoaded">
-        <q-spinner
-          color="primary"
-          size="3em"
-          :thickness="10"
-        />
-      </q-inner-loading>
-    </q-page>
+  <div>
+    <page-spinner v-if="!expensePageReady" />
 
     <scroll-page
       v-else
@@ -17,17 +9,20 @@
       :actionModel.sync="showAddExpense"
     >
       <div
-        v-if="Object.keys(expenses).length"
+        v-if="Object.keys(expensesSortedByDate).length"
         class="q-mb-xl"
       >
         <expense-list
           :collectionId="collectionId"
-          :expenses="expenses"
+          :expenses="expensesSortedByDate"
           class="q-mb-xl"
         />
 
         <big-title>Summary</big-title>
-        <expense-summary :expenses="expenses" />
+        <expense-summary
+          :users="currentCollectionUsers"
+          :expenses="expensesSortedByDate"
+        />
       </div>
 
       <no-resource-banner
@@ -48,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import ExpenseList from 'src/components/Expenses/List/ExpenseList';
@@ -63,14 +58,14 @@ export default {
     };
   },
   computed: {
-    ...mapState('app', ['expensesLoaded']),
+    ...mapGetters('app', ['expensePageReady']),
     ...mapGetters('expenses', ['expensesSortedByDate']),
-    expenses() {
-      return this.expensesSortedByDate;
-    },
+    ...mapGetters('users', ['currentCollectionUsers']),
   },
   methods: {
-    ...mapActions('app', ['loadExpenseData']),
+    ...mapActions('app', ['resetExpensePage']),
+    ...mapActions('expenses', ['loadExpenses']),
+    ...mapActions('users', ['loadUsersFromCollection']),
     showAddExpenseDialog() {
       this.showAddExpense = true;
     },
@@ -82,18 +77,18 @@ export default {
   },
   watch: {
     collectionId() {
-      this.loadExpenseData(this.collectionId);
+      this.resetExpensePage();
+
+      this.loadExpenses(this.collectionId);
+      this.loadUsersFromCollection(this.collectionId);
     },
   },
   mounted() {
-    this.loadExpenseData(this.collectionId);
+    this.loadExpenses(this.collectionId);
+    this.loadUsersFromCollection(this.collectionId);
+  },
+  destroyed() {
+    this.resetExpensePage();
   },
 };
 </script>
-
-<style scoped>
-.q-scroll-area-expenses {
-  display: flex;
-  flex-grow: 1;
-}
-</style>
