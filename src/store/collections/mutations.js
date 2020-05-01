@@ -7,3 +7,7 @@ export function initCollection(state, collectionId) {
 export function deleteCollection(state, collectionId) {
   Vue.delete(state.collections, collectionId);
 }
+
+export function setCollections(state, value) {
+  state.collections = value;
+}

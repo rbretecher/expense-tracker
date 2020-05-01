@@ -73,3 +73,7 @@ export const loadCollections = firebaseAction(
     });
   },
 );
+
+export function setCollections({ commit }, value) {
+  commit('setCollections', value);
+}

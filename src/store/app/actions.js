@@ -117,5 +117,7 @@ export function resetState({ commit, dispatch }) {
 
   dispatch('resetExpensePage');
 
+  dispatch('collections/setCollections', {}, { root: true });
+
   commit('setUsersLoaded', false);
 }
