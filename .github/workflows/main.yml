@@ -27,13 +27,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v2.1.0
       - name: Download dist
         uses: actions/download-artifact@v1.0.0
         with:
           name: dist
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
+        uses: w9jds/firebase-action@v1.3.0
         with:
           args: deploy
         env:
