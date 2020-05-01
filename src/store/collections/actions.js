@@ -3,16 +3,19 @@ import 'firebase/database';
 
 import { uid } from 'quasar';
 import { firebaseAction } from 'vuexfire';
-import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
+import { firebaseUpdateValue, firebaseMultiPathUpdates } from 'src/database/firebase';
 
 export function addCollection(context, { collection, user }) {
   const collectionId = uid();
   const userId = user['.key'];
 
-  firebaseSetValue(`collections/${collectionId}`, collection, { successMessage: 'Collection added!' });
+  const updateObj = {
+    [`collections/${collectionId}`]: collection,
+    [`user_has_collections/${userId}/${collectionId}`]: true,
+    [`collection_has_users/${collectionId}/${userId}`]: true,
+  };
 
-  firebaseSetValue(`user_has_collections/${userId}/${collectionId}`, true);
-  firebaseSetValue(`collection_has_users/${collectionId}/${userId}`, true);
+  return firebaseMultiPathUpdates(updateObj, { successMessage: 'Collection added!' });
 }
 
 export function updateCollection(context, payload) {
@@ -20,13 +23,16 @@ export function updateCollection(context, payload) {
 }
 
 export function deleteCollection(context, collectionId) {
+  const updateObj = {};
+
   firebase.database().ref(`collection_has_users/${collectionId}`).once('value', (snapshot) => {
     Object.keys(snapshot.val()).forEach((userId) => {
-      firebaseRemoveValue(`user_has_collections/${userId}/${collectionId}`);
-      firebaseRemoveValue(`collection_has_users/${collectionId}/${userId}`);
+      updateObj[`user_has_collections/${userId}/${collectionId}`] = null;
+      updateObj[`collection_has_users/${collectionId}/${userId}`] = null;
     });
+    updateObj[`collections/${collectionId}`] = null;
 
-    firebaseRemoveValue(`collections/${collectionId}`, { successMessage: 'Collection deleted!' });
+    return firebaseMultiPathUpdates(updateObj, { successMessage: 'Collection deleted!' });
   });
 }
 
@@ -62,8 +68,6 @@ export const loadCollections = firebaseAction(
     });
 
     userHasCollections.on('child_removed', (snapshot) => {
-      dispatch('collections/unbindCollection', snapshot.key, { root: true });
-
       unbindFirebaseRef(`collections.${snapshot.key}`);
       commit('deleteCollection', snapshot.key);
     });
