@@ -69,7 +69,5 @@ About the project :
 - UI/UX improvements
 
 New features :
-- Add authentication (Firebase Authentication)
-    - For now, everyone can access the Firebase Realtime Database (read/write)
 - Improve mobile support
 - Set parts to split expenses unevenly
