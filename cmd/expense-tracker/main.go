@@ -15,7 +15,7 @@ func main() {
 	s.RegisterCodec(json2.NewCodec(), "application/json")
 	s.RegisterCodec(json2.NewCodec(), "application/json;charset=UTF-8")
 
-	db := database.Init()
+	db := database.Connect()
 	s.RegisterService(service.NewCollectionService(db), "Collection")
 
 	http.Handle("/rpc", s)
