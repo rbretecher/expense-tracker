@@ -36,9 +36,9 @@ func (s *CollectionService) Create(r *http.Request, args *CreateArgs, reply *dom
 }
 
 type GetArgs struct {
-	CollectionID int `json:"collection_id"`
+	ID int
 }
 
 func (s *CollectionService) Get(r *http.Request, args *GetArgs, reply *domain.Collection) error {
-	return s.db.Get(reply, "SELECT * FROM collections WHERE collection_id = $1", args.CollectionID)
+	return s.db.Get(reply, "SELECT * FROM collections WHERE collection_id = $1", args.ID)
 }
