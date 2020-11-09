@@ -1,18 +1,23 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/rbretecher/expense-tracker-back/internal/handlers"
+	"net/http"
+
+	"github.com/gorilla/rpc/v2"
+	"github.com/gorilla/rpc/v2/json2"
 	"github.com/rbretecher/expense-tracker-back/internal/infrastructure/database"
+	"github.com/rbretecher/expense-tracker-back/internal/service"
 )
 
 func main() {
-	r := gin.Default()
+	s := rpc.NewServer()
+
+	s.RegisterCodec(json2.NewCodec(), "application/json")
+	s.RegisterCodec(json2.NewCodec(), "application/json;charset=UTF-8")
 
 	db := database.Init()
+	s.RegisterService(service.NewCollectionService(db), "")
 
-	r.GET("/collections", handlers.GetCollections(db))
-	r.POST("/collection", handlers.CreateCollection(db))
-
-	r.Run()
+	http.Handle("/rpc", s)
+	http.ListenAndServe(":8080", nil)
 }
