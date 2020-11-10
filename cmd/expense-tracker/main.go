@@ -7,15 +7,16 @@ import (
 	"github.com/gorilla/rpc/v2/json2"
 	"github.com/rbretecher/expense-tracker-back/internal/infrastructure/database"
 	"github.com/rbretecher/expense-tracker-back/internal/service"
+	"github.com/rbretecher/expense-tracker-back/pkg/validator"
 )
 
 func main() {
-	s := rpc.NewServer()
+	db := database.Connect()
 
+	s := rpc.NewServer()
 	s.RegisterCodec(json2.NewCodec(), "application/json")
 	s.RegisterCodec(json2.NewCodec(), "application/json;charset=UTF-8")
-
-	db := database.Connect()
+	s.RegisterValidateRequestFunc(validator.Validate)
 	s.RegisterService(service.NewCollectionService(db), "Collection")
 
 	http.Handle("/rpc", s)
