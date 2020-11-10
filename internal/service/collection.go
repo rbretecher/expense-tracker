@@ -31,7 +31,7 @@ func (s *CollectionService) Create(r *http.Request, args *CreateArgs, reply *dom
 	return s.db.QueryRow(`
 			INSERT INTO collections (name, icon_name, icon_color)
 			VALUES ($1, $2, $3)
-			RETURNING collection_id, name, icon_name, icon_color
+			RETURNING id, name, icon_name, icon_color
 		`, args.Name, args.IconName, args.IconColor).Scan(&reply.ID, &reply.Name, &reply.IconName, &reply.IconColor)
 }
 
@@ -40,5 +40,5 @@ type GetArgs struct {
 }
 
 func (s *CollectionService) Get(r *http.Request, args *GetArgs, reply *domain.Collection) error {
-	return s.db.Get(reply, "SELECT * FROM collections WHERE collection_id = $1", args.ID)
+	return s.db.Get(reply, "SELECT * FROM collections WHERE id = $1", args.ID)
 }
