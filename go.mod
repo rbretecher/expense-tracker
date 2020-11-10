@@ -7,6 +7,6 @@ require (
 	github.com/gorilla/rpc v1.2.0
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/lib/pq v1.8.0
-	golang.org/x/tools v0.0.0-20201110201400-7099162a900a // indirect
+	golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 )
