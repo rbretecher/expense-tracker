@@ -22,9 +22,9 @@ func (s *CollectionService) All(r *http.Request, args *NoArgs, reply *[]*domain.
 }
 
 type CreateArgs struct {
-	Name      string `json:"name"`
-	IconName  string `json:"iconName"`
-	IconColor string `json:"iconColor"`
+	Name      string `json:"name" validate:"required"`
+	IconName  string `json:"iconName" validate:"required"`
+	IconColor string `json:"iconColor" validate:"required"`
 }
 
 func (s *CollectionService) Create(r *http.Request, args *CreateArgs, reply *domain.Collection) error {
@@ -36,7 +36,7 @@ func (s *CollectionService) Create(r *http.Request, args *CreateArgs, reply *dom
 }
 
 type GetArgs struct {
-	ID int
+	ID int `json:"id" validate:"required"`
 }
 
 func (s *CollectionService) Get(r *http.Request, args *GetArgs, reply *domain.Collection) error {
