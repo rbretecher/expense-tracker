@@ -4,4 +4,4 @@ start:
 	docker-compose up
 
 db:
-	docker exec -it expense-tracker-postgres psql -U postgres --dbname=expense-tracker
+	docker exec -it expensetrackerbackend_db_1 psql -U postgres --dbname=expense-tracker

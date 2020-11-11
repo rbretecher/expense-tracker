@@ -26,6 +26,7 @@ func New() app {
 	s.RegisterValidateRequestFunc(func(r *rpc.RequestInfo, i interface{}) error {
 		return validator.Validate.Struct(i)
 	})
+	s.RegisterService(service.NewUserService(db), "User")
 	s.RegisterService(service.NewCollectionService(db), "Collection")
 
 	return app{
