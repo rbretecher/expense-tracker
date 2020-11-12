@@ -1,22 +1,11 @@
-package service
+package user
 
 import (
 	"net/http"
 
-	"github.com/jmoiron/sqlx"
 	"github.com/rbretecher/expense-tracker-back/internal/auth"
 	"github.com/rbretecher/expense-tracker-back/internal/domain"
 )
-
-type UserService struct {
-	db *sqlx.DB
-}
-
-func NewUserService(db *sqlx.DB) *UserService {
-	return &UserService{
-		db: db,
-	}
-}
 
 type LoginArgs struct {
 	Email    string `json:"email" validate:"required,email"`

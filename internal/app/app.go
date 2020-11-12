@@ -8,7 +8,8 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/rbretecher/expense-tracker-back/internal/auth"
 	"github.com/rbretecher/expense-tracker-back/internal/infrastructure/database"
-	"github.com/rbretecher/expense-tracker-back/internal/service"
+	"github.com/rbretecher/expense-tracker-back/internal/service/collection"
+	"github.com/rbretecher/expense-tracker-back/internal/service/user"
 )
 
 type app struct {
@@ -23,8 +24,8 @@ func New() app {
 	s.RegisterCodec(json2.NewCodec(), "application/json")
 	s.RegisterInterceptFunc(auth.Middleware)
 	s.RegisterValidateRequestFunc(middleware)
-	s.RegisterService(service.NewUserService(db), "User")
-	s.RegisterService(service.NewCollectionService(db), "Collection")
+	s.RegisterService(user.NewService(db), "User")
+	s.RegisterService(collection.NewService(db), "Collection")
 
 	return app{
 		server: s,
