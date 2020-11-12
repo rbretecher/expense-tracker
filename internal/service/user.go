@@ -3,9 +3,8 @@ package service
 import (
 	"net/http"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/jmoiron/sqlx"
-	"github.com/rbretecher/expense-tracker-back/internal/authorization"
+	"github.com/rbretecher/expense-tracker-back/internal/auth"
 	"github.com/rbretecher/expense-tracker-back/internal/domain"
 )
 
@@ -31,8 +30,8 @@ func (s *UserService) Login(r *http.Request, args *LoginArgs, reply *domain.User
 		return err
 	}
 
-	reply.JWT, err = authorization.SignJWT(jwt.MapClaims{
-		"id": reply.ID,
+	reply.JWT, err = auth.SignJWT(&auth.JWTContent{
+		UserID: reply.ID,
 	})
 
 	return err
