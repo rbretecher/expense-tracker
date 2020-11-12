@@ -43,3 +43,11 @@ CREATE TABLE expenses
 
     PRIMARY KEY(id)
 );
+
+CREATE TABLE user_has_collection
+(
+    user_id INT REFERENCES users(id),
+    collection_id INT REFERENCES collections(id),
+
+    PRIMARY KEY(user_id, collection_id)
+);
