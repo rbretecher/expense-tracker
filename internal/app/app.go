@@ -2,6 +2,7 @@ package app
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gorilla/rpc/v2"
 	"github.com/gorilla/rpc/v2/json2"
@@ -35,5 +36,6 @@ func New() app {
 
 func (a app) Start() {
 	http.Handle("/rpc", a.server)
-	http.ListenAndServe(":8080", nil)
+
+	http.ListenAndServe(":"+os.Getenv("HTTP_PORT"), nil)
 }
