@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/justinas/alice"
+
 	"github.com/gorilla/rpc/v2"
 	"github.com/gorilla/rpc/v2/json2"
 	"github.com/jmoiron/sqlx"
@@ -11,6 +13,7 @@ import (
 	"github.com/rbretecher/expense-tracker-back/internal/infrastructure/database"
 	"github.com/rbretecher/expense-tracker-back/internal/service/collection"
 	"github.com/rbretecher/expense-tracker-back/internal/service/user"
+	"github.com/rs/cors"
 )
 
 type app struct {
@@ -35,7 +38,8 @@ func New() app {
 }
 
 func (a app) Start() {
-	http.Handle("/rpc", a.server)
+	chain := alice.New(cors.Default().Handler)
 
+	http.Handle("/rpc", chain.Then(a.server))
 	http.ListenAndServe(":"+os.Getenv("HTTP_PORT"), nil)
 }
