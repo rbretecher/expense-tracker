@@ -1,23 +1,53 @@
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { executeRequest } from 'src/client/json-rpc';
+import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 
-import { uid } from 'quasar';
-import { firebaseAction } from 'vuexfire';
-import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
+import { Notify, Loading } from 'quasar';
 
-export function addCategory(context, category) {
-  firebaseSetValue(`categories/${uid()}`, category, { successMessage: 'Category added!' });
+export async function loadCategories({ commit }) {
+  try {
+    const categories = await executeRequest('Category.All');
+
+    commit('setCategories', categories);
+  } catch (e) {
+    showErrorMessageWithTitle('Could not load categories', e.message);
+  }
 }
 
-export function updateCategory(context, payload) {
-  firebaseUpdateValue(`categories/${payload.id}`, payload.updates, { successMessage: 'Category updated!' });
-}
-export function deleteCategory(context, id) {
-  firebaseRemoveValue(`categories/${id}`, { successMessage: 'Category deleted!' });
+export async function addCategory({ dispatch }, categoryForm) {
+  try {
+    Loading.show();
+    await executeRequest('Category.Create', categoryForm);
+    await dispatch('loadCategories');
+    Loading.hide();
+
+    Notify.create('Category added!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not add category', e.message);
+  }
 }
 
-export const loadCategories = firebaseAction(
-  ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('categories', firebase.database().ref('categories')).then(() => {
-    dispatch('app/setCategoriesLoaded', true, { root: true });
-  }),
-);
+export async function deleteCategory({ dispatch }, id) {
+  try {
+    Loading.show();
+    await executeRequest('Category.Delete', { id });
+    await dispatch('loadCategories');
+    Loading.hide();
+
+    Notify.create('Category deleted!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not delete category', e.message);
+  }
+}
+
+export async function updateCategory({ dispatch }, category) {
+  try {
+    Loading.show();
+    await executeRequest('Category.Update', category);
+    await dispatch('loadCategories');
+    Loading.hide();
+
+    Notify.create('Category updated!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not update category', e.message);
+  }
+}

@@ -7,10 +7,8 @@ export default {
     return {
       formData: {
         name: null,
-        icon: {
-          name: 'face',
-          color: 'blue-4',
-        },
+        iconName: 'face',
+        iconColor: 'blue-4',
       },
     };
   },

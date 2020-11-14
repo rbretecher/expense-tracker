@@ -4,9 +4,8 @@
     separator
   >
     <category-list-item
-      v-for="(category, key) in categories"
-      :key="key"
-      :id="key"
+      v-for="category in categories"
+      :key="category.id"
       :category="category"
     />
   </q-list>

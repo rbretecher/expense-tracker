@@ -7,7 +7,10 @@
       :name.sync="formData.name"
       :autofocus="$q.platform.is.desktop"
     />
-    <modal-icon-color-input :icon.sync="formData.icon" />
+    <modal-icon-color-input
+      :iconName.sync="formData.iconName"
+      :iconColor.sync="formData.iconColor"
+    />
   </modal>
 </template>
 

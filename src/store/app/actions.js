@@ -12,8 +12,7 @@ export async function login({ dispatch }, { email, password }) {
       password,
     });
 
-
-    dispatch('users/login', user, { root: true });
+    dispatch('loggedIn', user);
 
     if (this.$router.currentRoute.fullPath === '/login') {
       this.$router.push('/').catch(() => { });
@@ -25,6 +24,11 @@ export async function login({ dispatch }, { email, password }) {
   }
 }
 
+// Should be called when user is logged in.
+export function loggedIn({ dispatch }, user) {
+  dispatch('users/login', user, { root: true });
+  dispatch('categories/loadCategories', null, { root: true });
+}
 
 export function logout({ dispatch }) {
   dispatch('users/logout', null, { root: true });

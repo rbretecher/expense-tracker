@@ -1,5 +1,5 @@
 export function appReady(state, getters, rootState, rootGetters) {
-  return !!rootGetters['users/currentUser'];
+  return !!rootGetters['users/currentUser'] && rootGetters['categories/categories'];
 }
 
 export function collectionsLoaded(state) {

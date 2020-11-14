@@ -7,7 +7,10 @@
       :name.sync="formData.name"
       :autofocus="$q.platform.is.desktop"
     />
-    <modal-icon-color-input :icon.sync="formData.icon" />
+    <modal-icon-color-input
+      :iconName.sync="formData.iconName"
+      :iconColor.sync="formData.iconColor"
+    />
   </modal>
 </template>
 
@@ -17,13 +20,13 @@ import mixinAddEditCategory from 'src/mixins/mixin-add-edit-category';
 
 export default {
   mixins: [mixinAddEditCategory],
-  props: ['id', 'category'],
+  props: ['category'],
   methods: {
     ...mapActions('categories', ['updateCategory']),
     saveCategory() {
       this.updateCategory({
-        id: this.id,
-        updates: this.formData,
+        id: this.category.id,
+        ...this.formData,
       });
       this.$emit('close');
     },
@@ -31,7 +34,8 @@ export default {
   mounted() {
     this.formData = {
       ...this.category,
-      icon: { ...this.category.icon },
+      iconName: this.category.iconName,
+      iconColor: this.category.iconColor,
     };
   },
 };

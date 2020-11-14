@@ -3,7 +3,7 @@ import { LocalStorage } from 'quasar';
 export default async ({ router, store }) => {
   const user = LocalStorage.getItem('user');
   if (user !== null) {
-    store.dispatch('users/login', user, { root: true });
+    store.dispatch('app/loggedIn', user, { root: true });
   }
 
   router.beforeEach((to, from, next) => {

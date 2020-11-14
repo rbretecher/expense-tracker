@@ -6,7 +6,7 @@
   >
     <category-list
       :categories="categories"
-      v-if="Object.keys(categories).length"
+      v-if="categories.length"
     />
 
     <no-resource-banner v-else>
