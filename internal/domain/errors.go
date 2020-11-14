@@ -11,3 +11,8 @@ var InvalidAuthenticationError = &json2.Error{
 	Code:    -32001,
 	Message: "Invalid authentication",
 }
+
+var EntityDoesNotExistError = &json2.Error{
+	Code:    -32050,
+	Message: "Entity does not exist",
+}

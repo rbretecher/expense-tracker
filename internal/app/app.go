@@ -11,6 +11,7 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/rbretecher/expense-tracker-back/internal/auth"
 	"github.com/rbretecher/expense-tracker-back/internal/infrastructure/database"
+	"github.com/rbretecher/expense-tracker-back/internal/service/category"
 	"github.com/rbretecher/expense-tracker-back/internal/service/collection"
 	"github.com/rbretecher/expense-tracker-back/internal/service/user"
 	"github.com/rs/cors"
@@ -30,6 +31,7 @@ func New() app {
 	s.RegisterValidateRequestFunc(middleware)
 	s.RegisterService(user.NewService(db), "User")
 	s.RegisterService(collection.NewService(db), "Collection")
+	s.RegisterService(category.NewService(db), "Category")
 
 	return app{
 		server: s,
@@ -38,7 +40,7 @@ func New() app {
 }
 
 func (a app) Start() {
-	chain := alice.New(cors.Default().Handler)
+	chain := alice.New(cors.AllowAll().Handler)
 
 	http.Handle("/rpc", chain.Then(a.server))
 	http.ListenAndServe(":"+os.Getenv("HTTP_PORT"), nil)
