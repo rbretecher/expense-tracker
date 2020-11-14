@@ -23,7 +23,7 @@
 <script>
 import AppHeader from 'components/Layout/Header/Header';
 import AppMenu from 'components/Layout/Menu/Menu';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'MainLayout',
@@ -36,14 +36,8 @@ export default {
       leftDrawerOpen: false,
     };
   },
-  methods: {
-    ...mapActions('app', ['handleAuthStateChanged']),
-  },
   computed: {
     ...mapGetters('app', ['appReady']),
-  },
-  mounted() {
-    this.handleAuthStateChanged();
   },
 };
 </script>

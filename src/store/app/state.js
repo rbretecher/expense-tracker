@@ -1,7 +1,5 @@
 export default function () {
   return {
-    // User
-    isSignedIn: false,
     // Toolbar
     toolbar: {
       title: null,

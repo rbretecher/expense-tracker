@@ -1,5 +1,5 @@
-export function appReady(state) {
-  return state.categoriesLoaded && state.collectionsLoaded;
+export function appReady(state, getters, rootState, rootGetters) {
+  return !!rootGetters['users/currentUser'];
 }
 
 export function collectionsLoaded(state) {
