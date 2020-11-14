@@ -1,7 +1,3 @@
-export function setIsSignedIn(state, value) {
-  state.isSignedIn = value;
-}
-
 export function setToolbar(state, value) {
   state.toolbar = value;
 }

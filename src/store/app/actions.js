@@ -1,67 +1,35 @@
-import firebase from 'firebase/app';
 import 'firebase/auth';
-import { Loading, LocalStorage } from 'quasar';
+import { Loading } from 'quasar';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 
-export function handleAuthStateChanged({ commit, dispatch }) {
-  const unsubscribeOnAuthStateChange = firebase.auth().onAuthStateChanged((user) => {
-    Loading.hide();
-    if (user) {
-      commit('setIsSignedIn', true);
-      LocalStorage.set('signedIn', true);
-      dispatch('users/loadCurrentUser', user.uid, { root: true });
-      if (this.$router.currentRoute.fullPath === '/login') {
-        this.$router.push('/').catch(() => { });
-      }
-    } else {
-      commit('setIsSignedIn', false);
-      LocalStorage.set('signedIn', false);
-      dispatch('resetState');
-      this.$router.push('/login').catch(() => { });
-      unsubscribeOnAuthStateChange();
-    }
-  });
-}
+import { executeRequest } from 'src/client/json-rpc';
 
-export function login({ commit, dispatch }, { email, password }) {
-  Loading.show();
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then((result) => {
-      commit('setIsSignedIn', true);
-      LocalStorage.set('signedIn', true);
-      dispatch('users/loadCurrentUser', result.user.uid, { root: true });
-      if (this.$router.currentRoute.fullPath === '/login') {
-        this.$router.push('/').catch(() => { });
-      }
-    })
-    .catch((error) => {
-      Loading.hide();
-      showErrorMessageWithTitle('Could not sign in', error.message);
-    });
-}
-
-export function logout() {
-  Loading.show();
-  firebase
-    .auth()
-    .signOut()
-    .catch((error) => {
-      Loading.hide();
-      showErrorMessageWithTitle('Could not sign out', error.message);
-    });
-}
-
-export function loadData({ dispatch }, userId) {
+export async function login({ dispatch }, { email, password }) {
   Loading.show();
   try {
-    dispatch('categories/loadCategories', null, { root: true });
-    dispatch('collections/loadCollections', userId, { root: true });
-  } catch (error) {
+    const user = await executeRequest('User.Login', {
+      email,
+      password,
+    });
+
+
+    dispatch('users/login', user, { root: true });
+
+    if (this.$router.currentRoute.fullPath === '/login') {
+      this.$router.push('/').catch(() => { });
+    }
+  } catch (e) {
+    showErrorMessageWithTitle('Could not sign in', e.message);
+  } finally {
     Loading.hide();
-    showErrorMessageWithTitle('Could not load Firebase data', 'Please make sure you configured properly Firebase credentials.');
   }
+}
+
+
+export function logout({ dispatch }) {
+  dispatch('users/logout', null, { root: true });
+
+  this.$router.push('/login').catch(() => { });
 }
 
 export function setCategoriesLoaded({ commit, getters }, value) {
@@ -105,8 +73,6 @@ export function resetExpensePage({ commit, dispatch }) {
 }
 
 export function resetState({ commit, dispatch }) {
-  commit('setIsSignedIn', false);
-
   commit('setToolbar', {
     title: null,
     button: null,

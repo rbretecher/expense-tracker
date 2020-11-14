@@ -1,9 +1,12 @@
 import firebase from 'firebase/app';
+
 import 'firebase/database';
 
-import { uid } from 'quasar';
+import { uid, LocalStorage } from 'quasar';
 import { firebaseAction } from 'vuexfire';
 import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
+
+import { setAxiosHeaders } from 'src/client/json-rpc';
 
 export function addUser(context, user) {
   firebaseSetValue(`users/${uid()}`, user, { successMessage: 'User added!' });
@@ -23,11 +26,16 @@ export const loadUsers = firebaseAction(
   }),
 );
 
-export const loadCurrentUser = firebaseAction(
-  ({ bindFirebaseRef, dispatch }, userUid) => bindFirebaseRef('currentUser', firebase.database().ref(`users/${userUid}`)).then((snapshot) => {
-    dispatch('app/loadData', snapshot.key, { root: true });
-  }),
-);
+export function login({ commit }, user) {
+  commit('setCurrentUser', user);
+  LocalStorage.set('user', user);
+  setAxiosHeaders(user.jwt);
+}
+
+export function logout({ commit }) {
+  commit('setCurrentUser', null);
+  LocalStorage.remove('user');
+}
 
 // Load users related to a collection.
 export const loadUsersFromCollection = firebaseAction(
