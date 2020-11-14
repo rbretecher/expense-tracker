@@ -6,8 +6,8 @@
   >
     <q-item-section avatar>
       <q-icon
-        :name="category.icon.name"
-        :color="category.icon.color"
+        :name="category.iconName"
+        :color="category.iconColor"
       />
 
     </q-item-section>
@@ -27,7 +27,6 @@
 
     <app-dialog :showDialog.sync="showEditCategory">
       <edit-category
-        :id="id"
         :category="category"
         @close="showEditCategory = false"
       />
@@ -41,7 +40,7 @@ import EditCategory from 'src/components/Categories/Modals/EditCategory';
 import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
-  props: ['id', 'category'],
+  props: ['category'],
   data() {
     return {
       showEditCategory: false,
@@ -61,7 +60,7 @@ export default {
         ok: true,
         cancel: true,
       }).onOk(() => {
-        this.deleteCategory(this.id);
+        this.deleteCategory(this.category.id);
       });
     },
   },
