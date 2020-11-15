@@ -1,10 +1,8 @@
 package category
 
 import (
-	"errors"
 	"net/http"
 
-	"github.com/rbretecher/expense-tracker-back/internal/domain"
 	"github.com/rbretecher/expense-tracker-back/internal/service"
 )
 
@@ -19,19 +17,5 @@ func (s *CategoryService) Delete(r *http.Request, args *DeleteArgs, reply *servi
 		WHERE id = $1
 	`, args.ID)
 
-	if err != nil {
-		return domain.CouldNotDeleteEntityError(err)
-	}
-
-	rows, err := result.RowsAffected()
-
-	if err != nil {
-		return domain.CouldNotDeleteEntityError(err)
-	}
-
-	if rows != 1 {
-		return domain.CouldNotDeleteEntityError(errors.New("no row deleted"))
-	}
-
-	return nil
+	return service.HandleDelete(result, err)
 }
