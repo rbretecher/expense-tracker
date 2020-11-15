@@ -15,7 +15,7 @@ type User struct {
 	Admin     bool   `json:"admin" db:"admin"`
 	IconName  string `json:"iconName" db:"icon_name"`
 	IconColor string `json:"iconColor" db:"icon_color"`
-	JWT       string `json:"jwt"`
+	JWT       string `json:"jwt,omitempty"`
 }
 
 type Category struct {
