@@ -14,9 +14,5 @@ func (s *UserService) All(r *http.Request, args *service.NoArgs, reply *[]*domai
 		ORDER BY id
 	`)
 
-	if err != nil {
-		return domain.CouldNotFetchEntitiesError(err)
-	}
-
-	return nil
+	return service.HandleFetch(err)
 }

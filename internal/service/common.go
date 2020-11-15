@@ -28,3 +28,27 @@ func HandleDelete(result sql.Result, err error) error {
 
 	return nil
 }
+
+func HandleCreate(err error) error {
+	if err != nil {
+		return domain.CouldNotCreateEntityError(err)
+	}
+
+	return nil
+}
+
+func HandleUpdate(err error) error {
+	if err != nil {
+		return domain.EntityDoesNotExistError(err)
+	}
+
+	return nil
+}
+
+func HandleFetch(err error) error {
+	if err != nil {
+		return domain.CouldNotFetchEntitiesError(err)
+	}
+
+	return nil
+}

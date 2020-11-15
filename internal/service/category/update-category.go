@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/rbretecher/expense-tracker-back/internal/domain"
+	"github.com/rbretecher/expense-tracker-back/internal/service"
 )
 
 type UpdateArgs struct {
@@ -21,9 +22,5 @@ func (s *CategoryService) Update(r *http.Request, args *UpdateArgs, reply *domai
 		RETURNING id, name, icon_name, icon_color
 	`, args.ID, args.Name, args.IconName, args.IconColor).Scan(&reply.ID, &reply.Name, &reply.IconName, &reply.IconColor)
 
-	if err != nil {
-		return domain.EntityDoesNotExistError(err)
-	}
-
-	return nil
+	return service.HandleUpdate(err)
 }
