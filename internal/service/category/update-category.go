@@ -22,7 +22,7 @@ func (s *CategoryService) Update(r *http.Request, args *UpdateArgs, reply *domai
 	`, args.ID, args.Name, args.IconName, args.IconColor).Scan(&reply.ID, &reply.Name, &reply.IconName, &reply.IconColor)
 
 	if err != nil {
-		return domain.EntityDoesNotExistError
+		return domain.EntityDoesNotExistError(err)
 	}
 
 	return nil
