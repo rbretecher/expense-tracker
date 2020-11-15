@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/rbretecher/expense-tracker-back/internal/domain"
+	"github.com/rbretecher/expense-tracker-back/internal/service"
 )
 
 type CreateArgs struct {
@@ -19,9 +20,5 @@ func (s *CategoryService) Create(r *http.Request, args *CreateArgs, reply *domai
 		RETURNING id, name, icon_name, icon_color
 	`, args.Name, args.IconName, args.IconColor).Scan(&reply.ID, &reply.Name, &reply.IconName, &reply.IconColor)
 
-	if err != nil {
-		return domain.CouldNotCreateEntityError(err)
-	}
-
-	return nil
+	return service.HandleCreate(err)
 }
