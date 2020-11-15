@@ -8,9 +8,15 @@ import (
 )
 
 func (s *CategoryService) All(r *http.Request, args *service.NoArgs, reply *[]*domain.Category) error {
-	return s.db.Select(reply, `
+	err := s.db.Select(reply, `
 		SELECT *
 		FROM categories
 		ORDER BY name
 	`)
+
+	if err != nil {
+		return domain.CouldNotFetchEntitiesError(err)
+	}
+
+	return nil
 }

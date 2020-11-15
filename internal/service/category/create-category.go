@@ -13,9 +13,15 @@ type CreateArgs struct {
 }
 
 func (s *CategoryService) Create(r *http.Request, args *CreateArgs, reply *domain.Category) error {
-	return s.db.QueryRow(`
+	err := s.db.QueryRow(`
 		INSERT INTO categories (name, icon_name, icon_color)
 		VALUES ($1, $2, $3)
 		RETURNING id, name, icon_name, icon_color
 	`, args.Name, args.IconName, args.IconColor).Scan(&reply.ID, &reply.Name, &reply.IconName, &reply.IconColor)
+
+	if err != nil {
+		return domain.CouldNotCreateEntityError(err)
+	}
+
+	return nil
 }

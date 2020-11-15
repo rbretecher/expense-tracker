@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/gorilla/rpc/v2"
@@ -14,7 +15,7 @@ func Middleware(i *rpc.RequestInfo) *http.Request {
 		authorizationString := i.Request.Header.Get(header)
 		if authorizationString == "" || len(authorizationString) < 7 {
 			return requestWithSession(i.Request, Session{
-				AuthErr: domain.AuthenticationRequiredError,
+				AuthErr: domain.AuthenticationRequiredError(errors.New("invalid authorization header")),
 			})
 		}
 
@@ -22,7 +23,7 @@ func Middleware(i *rpc.RequestInfo) *http.Request {
 
 		if err != nil {
 			return requestWithSession(i.Request, Session{
-				AuthErr: domain.InvalidAuthenticationError,
+				AuthErr: domain.InvalidAuthenticationError(err),
 			})
 		}
 
