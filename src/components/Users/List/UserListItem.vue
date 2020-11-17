@@ -6,15 +6,14 @@
   >
     <q-item-section avatar>
       <q-icon
-        :name="user.icon.name"
-        :color="user.icon.color"
+        :name="user.iconName"
+        :color="user.iconColor"
       />
     </q-item-section>
     <q-item-section>{{ user.name }}</q-item-section>
     <q-item-section side>
       <div class="row">
         <q-btn
-          v-if="false"
           @click.stop="confirmDeleteUser"
           flat
           round
@@ -27,7 +26,6 @@
 
     <app-dialog :showDialog.sync="showEditUser">
       <edit-user
-        :id="id"
         :user="user"
         @close="showEditUser = false"
       />
@@ -41,7 +39,7 @@ import EditUser from 'src/components/Users/Modals/EditUser';
 import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
-  props: ['id', 'user'],
+  props: ['user'],
   data() {
     return {
       showEditUser: false,
@@ -61,7 +59,7 @@ export default {
         ok: true,
         cancel: true,
       }).onOk(() => {
-        this.deleteUser(this.id);
+        this.deleteUser(this.user.id);
       });
     },
   },

@@ -7,13 +7,22 @@
       :name.sync="formData.name"
       :autofocus="$q.platform.is.desktop"
     />
-    <modal-icon-color-input :icon.sync="formData.icon" />
+
+    <modal-email-input :email.sync="formData.email" />
+
+    <modal-icon-color-input
+      :iconName.sync="formData.iconName"
+      :iconColor.sync="formData.iconColor"
+    />
+
+    <modal-password-input :password.sync="formData.password" />
   </modal>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import mixinAddEditUser from 'src/mixins/mixin-add-edit-user';
+import ModalPasswordInput from 'src/components/Shared/Modals/ModalPasswordInput';
 
 export default {
   mixins: [mixinAddEditUser],
@@ -24,10 +33,8 @@ export default {
       this.$emit('close');
     },
   },
-  mounted() {
-    if (this.collectionId) {
-      this.formData.collection = this.collectionId;
-    }
+  components: {
+    ModalPasswordInput,
   },
 };
 </script>

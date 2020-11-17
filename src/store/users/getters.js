@@ -1,7 +1,5 @@
-import { orderObjectByProp } from 'src/functions/order-object-by-prop';
-
 export function users(state) {
-  return orderObjectByProp(state.users, 'name');
+  return state.users;
 }
 
 export function currentUser(state) {

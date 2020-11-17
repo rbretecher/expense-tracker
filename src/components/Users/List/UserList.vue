@@ -4,9 +4,8 @@
     separator
   >
     <user-list-item
-      v-for="(user, key) in users"
-      :key="key"
-      :id="key"
+      v-for="user in users"
+      :key="user.id"
       :user="user"
     />
   </q-list>

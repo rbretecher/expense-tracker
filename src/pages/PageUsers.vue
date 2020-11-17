@@ -1,15 +1,12 @@
 <template>
   <div>
-    <page-spinner v-if="!usersLoaded" />
-
     <scroll-page
-      v-else
       title="Users"
       actionName="Add new user"
       :actionModel.sync="showAddUser"
     >
       <user-list
-        v-if="Object.keys(users).length"
+        v-if="users.length"
         :users="users"
       />
 
@@ -25,7 +22,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
 import UserList from 'src/components/Users/List/UserList';
 import AddUser from 'src/components/Users/Modals/AddUser';
@@ -42,16 +39,7 @@ export default {
     AddUser,
   },
   computed: {
-    ...mapState('app', ['usersLoaded']),
-    ...mapGetters('users', ['users']),
-  },
-  methods: {
-    ...mapActions('users', ['loadUsers']),
-  },
-  mounted() {
-    if (!this.usersLoaded) {
-      this.loadUsers();
-    }
+    ...mapState('users', ['users']),
   },
 };
 </script>
