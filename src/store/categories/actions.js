@@ -13,16 +13,16 @@ export async function loadCategories({ commit }) {
   }
 }
 
-export async function addCategory({ dispatch }, categoryForm) {
+export async function addCategory({ dispatch }, category) {
   try {
     Loading.show();
-    await executeRequest('Category.Create', categoryForm);
+    await executeRequest('Category.Create', category);
     await dispatch('loadCategories');
     Loading.hide();
 
     Notify.create('Category added!');
   } catch (e) {
-    showErrorMessageWithTitle('Could not add category', e.message);
+    showErrorMessageWithTitle('Could not create category', e.message);
   }
 }
 
