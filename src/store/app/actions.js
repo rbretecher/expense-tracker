@@ -28,6 +28,7 @@ export async function login({ dispatch }, { email, password }) {
 export function loggedIn({ dispatch }, user) {
   dispatch('users/login', user, { root: true });
   dispatch('categories/loadCategories', null, { root: true });
+  dispatch('users/loadUsers', null, { root: true });
 }
 
 export function logout({ dispatch }) {

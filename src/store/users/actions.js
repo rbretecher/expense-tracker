@@ -1,30 +1,9 @@
-import firebase from 'firebase/app';
+import {
+  Loading, Notify, LocalStorage,
+} from 'quasar';
 
-import 'firebase/database';
-
-import { uid, LocalStorage } from 'quasar';
-import { firebaseAction } from 'vuexfire';
-import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
-
-import { setAxiosHeaders } from 'src/client/json-rpc';
-
-export function addUser(context, user) {
-  firebaseSetValue(`users/${uid()}`, user, { successMessage: 'User added!' });
-}
-
-export function updateUser(context, payload) {
-  firebaseUpdateValue(`users/${payload.id}`, payload.updates, { successMessage: 'User updated!' });
-}
-
-export function deleteUser(context, id) {
-  firebaseRemoveValue(`users/${id}`, { successMessage: 'User deleted!' });
-}
-
-export const loadUsers = firebaseAction(
-  ({ bindFirebaseRef, dispatch }) => bindFirebaseRef('users', firebase.database().ref('users')).then(() => {
-    dispatch('app/setUsersLoaded', true, { root: true });
-  }),
-);
+import { executeRequest, setAxiosHeaders } from 'src/client/json-rpc';
+import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 
 export function login({ commit }, user) {
   commit('setCurrentUser', user);
@@ -37,48 +16,51 @@ export function logout({ commit }) {
   LocalStorage.remove('user');
 }
 
-// Load users related to a collection.
-export const loadUsersFromCollection = firebaseAction(
-  ({
-    commit, dispatch, bindFirebaseRef, unbindFirebaseRef, rootGetters,
-  }, collectionId) => {
-    const collectionHasUsers = firebase.database().ref(`collection_has_users/${collectionId}`);
+export async function loadUsers({ commit }) {
+  try {
+    const categories = await executeRequest('User.All');
 
-    collectionHasUsers.once('value', (snapshot) => {
-      dispatch('setCurrentCollectionUsers', snapshot.val());
+    commit('setUsers', categories);
+  } catch (e) {
+    showErrorMessageWithTitle('Could not load users', e.message);
+  }
+}
 
-      const promises = [];
+export async function addUser({ dispatch }, user) {
+  try {
+    Loading.show();
+    await executeRequest('User.Create', user);
+    await dispatch('loadUsers');
+    Loading.hide();
 
-      Object.keys(snapshot.val()).forEach((userId) => {
-        commit('initUser', userId);
-        promises.push(
-          bindFirebaseRef(`users.${userId}`, firebase.database().ref(`users/${userId}`)),
-        );
-      });
+    Notify.create('User updated!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not create user', e.message);
+  }
+}
 
-      Promise.all(promises).then(() => {
-        dispatch('app/setCollectionUsersLoaded', true, { root: true });
-      });
-    });
+export async function updateUser({ dispatch }, user) {
+  try {
+    Loading.show();
+    await executeRequest('User.Update', user);
+    await dispatch('loadUsers');
+    Loading.hide();
 
-    collectionHasUsers.on('child_added', (snapshot) => {
-      if (!rootGetters['app/collectionUsersLoaded']) {
-        return;
-      }
+    Notify.create('User updated!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not update user', e.message);
+  }
+}
 
-      commit('initUser', snapshot.key);
-      bindFirebaseRef(`users.${snapshot.key}`, firebase.database().ref(`users/${snapshot.key}`));
-      commit('addCurrentCollectionUser', { id: snapshot.key, user: snapshot.val() });
-    });
+export async function deleteUser({ dispatch }, id) {
+  try {
+    Loading.show();
+    await executeRequest('User.Delete', { id });
+    await dispatch('loadUsers');
+    Loading.hide();
 
-    collectionHasUsers.on('child_removed', (snapshot) => {
-      unbindFirebaseRef(`users.${snapshot.key}`);
-      commit('deleteUser', snapshot.key);
-      commit('deleteUserFromCurrentCollection', snapshot.key);
-    });
-  },
-);
-
-export function setCurrentCollectionUsers({ commit }, value) {
-  commit('setCurrentCollectionUsers', value);
+    Notify.create('User deleted!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not delete user', e.message);
+  }
 }
