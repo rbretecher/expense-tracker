@@ -34,8 +34,6 @@ export default {
   mounted() {
     this.formData = {
       ...this.category,
-      iconName: this.category.iconName,
-      iconColor: this.category.iconColor,
     };
   },
 };
