@@ -7,7 +7,7 @@
       :name.sync="formData.name"
       :autofocus="$q.platform.is.desktop"
     />
-    <modal-icon-input :name.sync="formData.icon.name" />
+    <modal-icon-input :name.sync="formData.iconName" />
   </modal>
 </template>
 
@@ -24,7 +24,7 @@ export default {
   methods: {
     ...mapActions('collections', ['addCollection']),
     saveCollection() {
-      this.addCollection({ collection: this.formData, user: this.currentUser });
+      this.addCollection(this.formData);
       this.$emit('close');
     },
   },

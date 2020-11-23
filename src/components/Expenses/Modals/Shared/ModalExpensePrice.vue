@@ -2,7 +2,7 @@
   <q-input
     outlined
     :value="price"
-    @input="$emit('update:price', $event)"
+    @input="$emit('update:price', parseFloat($event))"
     lazy-rules
     :rules="[ val => val && val != 0 || 'Please enter a valid price']"
     type="number"

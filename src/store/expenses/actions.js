@@ -1,28 +1,54 @@
-import firebase from 'firebase/app';
-import 'firebase/database';
 
-import { uid } from 'quasar';
-import { firebaseAction } from 'vuexfire';
-import { firebaseSetValue, firebaseUpdateValue, firebaseRemoveValue } from 'src/database/firebase';
+import { Notify, Loading } from 'quasar';
+import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
+import { executeRequest } from 'src/client/json-rpc';
 
-export function addExpense(context, payload) {
-  firebaseSetValue(`expenses/${payload.collectionId}/${uid()}`, payload.expense, { successMessage: 'Expense added!' });
-}
+export async function loadExpenses({ commit, dispatch }, collectionId) {
+  try {
+    const expenses = await executeRequest('Expense.Get', { id: parseInt(collectionId, 10) });
 
-export function updateExpense(context, payload) {
-  firebaseUpdateValue(`expenses/${payload.collectionId}/${payload.id}`, payload.updates, { successMessage: 'Expense updated!' });
-}
-
-export function deleteExpense(context, payload) {
-  firebaseRemoveValue(`expenses/${payload.collectionId}/${payload.id}`, { successMessage: 'Expense deleted!' });
-}
-
-export const loadExpenses = firebaseAction(
-  ({ bindFirebaseRef, dispatch }, collectionId) => bindFirebaseRef('expenses', firebase.database().ref('expenses').child(collectionId)).then(() => {
+    commit('setExpenses', expenses);
     dispatch('app/setExpensesLoaded', true, { root: true });
-  }),
-);
+  } catch (e) {
+    showErrorMessageWithTitle('Could not load expenses', e.message);
+  }
+}
 
-export function setExpenses({ commit }, value) {
-  commit('setExpenses', value);
+export async function updateExpense({ dispatch }, expense) {
+  try {
+    Loading.show();
+    await executeRequest('Expense.Update', expense);
+    await dispatch('loadExpenses', expense.collectionId);
+    Loading.hide();
+
+    Notify.create('Expense updated!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not update expense', e.message);
+  }
+}
+
+export async function addExpense({ dispatch }, expense) {
+  try {
+    Loading.show();
+    await executeRequest('Expense.Create', expense);
+    await dispatch('loadExpenses', expense.collectionId);
+    Loading.hide();
+
+    Notify.create('Expense added!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not create expense', e.message);
+  }
+}
+
+export async function deleteExpense({ dispatch }, expense) {
+  try {
+    Loading.show();
+    await executeRequest('Expense.Delete', { id: expense.id });
+    await dispatch('loadExpenses', expense.collectionId);
+    Loading.hide();
+
+    Notify.create('Expense deleted!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not delete expense', e.message);
+  }
 }

@@ -6,8 +6,8 @@
   >
     <q-item-section avatar>
       <q-icon
-        :name="collection.icon.name"
-        :color="collection.icon.color"
+        :name="collection.iconName"
+        :color="collection.iconColor"
       />
     </q-item-section>
     <q-item-section>{{ collection.name }}</q-item-section>
@@ -28,14 +28,12 @@
           dense
           color="red-5"
           icon="delete"
-          :disabled="collection.count !== 0"
         />
       </div>
     </q-item-section>
 
     <app-dialog :showDialog.sync="showEditCollection">
       <edit-collection
-        :id="id"
         :collection="collection"
         @close="showEditCollection = false"
       />
@@ -49,7 +47,7 @@ import EditCollection from 'src/components/Collections/Modals/EditCollection';
 import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
-  props: ['id', 'collection'],
+  props: ['collection'],
   data() {
     return {
       showEditCollection: false,
@@ -72,11 +70,11 @@ export default {
         ok: true,
         cancel: true,
       }).onOk(() => {
-        this.deleteCollection(this.id);
+        this.deleteCollection(this.collection.id);
       });
     },
     exploreCollection() {
-      this.$router.push(`/collections/${this.id}`).catch(() => { });
+      this.$router.push(`/collections/${this.collection.id}`).catch(() => { });
     },
   },
 };

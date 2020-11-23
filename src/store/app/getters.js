@@ -7,7 +7,7 @@ export function collectionsLoaded(state) {
 }
 
 export function expensePageReady(state) {
-  return state.expensesLoaded && state.collectionUsersLoaded;
+  return state.expensesLoaded;
 }
 
 export function collectionUsersLoaded(state) {

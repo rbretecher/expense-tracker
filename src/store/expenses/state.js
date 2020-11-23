@@ -1,6 +1,5 @@
 export default function () {
   return {
-    expenses: {
-    },
+    expenses: [],
   };
 }

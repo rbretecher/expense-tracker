@@ -4,10 +4,9 @@
     separator
   >
     <expense-summary-item
-      v-for="(expenseSummary, key) in expenseSummaryPerUser"
-      :key="key"
+      v-for="expenseSummary in expenseSummaryPerUser"
+      :key="expenseSummary.user.id"
       :expenseSummary="expenseSummary"
-      :user="users[key]"
     />
   </q-list>
 </template>
@@ -25,27 +24,25 @@ export default {
       const expensesPerUser = {};
       let totalWeight = 0;
 
-      Object.keys(this.users).forEach((key) => {
-        expensesPerUser[key] = {
-          user: key,
+      this.users.forEach((user) => {
+        expensesPerUser[user.id] = {
+          user,
           paid: 0,
           shouldHavePaid: 0,
         };
 
-        totalWeight += (this.users[key].weight || 0.5);
+        // For now, all users have the same weight.
+        totalWeight += 0.5;
       });
 
-      Object.keys(this.expenses).forEach((key) => {
-        const expense = this.expenses[key];
-
+      this.expenses.forEach((expense) => {
         // Ensure the referenced user exists.
-        if (expensesPerUser[expense.paidBy]) {
+        if (expensesPerUser[expense.paidByUserId]) {
           const price = parseFloat(expense.price, 10);
-          expensesPerUser[expense.paidBy].paid += price;
+          expensesPerUser[expense.paidByUserId].paid += price;
 
           Object.keys(expensesPerUser).forEach((userId) => {
-            const shouldHavePaid = (price / totalWeight)
-              * (this.users[userId].weight || 0.5);
+            const shouldHavePaid = (price / totalWeight) * 0.5;
             expensesPerUser[userId].shouldHavePaid += shouldHavePaid;
           });
         }

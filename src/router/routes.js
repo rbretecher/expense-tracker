@@ -13,7 +13,7 @@ const routes = [
         component: () => import('pages/PageDashboard.vue'),
       },
       {
-        path: '/expenses/:collectionId',
+        path: '/expenses/:collectionIdParam',
         component: () => import('pages/PageExpenses.vue'),
         props: true,
       },

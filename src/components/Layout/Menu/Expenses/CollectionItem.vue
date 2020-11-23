@@ -4,16 +4,15 @@
       v-if="hasChildren"
       :header-inset-level="0"
       :content-inset-level="0.5"
-      :icon="collection.icon.name"
+      :icon="collection.iconName"
       :label="collection.name"
       default-opened
       :caption="`${collection.count} expenses`"
     >
       <q-list>
         <collection-item
-          v-for="(child, key) in children(id)"
-          :key="key"
-          :id="key"
+          v-for="child in children(collection.id)"
+          :key="child.id"
           :collection="child"
         />
       </q-list>
@@ -23,14 +22,14 @@
       v-else
       clickable
       tag="a"
-      :to="`/expenses/${id}`"
+      :to="`/expenses/${collection.id}`"
       exact
       active-class="active"
     >
       <q-item-section avatar>
         <q-icon
-          :name="collection.icon.name"
-          :color="collection.icon.color"
+          :name="collection.iconName"
+          :color="collection.iconColor"
         />
       </q-item-section>
 
@@ -47,11 +46,11 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'CollectionItem',
-  props: ['id', 'collection'],
+  props: ['collection'],
   computed: {
     ...mapGetters('collections', ['children']),
     hasChildren() {
-      return Object.keys(this.children(this.id)).length !== 0;
+      return Object.keys(this.children(this.collection.id)).length !== 0;
     },
   },
 };

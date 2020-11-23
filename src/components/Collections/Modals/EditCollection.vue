@@ -7,7 +7,7 @@
       :name.sync="formData.name"
       :autofocus="$q.platform.is.desktop"
     />
-    <modal-icon-input :name.sync="formData.icon.name" />
+    <modal-icon-input :name.sync="formData.iconName" />
   </modal>
 </template>
 
@@ -17,21 +17,17 @@ import mixinAddEditCollection from 'src/mixins/mixin-add-edit-collection';
 
 export default {
   mixins: [mixinAddEditCollection],
-  props: ['id', 'collection'],
+  props: ['collection'],
   methods: {
     ...mapActions('collections', ['updateCollection']),
     saveCollection() {
-      this.updateCollection({
-        id: this.id,
-        updates: this.formData,
-      });
+      this.updateCollection(this.formData);
       this.$emit('close');
     },
   },
   mounted() {
     this.formData = {
       ...this.collection,
-      icon: { ...this.collection.icon },
     };
   },
 };

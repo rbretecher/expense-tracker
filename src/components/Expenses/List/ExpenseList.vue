@@ -4,9 +4,8 @@
     separator
   >
     <expense-list-item
-      v-for="(expense, key) in expenses"
-      :key="key"
-      :id="key"
+      v-for="expense in expenses"
+      :key="expense.id"
       :expense="expense"
       :collectionId="collectionId"
     />
@@ -30,7 +29,7 @@ export default {
   },
   computed: {
     count() {
-      return Object.keys(this.expenses).length;
+      return this.expenses.length;
     },
     amount() {
       return Object
