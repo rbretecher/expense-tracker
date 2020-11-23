@@ -1,5 +1,10 @@
 package domain
 
+import (
+	"encoding/json"
+	"time"
+)
+
 type Collection struct {
 	ID        int    `json:"id" db:"id"`
 	Name      string `json:"name" db:"name"`
@@ -23,4 +28,25 @@ type Category struct {
 	Name      string `json:"name" db:"name"`
 	IconName  string `json:"iconName" db:"icon_name"`
 	IconColor string `json:"iconColor" db:"icon_color"`
+}
+
+type Expense struct {
+	ID           int       `json:"id" db:"id"`
+	CollectionID int       `json:"collectionId" db:"collection_id"`
+	CategoryID   int       `json:"categoryId" db:"category_id"`
+	PaidByUserID int       `json:"paidByUserId" db:"paid_by_user_id"`
+	Name         string    `json:"name" db:"name"`
+	Date         time.Time `json:"date" db:"date"`
+	Price        float32   `json:"price" db:"price"`
+}
+
+func (e *Expense) MarshalJSON() ([]byte, error) {
+	type Alias Expense
+	return json.Marshal(&struct {
+		Date string `json:"date"`
+		*Alias
+	}{
+		Date:  e.Date.Format("2006-01-02"),
+		Alias: (*Alias)(e),
+	})
 }

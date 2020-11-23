@@ -20,6 +20,14 @@ func InvalidAuthenticationError(err error) *json2.Error {
 	}
 }
 
+// ForbiddenAccessToEntityError is the error when a user try to interact with an entity that does not belong to him.
+func ForbiddenAccessToEntityError() *json2.Error {
+	return &json2.Error{
+		Code:    -32002,
+		Message: "Forbidden access to entity",
+	}
+}
+
 // BadParametersError is the error when the provided payload does meet requirements.
 func BadParametersError(err error) *json2.Error {
 	return &json2.Error{
