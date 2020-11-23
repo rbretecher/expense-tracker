@@ -12,9 +12,10 @@ func (s *CollectionService) All(r *http.Request, args *service.NoArgs, reply *[]
 	session := auth.GetSession(r)
 
 	return s.DB.Select(reply, `
-		SELECT c.*
+		SELECT c.*, (SELECT COUNT(*) FROM expenses WHERE collection_id = c.id) AS count
 		FROM collections c
 		JOIN user_has_collection uhc ON (c.id = uhc.collection_id)
 		WHERE uhc.user_id = $1
+		ORDER BY c.id
 	`, session.UserID)
 }

@@ -9,7 +9,7 @@ type CollectionService struct {
 	service.Service
 }
 
-func NewService(db *sqlx.DB) *ExpenseService {
+func NewService(db *sqlx.DB) *CollectionService {
 	return &CollectionService{
 		Service: service.Service{
 			DB: db,

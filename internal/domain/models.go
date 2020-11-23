@@ -10,6 +10,7 @@ type Collection struct {
 	Name      string `json:"name" db:"name"`
 	IconName  string `json:"iconName" db:"icon_name"`
 	IconColor string `json:"iconColor" db:"icon_color"`
+	Count     int    `json:"count"`
 }
 
 type User struct {
