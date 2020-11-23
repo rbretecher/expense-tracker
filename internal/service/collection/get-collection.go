@@ -14,10 +14,13 @@ type GetArgs struct {
 func (s *CollectionService) Get(r *http.Request, args *GetArgs, reply *domain.Collection) error {
 	session := auth.GetSession(r)
 
-	return s.db.Get(reply, `
+	if err := s.CheckUserHasCollection(session.UserID, args.ID); err != nil {
+		return err
+	}
+
+	return s.DB.Get(reply, `
 		SELECT c.*
 		FROM collections c
-		JOIN user_has_collection uhc ON (c.id = uhc.collection_id)
-		WHERE id = $1 AND uhc.user_id = $2
-	`, args.ID, session.UserID)
+		WHERE id = $1
+	`, args.ID)
 }

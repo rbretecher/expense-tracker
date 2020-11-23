@@ -11,7 +11,7 @@ import (
 func (s *CollectionService) All(r *http.Request, args *service.NoArgs, reply *[]*domain.Collection) error {
 	session := auth.GetSession(r)
 
-	return s.db.Select(reply, `
+	return s.DB.Select(reply, `
 		SELECT c.*
 		FROM collections c
 		JOIN user_has_collection uhc ON (c.id = uhc.collection_id)
