@@ -13,6 +13,7 @@ import (
 	"github.com/rbretecher/expense-tracker-back/internal/infrastructure/database"
 	"github.com/rbretecher/expense-tracker-back/internal/service/category"
 	"github.com/rbretecher/expense-tracker-back/internal/service/collection"
+	"github.com/rbretecher/expense-tracker-back/internal/service/expense"
 	"github.com/rbretecher/expense-tracker-back/internal/service/user"
 	"github.com/rs/cors"
 )
@@ -32,6 +33,7 @@ func New() app {
 	s.RegisterService(user.NewService(db), "User")
 	s.RegisterService(collection.NewService(db), "Collection")
 	s.RegisterService(category.NewService(db), "Category")
+	s.RegisterService(expense.NewService(db), "Expense")
 
 	return app{
 		server: s,
