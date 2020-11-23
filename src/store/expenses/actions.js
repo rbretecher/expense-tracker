@@ -32,6 +32,7 @@ export async function addExpense({ dispatch }, expense) {
     Loading.show();
     await executeRequest('Expense.Create', expense);
     await dispatch('loadExpenses', expense.collectionId);
+    await dispatch('collections/loadCollections', expense.collectionId, { root: true }); // Reload collection count
     Loading.hide();
 
     Notify.create('Expense added!');
@@ -45,6 +46,7 @@ export async function deleteExpense({ dispatch }, expense) {
     Loading.show();
     await executeRequest('Expense.Delete', { id: expense.id });
     await dispatch('loadExpenses', expense.collectionId);
+    await dispatch('collections/loadCollections', expense.collectionId, { root: true }); // Reload collection count
     Loading.hide();
 
     Notify.create('Expense deleted!');
