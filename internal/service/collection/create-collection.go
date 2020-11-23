@@ -16,7 +16,7 @@ type CreateArgs struct {
 func (s *CollectionService) Create(r *http.Request, args *CreateArgs, reply *domain.Collection) error {
 	session := auth.GetSession(r)
 
-	tx, err := s.db.Begin()
+	tx, err := s.DB.Begin()
 
 	if err != nil {
 		return err

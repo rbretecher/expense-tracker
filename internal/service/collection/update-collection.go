@@ -3,6 +3,7 @@ package collection
 import (
 	"net/http"
 
+	"github.com/rbretecher/expense-tracker-back/internal/auth"
 	"github.com/rbretecher/expense-tracker-back/internal/domain"
 	"github.com/rbretecher/expense-tracker-back/internal/service"
 )
@@ -15,7 +16,13 @@ type UpdateArgs struct {
 }
 
 func (s *CollectionService) Update(r *http.Request, args *UpdateArgs, reply *domain.Collection) error {
-	err := s.db.QueryRow(`
+	session := auth.GetSession(r)
+
+	if err := s.CheckUserHasCollection(session.UserID, args.ID); err != nil {
+		return err
+	}
+
+	err := s.DB.QueryRow(`
 		UPDATE collections
 		SET name = $2, icon_name = $3, icon_color = $4
 		WHERE id = $1
