@@ -3,6 +3,7 @@ package collection
 import (
 	"net/http"
 
+	"github.com/rbretecher/expense-tracker-back/internal/auth"
 	"github.com/rbretecher/expense-tracker-back/internal/service"
 )
 
@@ -11,7 +12,13 @@ type DeleteArgs struct {
 }
 
 func (s *CollectionService) Delete(r *http.Request, args *DeleteArgs, reply *service.NoReply) error {
-	result, err := s.db.Exec(`
+	session := auth.GetSession(r)
+
+	if err := s.CheckUserHasCollection(session.UserID, args.ID); err != nil {
+		return err
+	}
+
+	result, err := s.DB.Exec(`
 		DELETE
 		FROM collections
 		WHERE id = $1

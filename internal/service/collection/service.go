@@ -2,14 +2,17 @@ package collection
 
 import (
 	"github.com/jmoiron/sqlx"
+	"github.com/rbretecher/expense-tracker-back/internal/service"
 )
 
 type CollectionService struct {
-	db *sqlx.DB
+	service.Service
 }
 
-func NewService(db *sqlx.DB) *CollectionService {
+func NewService(db *sqlx.DB) *ExpenseService {
 	return &CollectionService{
-		db: db,
+		Service: service.Service{
+			DB: db,
+		},
 	}
 }
