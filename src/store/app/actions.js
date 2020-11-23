@@ -29,6 +29,7 @@ export function loggedIn({ dispatch }, user) {
   dispatch('users/login', user, { root: true });
   dispatch('categories/loadCategories', null, { root: true });
   dispatch('users/loadUsers', null, { root: true });
+  dispatch('collections/loadCollections', null, { root: true });
 }
 
 export function logout({ dispatch }) {
@@ -69,12 +70,9 @@ export function setCollectionUsersLoaded({ commit }, value) {
   commit('setCollectionUsersLoaded', value);
 }
 
-export function resetExpensePage({ commit, dispatch }) {
+export function resetExpensePage({ commit }) {
   commit('setExpensesLoaded', false);
   commit('setCollectionUsersLoaded', false);
-
-  dispatch('expenses/setExpenses', {}, { root: true });
-  dispatch('users/setCurrentCollectionUsers', {}, { root: true });
 }
 
 export function resetState({ commit, dispatch }) {
@@ -88,7 +86,7 @@ export function resetState({ commit, dispatch }) {
 
   dispatch('resetExpensePage');
 
-  dispatch('collections/setCollections', {}, { root: true });
+  dispatch('collections/setCollections', [], { root: true });
 
   commit('setUsersLoaded', false);
 }

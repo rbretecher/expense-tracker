@@ -10,10 +10,10 @@
     <modal-expense-price :price.sync="formData.price" />
     <modal-expense-date :date.sync="formData.date" />
     <modal-expense-paid-by
-      :paidBy.sync="formData.paidBy"
+      :paidByUserId.sync="formData.paidByUserId"
       :users="currentCollectionUsers"
     />
-    <modal-expense-category :category.sync="formData.category" />
+    <modal-expense-category :category.sync="formData.categoryId" />
   </modal>
 </template>
 
@@ -30,7 +30,7 @@ export default {
   methods: {
     ...mapActions('expenses', ['addExpense']),
     saveExpense() {
-      this.addExpense({ collectionId: this.collectionId, expense: this.formData });
+      this.addExpense({ collectionId: this.collectionId, ...this.formData });
       this.$emit('close');
     },
   },

@@ -15,9 +15,8 @@
       default-opened
     >
       <collection-item
-        v-for="(collection, key) in rootCollections"
-        :key="key"
-        :id="key"
+        v-for="collection in rootCollections"
+        :key="collection.id"
         :collection="collection"
       />
     </q-expansion-item>

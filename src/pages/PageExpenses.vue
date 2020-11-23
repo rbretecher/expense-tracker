@@ -9,19 +9,19 @@
       :actionModel.sync="showAddExpense"
     >
       <div
-        v-if="Object.keys(expensesSortedByDate).length"
+        v-if="expenses.length"
         class="q-mb-xl"
       >
         <expense-list
           :collectionId="collectionId"
-          :expenses="expensesSortedByDate"
+          :expenses="expenses"
           class="q-mb-xl"
         />
 
         <big-title>Summary</big-title>
         <expense-summary
           :users="currentCollectionUsers"
-          :expenses="expensesSortedByDate"
+          :expenses="expenses"
         />
       </div>
 
@@ -51,7 +51,7 @@ import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
 
 export default {
   mixins: [mixinPage],
-  props: ['collectionId'],
+  props: ['collectionIdParam'],
   data() {
     return {
       showAddExpense: false,
@@ -59,13 +59,15 @@ export default {
   },
   computed: {
     ...mapGetters('app', ['expensePageReady']),
-    ...mapGetters('expenses', ['expensesSortedByDate']),
+    ...mapGetters('expenses', ['expenses']),
     ...mapGetters('users', ['currentCollectionUsers']),
+    collectionId() {
+      return parseInt(this.collectionIdParam, 10);
+    },
   },
   methods: {
     ...mapActions('app', ['resetExpensePage']),
     ...mapActions('expenses', ['loadExpenses']),
-    ...mapActions('users', ['loadUsersFromCollection']),
     showAddExpenseDialog() {
       this.showAddExpense = true;
     },
@@ -80,12 +82,10 @@ export default {
       this.resetExpensePage();
 
       this.loadExpenses(this.collectionId);
-      this.loadUsersFromCollection(this.collectionId);
     },
   },
   mounted() {
     this.loadExpenses(this.collectionId);
-    this.loadUsersFromCollection(this.collectionId);
   },
   destroyed() {
     this.resetExpensePage();

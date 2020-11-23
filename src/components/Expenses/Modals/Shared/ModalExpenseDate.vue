@@ -42,14 +42,14 @@ export default {
   methods: {
     onDateUpdated(updatedDate) {
       if (this.dateIsValid(updatedDate)) {
-        this.$emit('update:date', this.convertDate(updatedDate));
+        this.$emit('update:date', this.convertDate(updatedDate, 'DD/MM/YYYY', 'YYYY-MM-DD'));
       }
     },
     onDateSelected(selectedDate) {
       this.$refs.qDateProxy.hide();
-      this.$emit('update:date', this.convertDate(selectedDate));
+      this.$emit('update:date', this.convertDate(selectedDate, 'DD/MM/YYYY', 'YYYY-MM-DD'));
     },
-    convertDate(aDate, inputMask = 'DD/MM/YYYY', outputMask = 'YYYY/MM/DD') {
+    convertDate(aDate, inputMask, outputMask) {
       const dateExtracted = date.extractDate(aDate, inputMask);
       return date.formatDate(dateExtracted, outputMask);
     },
@@ -67,7 +67,7 @@ export default {
   created() {
     this.$nextTick(() => {
       if (this.date) {
-        this.internalDate = this.convertDate(this.date, 'YYYY/MM/DD', 'DD/MM/YYYY');
+        this.internalDate = date.formatDate(Date.parse(this.date), 'DD/MM/YYYY');
       }
     });
   },

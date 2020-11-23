@@ -1,8 +1,8 @@
 <template>
   <q-select
     outlined
-    :value="paidBy"
-    @input="$emit('update:paidBy', $event)"
+    :value="paidByUserId"
+    @input="$emit('update:paidByUserId', $event)"
     :options="selectOptions"
     map-options
     emit-value
@@ -17,10 +17,10 @@
 
 <script>
 export default {
-  props: ['paidBy', 'users'],
+  props: ['paidByUserId', 'users'],
   computed: {
     selectOptions() {
-      return Object.keys(this.users).map((key) => ({ label: this.users[key].name, value: key }));
+      return this.users.map((user) => ({ label: user.name, value: user.id }));
     },
   },
 };

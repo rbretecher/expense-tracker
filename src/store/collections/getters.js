@@ -1,4 +1,8 @@
 
+export function getCollection(state) {
+  return (id) => (state.collections.filter((collection) => collection.id === id) || []).shift();
+}
+
 // Filter out empty collections.
 export function collections(state) {
   const collectionsObj = {};

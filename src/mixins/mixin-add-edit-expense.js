@@ -12,8 +12,8 @@ export default {
         name: null,
         price: null,
         date: null,
-        paidBy: null,
-        category: null,
+        paidByUserId: null,
+        categoryId: null,
       },
     };
   },

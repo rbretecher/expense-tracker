@@ -1,79 +1,52 @@
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { Notify, Loading } from 'quasar';
+import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
+import { executeRequest } from 'src/client/json-rpc';
 
-import { uid } from 'quasar';
-import { firebaseAction } from 'vuexfire';
-import { firebaseUpdateValue, firebaseMultiPathUpdates } from 'src/database/firebase';
+export async function loadCollections({ commit }) {
+  try {
+    const collections = await executeRequest('Collection.All');
 
-export function addCollection(context, { collection, user }) {
-  const collectionId = uid();
-  const userId = user['.key'];
-
-  const updateObj = {
-    [`collections/${collectionId}`]: collection,
-    [`user_has_collections/${userId}/${collectionId}`]: true,
-    [`collection_has_users/${collectionId}/${userId}`]: true,
-  };
-
-  return firebaseMultiPathUpdates(updateObj, { successMessage: 'Collection added!' });
+    commit('setCollections', collections);
+  } catch (e) {
+    showErrorMessageWithTitle('Could not load collections', e.message);
+  }
 }
 
-export function updateCollection(context, payload) {
-  firebaseUpdateValue(`collections/${payload.id}`, payload.updates, { successMessage: 'Collection updated!' });
+export async function addCollection({ dispatch }, collection) {
+  try {
+    Loading.show();
+    await executeRequest('Collection.Create', collection);
+    await dispatch('loadCollections');
+    Loading.hide();
+
+    Notify.create('Collection added!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not create collection', e.message);
+  }
 }
 
-export function deleteCollection(context, collectionId) {
-  const updateObj = {};
+export async function deleteCollection({ dispatch }, id) {
+  try {
+    Loading.show();
+    await executeRequest('Collection.Delete', { id });
+    await dispatch('loadCollections');
+    Loading.hide();
 
-  firebase.database().ref(`collection_has_users/${collectionId}`).once('value', (snapshot) => {
-    Object.keys(snapshot.val()).forEach((userId) => {
-      updateObj[`user_has_collections/${userId}/${collectionId}`] = null;
-      updateObj[`collection_has_users/${collectionId}/${userId}`] = null;
-    });
-    updateObj[`collections/${collectionId}`] = null;
-
-    return firebaseMultiPathUpdates(updateObj, { successMessage: 'Collection deleted!' });
-  });
+    Notify.create('Collection deleted!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not delete collection', e.message);
+  }
 }
 
-// Load collections related to a user.
-export const loadCollections = firebaseAction(
-  ({
-    bindFirebaseRef, unbindFirebaseRef, commit, dispatch, rootGetters,
-  }, userId) => {
-    const userHasCollections = firebase.database().ref(`user_has_collections/${userId}`);
+export async function updateCollection({ dispatch }, collection) {
+  try {
+    Loading.show();
+    await executeRequest('Collection.Update', collection);
+    await dispatch('loadCollections');
+    Loading.hide();
 
-    userHasCollections.once('value', (snapshot) => {
-      const promises = [];
-
-      Object.keys(snapshot.val()).forEach((collectionId) => {
-        commit('initCollection', collectionId);
-        promises.push(
-          bindFirebaseRef(`collections.${collectionId}`, firebase.database().ref(`collections/${collectionId}`)),
-        );
-      });
-
-      Promise.all(promises).then(() => {
-        dispatch('app/setCollectionsLoaded', true, { root: true });
-      });
-    });
-
-    userHasCollections.on('child_added', (snapshot) => {
-      if (!rootGetters['app/collectionsLoaded']) {
-        return;
-      }
-
-      commit('initCollection', snapshot.key);
-      bindFirebaseRef(`collections.${snapshot.key}`, firebase.database().ref(`collections/${snapshot.key}`));
-    });
-
-    userHasCollections.on('child_removed', (snapshot) => {
-      unbindFirebaseRef(`collections.${snapshot.key}`);
-      commit('deleteCollection', snapshot.key);
-    });
-  },
-);
-
-export function setCollections({ commit }, value) {
-  commit('setCollections', value);
+    Notify.create('Collection updated!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not update collection', e.message);
+  }
 }

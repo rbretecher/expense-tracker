@@ -6,8 +6,8 @@
   >
     <q-item-section avatar>
       <q-icon
-        :name="categoryIconName"
-        :color="categoryIconColor"
+        :name="category.iconName"
+        :color="category.iconColor"
       />
 
     </q-item-section>
@@ -35,7 +35,6 @@
 
     <app-dialog :showDialog.sync="showEditExpense">
       <edit-expense
-        :id="id"
         :expense="expense"
         :collectionId="collectionId"
         @close="showEditExpense = false"
@@ -53,7 +52,7 @@ import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   mixins: [mixinPrice],
-  props: ['id', 'expense', 'collectionId'],
+  props: ['expense', 'collectionId'],
   data() {
     return {
       showEditExpense: false,
@@ -63,22 +62,29 @@ export default {
     ...mapState('categories', ['categories']),
     ...mapGetters('users', ['currentCollectionUsers']),
     paidByName() {
-      if (!this.currentCollectionUsers[this.expense.paidBy]) {
+      const paidByUser = this
+        .currentCollectionUsers
+        .filter((user) => (user.id === this.expense.paidByUserId))
+        .shift();
+
+      if (!paidByUser) {
         return 'Unknown';
       }
-      return this.currentCollectionUsers[this.expense.paidBy].name;
+      return paidByUser.name;
     },
-    categoryIconName() {
-      if (!this.categories[this.expense.category]) {
-        return 'help_outline';
+    category() {
+      const currentCategory = this
+        .categories
+        .filter((category) => (category.id === this.expense.categoryId))
+        .shift();
+
+      if (!currentCategory) {
+        return {
+          iconName: 'help_outline',
+          iconColor: 'primary',
+        };
       }
-      return this.categories[this.expense.category].icon.name;
-    },
-    categoryIconColor() {
-      if (!this.categories[this.expense.category]) {
-        return 'primary';
-      }
-      return this.categories[this.expense.category].icon.color;
+      return currentCategory;
     },
   },
   components: {
@@ -100,10 +106,7 @@ export default {
         ok: true,
         cancel: true,
       }).onOk(() => {
-        this.deleteExpense({
-          id: this.id,
-          collectionId: this.collectionId,
-        });
+        this.deleteExpense(this.expense);
       });
     },
   },

@@ -19,8 +19,8 @@
       >
         <q-item-section avatar>
           <q-icon
-            :name="scope.opt.icon.name"
-            :color="scope.opt.icon.color"
+            :name="scope.opt.iconName"
+            :color="scope.opt.iconColor"
           />
         </q-item-section>
         <q-item-section>
@@ -40,11 +40,12 @@ export default {
   computed: {
     ...mapGetters('categories', ['categories']),
     selectOptions() {
-      return Object.keys(this.categories).map(
-        (key) => ({
-          label: this.categories[key].name,
-          value: key,
-          icon: this.categories[key].icon,
+      return this.categories.map(
+        (category) => ({
+          label: category.name,
+          value: category.id,
+          iconName: category.iconName,
+          iconColor: category.iconColor,
         }),
       );
     },

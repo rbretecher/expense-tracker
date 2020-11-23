@@ -5,9 +5,8 @@
     class="collection-list"
   >
     <collection-list-item
-      v-for="(collection, key) in collections"
-      :key="key"
-      :id="key"
+      v-for="collection in collections"
+      :key="collection.id"
       :collection="collection"
     />
   </q-list>

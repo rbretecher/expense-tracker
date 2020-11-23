@@ -2,13 +2,13 @@
   <q-item>
     <q-item-section avatar>
       <q-icon
-        :name="user.icon.name"
-        :color="user.icon.color"
+        :name="expenseSummary.user.iconName"
+        :color="expenseSummary.user.iconColor"
       />
     </q-item-section>
 
     <q-item-section>
-      <q-item-label>{{ user.name }}</q-item-label>
+      <q-item-label>{{ expenseSummary.user.name }}</q-item-label>
     </q-item-section>
 
     <q-item-section>
@@ -33,7 +33,7 @@ import mixinPrice from 'src/mixins/mixin-price';
 
 export default {
   mixins: [mixinPrice],
-  props: ['user', 'expenseSummary'],
+  props: ['expenseSummary'],
   computed: {
     toPay() {
       return this.expenseSummary.shouldHavePaid - this.expenseSummary.paid;
