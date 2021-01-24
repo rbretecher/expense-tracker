@@ -4,14 +4,9 @@
     actionName="Add new collection"
     :actionModel.sync="showAddCollection"
   >
-    <collection-breadcrumbs
-      v-if="collectionId"
-      :parents="parents(collectionId)"
-    />
-
     <collection-list
-      v-if="Object.keys(currentCollections).length"
-      :collections="currentCollections"
+      v-if="collections.length"
+      :collections="collections"
     />
 
     <no-resource-banner v-else>
@@ -28,11 +23,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
 import CollectionList from 'src/components/Collections/List/CollectionList';
 import AddCollection from 'src/components/Collections/Modals/AddCollection';
-import CollectionBreadcrumbs from 'src/components/Collections/CollectionBreadcrumbs';
 
 export default {
   mixins: [mixinPage],
@@ -45,16 +39,9 @@ export default {
   components: {
     CollectionList,
     AddCollection,
-    CollectionBreadcrumbs,
   },
   computed: {
-    ...mapGetters('collections', ['rootCollections', 'children', 'parents']),
-    currentCollections() {
-      if (!this.collectionId) {
-        return this.rootCollections;
-      }
-      return this.children(this.collectionId);
-    },
+    ...mapState('collections', ['collections']),
   },
 };
 </script>

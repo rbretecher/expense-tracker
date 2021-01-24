@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
 import DashboardItem from 'src/components/Dashboard/DashboardItem';
 
@@ -30,12 +30,9 @@ export default {
   computed: {
     ...mapState('users', ['currentUser']),
     ...mapState('categories', ['categories']),
-    ...mapGetters('collections', ['collections']),
+    ...mapState('collections', ['collections']),
     expenseCount() {
-      return Object
-        .keys(this.collections || {})
-        .filter((key) => !this.collections[key].collection)
-        .reduce((acc, currentKey) => acc + this.collections[currentKey].count, 0);
+      return this.collections.reduce((acc, collection) => acc + collection.count, 0);
     },
   },
 };
