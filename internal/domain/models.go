@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Collection struct {
+type Project struct {
 	ID        int    `json:"id" db:"id"`
 	Name      string `json:"name" db:"name"`
 	IconName  string `json:"iconName" db:"icon_name"`
@@ -33,7 +33,7 @@ type Category struct {
 
 type Expense struct {
 	ID           int       `json:"id" db:"id"`
-	CollectionID int       `json:"collectionId" db:"collection_id"`
+	ProjectID    int       `json:"projectId" db:"project_id"`
 	CategoryID   int       `json:"categoryId" db:"category_id"`
 	PaidByUserID int       `json:"paidByUserId" db:"paid_by_user_id"`
 	Name         string    `json:"name" db:"name"`

@@ -29,9 +29,9 @@ func (s *ExpenseService) Update(r *http.Request, args *UpdateArgs, reply *domain
 			UPDATE expenses
 			SET category_id = $2, paid_by_user_id = $3, name = $4, date = $5, price = $6
 			WHERE id = $1
-			RETURNING id, collection_id, category_id, paid_by_user_id, name, date, price
+			RETURNING id, project_id, category_id, paid_by_user_id, name, date, price
 		`, args.ID, args.CategoryID, args.PaidByUserID, args.Name, args.Date, args.Price).
-		Scan(&reply.ID, &reply.CollectionID, &reply.CategoryID, &reply.PaidByUserID, &reply.Name, &reply.Date, &reply.Price)
+		Scan(&reply.ID, &reply.ProjectID, &reply.CategoryID, &reply.PaidByUserID, &reply.Name, &reply.Date, &reply.Price)
 
 	return service.HandleUpdate(err)
 }

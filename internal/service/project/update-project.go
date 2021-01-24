@@ -1,4 +1,4 @@
-package collection
+package project
 
 import (
 	"net/http"
@@ -15,15 +15,15 @@ type UpdateArgs struct {
 	IconColor string `json:"iconColor" validate:"required"`
 }
 
-func (s *CollectionService) Update(r *http.Request, args *UpdateArgs, reply *domain.Collection) error {
+func (s *ProjectService) Update(r *http.Request, args *UpdateArgs, reply *domain.Project) error {
 	session := auth.GetSession(r)
 
-	if err := s.CheckUserHasCollection(session.UserID, args.ID); err != nil {
+	if err := s.CheckUserHasProject(session.UserID, args.ID); err != nil {
 		return err
 	}
 
 	err := s.DB.QueryRow(`
-		UPDATE collections
+		UPDATE projects
 		SET name = $2, icon_name = $3, icon_color = $4
 		WHERE id = $1
 		RETURNING id, name, icon_name, icon_color

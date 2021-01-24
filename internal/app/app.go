@@ -12,8 +12,8 @@ import (
 	"github.com/rbretecher/expense-tracker-back/internal/auth"
 	"github.com/rbretecher/expense-tracker-back/internal/infrastructure/database"
 	"github.com/rbretecher/expense-tracker-back/internal/service/category"
-	"github.com/rbretecher/expense-tracker-back/internal/service/collection"
 	"github.com/rbretecher/expense-tracker-back/internal/service/expense"
+	"github.com/rbretecher/expense-tracker-back/internal/service/project"
 	"github.com/rbretecher/expense-tracker-back/internal/service/user"
 	"github.com/rs/cors"
 )
@@ -31,7 +31,7 @@ func New() app {
 	s.RegisterInterceptFunc(auth.Middleware)
 	s.RegisterValidateRequestFunc(middleware)
 	s.RegisterService(user.NewService(db), "User")
-	s.RegisterService(collection.NewService(db), "Collection")
+	s.RegisterService(project.NewService(db), "Project")
 	s.RegisterService(category.NewService(db), "Category")
 	s.RegisterService(expense.NewService(db), "Expense")
 
