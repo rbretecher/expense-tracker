@@ -11,7 +11,7 @@
     <modal-expense-date :date.sync="formData.date" />
     <modal-expense-paid-by
       :paidByUserId.sync="formData.paidByUserId"
-      :users="currentCollectionUsers"
+      :users="users"
     />
     <modal-expense-category :category.sync="formData.categoryId" />
   </modal>
@@ -19,13 +19,13 @@
 
 <script>
 import mixinAddEditExpense from 'src/mixins/mixin-add-edit-expense';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   mixins: [mixinAddEditExpense],
   props: ['collectionId'],
   computed: {
-    ...mapGetters('users', ['currentCollectionUsers']),
+    ...mapState('users', ['users']),
   },
   methods: {
     ...mapActions('expenses', ['addExpense']),
