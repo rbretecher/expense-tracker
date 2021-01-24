@@ -5,7 +5,3 @@ export function users(state) {
 export function currentUser(state) {
   return state.currentUser;
 }
-
-export function currentCollectionUsers(state) {
-  return state.users;
-}

@@ -45,7 +45,7 @@
 
 <script>
 import { date } from 'quasar';
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import EditExpense from 'src/components/Expenses/Modals/EditExpense';
 import mixinPrice from 'src/mixins/mixin-price';
 import AppDialog from 'src/components/Shared/Dialog/Dialog';
@@ -60,10 +60,10 @@ export default {
   },
   computed: {
     ...mapState('categories', ['categories']),
-    ...mapGetters('users', ['currentCollectionUsers']),
+    ...mapState('users', ['users']),
     paidByName() {
       const paidByUser = this
-        .currentCollectionUsers
+        .users
         .filter((user) => (user.id === this.expense.paidByUserId))
         .shift();
 

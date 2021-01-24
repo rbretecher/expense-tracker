@@ -20,7 +20,7 @@
 
         <big-title>Summary</big-title>
         <expense-summary
-          :users="currentCollectionUsers"
+          :users="users"
           :expenses="expenses"
         />
       </div>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import ExpenseList from 'src/components/Expenses/List/ExpenseList';
@@ -60,7 +60,7 @@ export default {
   computed: {
     ...mapGetters('app', ['expensePageReady']),
     ...mapGetters('expenses', ['expenses']),
-    ...mapGetters('users', ['currentCollectionUsers']),
+    ...mapState('users', ['users']),
     collectionId() {
       return parseInt(this.collectionIdParam, 10);
     },
