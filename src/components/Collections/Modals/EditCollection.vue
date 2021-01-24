@@ -1,6 +1,6 @@
 <template>
   <modal
-    title="Edit category"
+    title="Edit collection"
     @success="saveCollection"
   >
     <modal-name-input

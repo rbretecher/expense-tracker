@@ -7,7 +7,7 @@
     />
 
     <q-expansion-item
-      v-if="rootCollections"
+      v-if="collections.length"
       expand-separator
       icon="euro_symbol"
       label="Expenses"
@@ -15,7 +15,7 @@
       default-opened
     >
       <collection-item
-        v-for="collection in rootCollections"
+        v-for="collection in collections"
         :key="collection.id"
         :collection="collection"
       />
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import CollectionItem from 'components/Layout/Menu/Expenses/CollectionItem';
 import MenuItem from 'components/Layout/Menu/MenuItem';
 
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     ...mapState('users', ['currentUser']),
-    ...mapGetters('collections', ['rootCollections']),
+    ...mapState('collections', ['collections']),
   },
 };
 </script>

@@ -1,58 +1,29 @@
 <template>
-  <div>
-    <q-expansion-item
-      v-if="hasChildren"
-      :header-inset-level="0"
-      :content-inset-level="0.5"
-      :icon="collection.iconName"
-      :label="collection.name"
-      default-opened
-      :caption="`${collection.count} expenses`"
-    >
-      <q-list>
-        <collection-item
-          v-for="child in children(collection.id)"
-          :key="child.id"
-          :collection="child"
-        />
-      </q-list>
-    </q-expansion-item>
+  <q-item
+    clickable
+    tag="a"
+    :to="`/expenses/${collection.id}`"
+    exact
+    active-class="active"
+  >
+    <q-item-section avatar>
+      <q-icon
+        :name="collection.iconName"
+        :color="collection.iconColor"
+      />
+    </q-item-section>
 
-    <q-item
-      v-else
-      clickable
-      tag="a"
-      :to="`/expenses/${collection.id}`"
-      exact
-      active-class="active"
-    >
-      <q-item-section avatar>
-        <q-icon
-          :name="collection.iconName"
-          :color="collection.iconColor"
-        />
-      </q-item-section>
-
-      <q-item-section>
-        <q-item-label>{{ collection.name }}</q-item-label>
-        <q-item-label caption>{{ collection.count }} expenses</q-item-label>
-      </q-item-section>
-    </q-item>
-  </div>
+    <q-item-section>
+      <q-item-label>{{ collection.name }}</q-item-label>
+      <q-item-label caption>{{ collection.count }} expenses</q-item-label>
+    </q-item-section>
+  </q-item>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
   name: 'CollectionItem',
   props: ['collection'],
-  computed: {
-    ...mapGetters('collections', ['children']),
-    hasChildren() {
-      return Object.keys(this.children(this.collection.id)).length !== 0;
-    },
-  },
 };
 </script>
 
