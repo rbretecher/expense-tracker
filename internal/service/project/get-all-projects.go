@@ -11,6 +11,10 @@ import (
 func (s *ProjectService) All(r *http.Request, args *service.NoArgs, reply *[]*domain.Project) error {
 	session := auth.GetSession(r)
 
+	// Primitives types are marshalled as "null".
+	// With this, empty slice will be marshalled as "[]".
+	*reply = make([]*domain.Project, 0)
+
 	return s.DB.Select(reply, `
 		SELECT p.*, (SELECT COUNT(*) FROM expenses WHERE project_id = p.id) AS count
 		FROM projects p
