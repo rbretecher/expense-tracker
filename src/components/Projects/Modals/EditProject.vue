@@ -1,7 +1,7 @@
 <template>
   <modal
-    title="Edit collection"
-    @success="saveCollection"
+    title="Edit project"
+    @success="saveProject"
   >
     <modal-name-input
       :name.sync="formData.name"
@@ -13,21 +13,21 @@
 
 <script>
 import { mapActions } from 'vuex';
-import mixinAddEditCollection from 'src/mixins/mixin-add-edit-collection';
+import mixinAddEditProject from 'src/mixins/mixin-add-edit-project';
 
 export default {
-  mixins: [mixinAddEditCollection],
-  props: ['collection'],
+  mixins: [mixinAddEditProject],
+  props: ['project'],
   methods: {
-    ...mapActions('collections', ['updateCollection']),
-    saveCollection() {
-      this.updateCollection(this.formData);
+    ...mapActions('projects', ['updateProject']),
+    saveProject() {
+      this.updateProject(this.formData);
       this.$emit('close');
     },
   },
   mounted() {
     this.formData = {
-      ...this.collection,
+      ...this.project,
     };
   },
 };

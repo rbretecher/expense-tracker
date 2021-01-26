@@ -3,9 +3,9 @@ import { Notify, Loading } from 'quasar';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 import { executeRequest } from 'src/client/json-rpc';
 
-export async function loadExpenses({ commit, dispatch }, collectionId) {
+export async function loadExpenses({ commit, dispatch }, projectId) {
   try {
-    const expenses = await executeRequest('Expense.Get', { id: parseInt(collectionId, 10) });
+    const expenses = await executeRequest('Expense.Get', { id: parseInt(projectId, 10) });
 
     commit('setExpenses', expenses);
     dispatch('app/setExpensesLoaded', true, { root: true });
@@ -18,7 +18,7 @@ export async function updateExpense({ dispatch }, expense) {
   try {
     Loading.show();
     await executeRequest('Expense.Update', expense);
-    await dispatch('loadExpenses', expense.collectionId);
+    await dispatch('loadExpenses', expense.projectId);
     Loading.hide();
 
     Notify.create('Expense updated!');
@@ -31,8 +31,8 @@ export async function addExpense({ dispatch }, expense) {
   try {
     Loading.show();
     await executeRequest('Expense.Create', expense);
-    await dispatch('loadExpenses', expense.collectionId);
-    await dispatch('collections/loadCollections', expense.collectionId, { root: true }); // Reload collection count
+    await dispatch('loadExpenses', expense.projectId);
+    await dispatch('projects/loadProjects', expense.projectId, { root: true }); // Reload project count
     Loading.hide();
 
     Notify.create('Expense added!');
@@ -45,8 +45,8 @@ export async function deleteExpense({ dispatch }, expense) {
   try {
     Loading.show();
     await executeRequest('Expense.Delete', { id: expense.id });
-    await dispatch('loadExpenses', expense.collectionId);
-    await dispatch('collections/loadCollections', expense.collectionId, { root: true }); // Reload collection count
+    await dispatch('loadExpenses', expense.projectId);
+    await dispatch('projects/loadProjects', expense.projectId, { root: true }); // Reload project count
     Loading.hide();
 
     Notify.create('Expense deleted!');

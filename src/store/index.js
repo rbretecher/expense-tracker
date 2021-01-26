@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 
 import { vuexfireMutations } from 'vuexfire';
 import app from './app';
-import collections from './collections';
+import projects from './projects';
 import expenses from './expenses';
 import users from './users';
 import categories from './categories';
@@ -23,7 +23,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       app,
-      collections,
+      projects,
       expenses,
       users,
       categories,

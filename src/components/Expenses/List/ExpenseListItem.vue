@@ -36,7 +36,7 @@
     <app-dialog :showDialog.sync="showEditExpense">
       <edit-expense
         :expense="expense"
-        :collectionId="collectionId"
+        :projectId="projectId"
         @close="showEditExpense = false"
       />
     </app-dialog>
@@ -52,7 +52,7 @@ import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
   mixins: [mixinPrice],
-  props: ['expense', 'collectionId'],
+  props: ['expense', 'projectId'],
   data() {
     return {
       showEditExpense: false,

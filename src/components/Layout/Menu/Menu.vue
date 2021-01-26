@@ -7,24 +7,24 @@
     />
 
     <q-expansion-item
-      v-if="collections.length"
+      v-if="projects.length"
       expand-separator
       icon="euro_symbol"
       label="Expenses"
       caption="Manage your expenses"
       default-opened
     >
-      <collection-item
-        v-for="collection in collections"
-        :key="collection.id"
-        :collection="collection"
+      <project-item
+        v-for="project in projects"
+        :key="project.id"
+        :project="project"
       />
     </q-expansion-item>
 
     <menu-item
-      to="/collections"
+      to="/projects"
       icon="account_tree"
-      label="Collections"
+      label="Projects"
       caption="Organize your expenses"
     />
 
@@ -49,17 +49,17 @@
 
 <script>
 import { mapState } from 'vuex';
-import CollectionItem from 'components/Layout/Menu/Expenses/CollectionItem';
+import ProjectItem from 'components/Layout/Menu/Expenses/ProjectItem';
 import MenuItem from 'components/Layout/Menu/MenuItem';
 
 export default {
   components: {
-    CollectionItem,
+    ProjectItem,
     MenuItem,
   },
   computed: {
     ...mapState('users', ['currentUser']),
-    ...mapState('collections', ['collections']),
+    ...mapState('projects', ['projects']),
   },
 };
 </script>

@@ -23,14 +23,14 @@ import { mapActions, mapState } from 'vuex';
 
 export default {
   mixins: [mixinAddEditExpense],
-  props: ['collectionId'],
+  props: ['projectId'],
   computed: {
     ...mapState('users', ['users']),
   },
   methods: {
     ...mapActions('expenses', ['addExpense']),
     saveExpense() {
-      this.addExpense({ collectionId: this.collectionId, ...this.formData });
+      this.addExpense({ projectId: this.projectId, ...this.formData });
       this.$emit('close');
     },
   },

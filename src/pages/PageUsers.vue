@@ -11,7 +11,7 @@
       />
 
       <no-resource-banner v-else>
-        There is no user. Add a user and it will have access to your collections.
+        There is no user. Add a user and it will have access to your projects.
       </no-resource-banner>
 
       <app-dialog :showDialog.sync="showAddUser">
