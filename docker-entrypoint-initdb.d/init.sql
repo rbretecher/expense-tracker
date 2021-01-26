@@ -68,6 +68,7 @@ INSERT INTO projects (name, icon_name, icon_color) VALUES ('MDR', 'hotel', 'blue
 INSERT INTO user_has_project (user_id, project_id) VALUES (1, 1);
 INSERT INTO user_has_project (user_id, project_id) VALUES (1, 2);
 INSERT INTO user_has_project (user_id, project_id) VALUES (1, 3);
+INSERT INTO user_has_project (user_id, project_id) VALUES (2, 1);
 
 INSERT INTO expenses (project_id, category_id, paid_by_user_id, name, date, price) 
 VALUES  (1, 1, 1, 'Courses', NOW(), 15.99),
