@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-spinner v-if="!expensePageReady" />
+    <page-spinner v-if="!currentProject" />
 
     <scroll-page
       v-else
@@ -9,19 +9,19 @@
       :actionModel.sync="showAddExpense"
     >
       <div
-        v-if="expenses.length"
+        v-if="currentProject.expenses.length"
         class="q-mb-xl"
       >
         <expense-list
           :projectId="projectId"
-          :expenses="expenses"
+          :expenses="currentProject.expenses"
           class="q-mb-xl"
         />
 
         <big-title>Summary</big-title>
         <expense-summary
-          :users="users"
-          :expenses="expenses"
+          :users="currentProject.users"
+          :expenses="currentProject.expenses"
         />
       </div>
 
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import ExpenseList from 'src/components/Expenses/List/ExpenseList';
@@ -58,16 +58,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('app', ['expensePageReady']),
-    ...mapGetters('expenses', ['expenses']),
-    ...mapState('users', ['users']),
+    ...mapState('projects', ['currentProject']),
     projectId() {
       return parseInt(this.projectIdParam, 10);
     },
   },
   methods: {
-    ...mapActions('app', ['resetExpensePage']),
-    ...mapActions('expenses', ['loadExpenses']),
+    ...mapActions('projects', ['loadProject', 'resetCurrentProject']),
     showAddExpenseDialog() {
       this.showAddExpense = true;
     },
@@ -79,16 +76,16 @@ export default {
   },
   watch: {
     projectId() {
-      this.resetExpensePage();
+      this.resetCurrentProject();
 
-      this.loadExpenses(this.projectId);
+      this.loadProject(this.projectId);
     },
   },
   mounted() {
-    this.loadExpenses(this.projectId);
+    this.loadProject(this.projectId);
   },
   destroyed() {
-    this.resetExpensePage();
+    this.resetCurrentProject();
   },
 };
 </script>

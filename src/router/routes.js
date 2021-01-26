@@ -14,7 +14,7 @@ const routes = [
       },
       {
         path: '/expenses/:projectIdParam',
-        component: () => import('pages/PageExpenses.vue'),
+        component: () => import('pages/PageProject.vue'),
         props: true,
       },
       {

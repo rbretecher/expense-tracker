@@ -61,19 +61,6 @@ export function setToolbar({ commit }, value) {
   commit('setToolbar', value);
 }
 
-export function setExpensesLoaded({ commit }, value) {
-  commit('setExpensesLoaded', value);
-}
-
-export function setProjectUsersLoaded({ commit }, value) {
-  commit('setProjectUsersLoaded', value);
-}
-
-export function resetExpensePage({ commit }) {
-  commit('setExpensesLoaded', false);
-  commit('setProjectUsersLoaded', false);
-}
-
 export function resetState({ commit, dispatch }) {
   commit('setToolbar', {
     title: null,
@@ -82,8 +69,6 @@ export function resetState({ commit, dispatch }) {
 
   commit('setCategoriesLoaded', false);
   commit('setProjectsLoaded', false);
-
-  dispatch('resetExpensePage');
 
   dispatch('projects/setProjects', [], { root: true });
 
