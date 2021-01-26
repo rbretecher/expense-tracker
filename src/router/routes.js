@@ -13,7 +13,7 @@ const routes = [
         component: () => import('pages/PageDashboard.vue'),
       },
       {
-        path: '/expenses/:collectionIdParam',
+        path: '/expenses/:projectIdParam',
         component: () => import('pages/PageExpenses.vue'),
         props: true,
       },
@@ -26,12 +26,12 @@ const routes = [
         component: () => import('pages/PageUsers.vue'),
       },
       {
-        path: '/collections',
-        component: () => import('pages/PageCollections.vue'),
+        path: '/projects',
+        component: () => import('pages/PageProjects.vue'),
       },
       {
-        path: '/collections/:collectionId',
-        component: () => import('pages/PageCollections.vue'),
+        path: '/projects/:projectId',
+        component: () => import('pages/PageProjects.vue'),
         props: true,
       },
     ],

@@ -28,7 +28,7 @@ export function loggedIn({ dispatch }, user) {
   dispatch('users/login', user, { root: true });
   dispatch('categories/loadCategories', null, { root: true });
   dispatch('users/loadUsers', null, { root: true });
-  dispatch('collections/loadCollections', null, { root: true });
+  dispatch('projects/loadProjects', null, { root: true });
 }
 
 export function logout({ dispatch }) {
@@ -45,8 +45,8 @@ export function setCategoriesLoaded({ commit, getters }, value) {
   }
 }
 
-export function setCollectionsLoaded({ commit, getters }, value) {
-  commit('setCollectionsLoaded', value);
+export function setProjectsLoaded({ commit, getters }, value) {
+  commit('setProjectsLoaded', value);
 
   if (getters.appReady) {
     Loading.hide();
@@ -65,13 +65,13 @@ export function setExpensesLoaded({ commit }, value) {
   commit('setExpensesLoaded', value);
 }
 
-export function setCollectionUsersLoaded({ commit }, value) {
-  commit('setCollectionUsersLoaded', value);
+export function setProjectUsersLoaded({ commit }, value) {
+  commit('setProjectUsersLoaded', value);
 }
 
 export function resetExpensePage({ commit }) {
   commit('setExpensesLoaded', false);
-  commit('setCollectionUsersLoaded', false);
+  commit('setProjectUsersLoaded', false);
 }
 
 export function resetState({ commit, dispatch }) {
@@ -81,11 +81,11 @@ export function resetState({ commit, dispatch }) {
   });
 
   commit('setCategoriesLoaded', false);
-  commit('setCollectionsLoaded', false);
+  commit('setProjectsLoaded', false);
 
   dispatch('resetExpensePage');
 
-  dispatch('collections/setCollections', [], { root: true });
+  dispatch('projects/setProjects', [], { root: true });
 
   commit('setUsersLoaded', false);
 }

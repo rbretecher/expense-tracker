@@ -2,19 +2,19 @@
   <q-item
     clickable
     v-ripple
-    @click="exploreCollection"
+    @click="exploreProject"
   >
     <q-item-section avatar>
       <q-icon
-        :name="collection.iconName"
-        :color="collection.iconColor"
+        :name="project.iconName"
+        :color="project.iconColor"
       />
     </q-item-section>
-    <q-item-section>{{ collection.name }}</q-item-section>
+    <q-item-section>{{ project.name }}</q-item-section>
     <q-item-section side>
       <div class="row">
         <q-btn
-          @click.stop="showEditCollection = true"
+          @click.stop="showEditProject = true"
           flat
           round
           dense
@@ -22,7 +22,7 @@
           icon="edit"
         />
         <q-btn
-          @click.stop="confirmDeleteCollection"
+          @click.stop="confirmDeleteProject"
           flat
           round
           dense
@@ -32,10 +32,10 @@
       </div>
     </q-item-section>
 
-    <app-dialog :showDialog.sync="showEditCollection">
-      <edit-collection
-        :collection="collection"
-        @close="showEditCollection = false"
+    <app-dialog :showDialog.sync="showEditProject">
+      <edit-project
+        :project="project"
+        @close="showEditProject = false"
       />
     </app-dialog>
   </q-item>
@@ -43,38 +43,38 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import EditCollection from 'src/components/Collections/Modals/EditCollection';
+import EditProject from 'src/components/Projects/Modals/EditProject';
 import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
 export default {
-  props: ['collection'],
+  props: ['project'],
   data() {
     return {
-      showEditCollection: false,
+      showEditProject: false,
     };
   },
   computed: {
     ...mapState('users', ['currentUser']),
   },
   components: {
-    EditCollection,
+    EditProject,
     AppDialog,
   },
   methods: {
-    ...mapActions('collections', ['deleteCollection']),
-    confirmDeleteCollection() {
+    ...mapActions('projects', ['deleteProject']),
+    confirmDeleteProject() {
       this.$q.dialog({
         icon: 'delete',
-        title: 'Delete collection',
-        message: 'Are you sure you want to delete this collection ?',
+        title: 'Delete project',
+        message: 'Are you sure you want to delete this project ?',
         ok: true,
         cancel: true,
       }).onOk(() => {
-        this.deleteCollection(this.collection.id);
+        this.deleteProject(this.project.id);
       });
     },
-    exploreCollection() {
-      this.$router.push(`/collections/${this.collection.id}`).catch(() => { });
+    exploreProject() {
+      this.$router.push(`/projects/${this.project.id}`).catch(() => { });
     },
   },
 };

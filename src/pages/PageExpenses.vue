@@ -13,7 +13,7 @@
         class="q-mb-xl"
       >
         <expense-list
-          :collectionId="collectionId"
+          :projectId="projectId"
           :expenses="expenses"
           class="q-mb-xl"
         />
@@ -29,13 +29,13 @@
         :showAddExpense.sync="showAddExpense"
         v-else
       >
-        There is no expense in this collection. Add a new expense and it will show up here.
+        There is no expense in this project. Add a new expense and it will show up here.
       </no-resource-banner>
 
       <app-dialog :showDialog.sync="showAddExpense">
         <add-expense
           @close="showAddExpense = false"
-          :collectionId="collectionId"
+          :projectId="projectId"
         />
       </app-dialog>
     </scroll-page>
@@ -51,7 +51,7 @@ import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
 
 export default {
   mixins: [mixinPage],
-  props: ['collectionIdParam'],
+  props: ['projectIdParam'],
   data() {
     return {
       showAddExpense: false,
@@ -61,8 +61,8 @@ export default {
     ...mapGetters('app', ['expensePageReady']),
     ...mapGetters('expenses', ['expenses']),
     ...mapState('users', ['users']),
-    collectionId() {
-      return parseInt(this.collectionIdParam, 10);
+    projectId() {
+      return parseInt(this.projectIdParam, 10);
     },
   },
   methods: {
@@ -78,14 +78,14 @@ export default {
     ExpenseSummary,
   },
   watch: {
-    collectionId() {
+    projectId() {
       this.resetExpensePage();
 
-      this.loadExpenses(this.collectionId);
+      this.loadExpenses(this.projectId);
     },
   },
   mounted() {
-    this.loadExpenses(this.collectionId);
+    this.loadExpenses(this.projectId);
   },
   destroyed() {
     this.resetExpensePage();

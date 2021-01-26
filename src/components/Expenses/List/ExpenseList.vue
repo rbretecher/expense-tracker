@@ -7,7 +7,7 @@
       v-for="expense in expenses"
       :key="expense.id"
       :expense="expense"
-      :collectionId="collectionId"
+      :projectId="projectId"
     />
 
     <expense-list-item-total
@@ -22,7 +22,7 @@ import ExpenseListItem from 'src/components/Expenses/List/ExpenseListItem';
 import ExpenseListItemTotal from 'src/components/Expenses/List/ExpenseListItemTotal';
 
 export default {
-  props: ['collectionId', 'expenses'],
+  props: ['projectId', 'expenses'],
   components: {
     ExpenseListItem,
     ExpenseListItemTotal,

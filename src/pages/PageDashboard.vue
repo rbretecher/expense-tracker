@@ -7,7 +7,7 @@
       </dashboard-item>
 
       <dashboard-item icon="account_tree">
-        {{ Object.keys(collections).length }} collections
+        {{ Object.keys(projects).length }} projects
       </dashboard-item>
 
       <dashboard-item icon="category">
@@ -30,9 +30,9 @@ export default {
   computed: {
     ...mapState('users', ['currentUser']),
     ...mapState('categories', ['categories']),
-    ...mapState('collections', ['collections']),
+    ...mapState('projects', ['projects']),
     expenseCount() {
-      return this.collections.reduce((acc, collection) => acc + collection.count, 0);
+      return this.projects.reduce((acc, project) => acc + project.count, 0);
     },
   },
 };

@@ -24,7 +24,7 @@ import { mapActions, mapState } from 'vuex';
 
 export default {
   mixins: [mixinAddEditExpense],
-  props: ['expense', 'collectionId'],
+  props: ['expense', 'projectId'],
   computed: {
     ...mapState('users', ['users']),
   },

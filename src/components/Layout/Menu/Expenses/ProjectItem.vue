@@ -2,28 +2,28 @@
   <q-item
     clickable
     tag="a"
-    :to="`/expenses/${collection.id}`"
+    :to="`/expenses/${project.id}`"
     exact
     active-class="active"
   >
     <q-item-section avatar>
       <q-icon
-        :name="collection.iconName"
-        :color="collection.iconColor"
+        :name="project.iconName"
+        :color="project.iconColor"
       />
     </q-item-section>
 
     <q-item-section>
-      <q-item-label>{{ collection.name }}</q-item-label>
-      <q-item-label caption>{{ collection.count }} expenses</q-item-label>
+      <q-item-label>{{ project.name }}</q-item-label>
+      <q-item-label caption>{{ project.count }} expenses</q-item-label>
     </q-item-section>
   </q-item>
 </template>
 
 <script>
 export default {
-  name: 'CollectionItem',
-  props: ['collection'],
+  name: 'ProjectItem',
+  props: ['project'],
 };
 </script>
 
