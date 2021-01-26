@@ -1,4 +1,3 @@
-import 'firebase/auth';
 import { Loading } from 'quasar';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 

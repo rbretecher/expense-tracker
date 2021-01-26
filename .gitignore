@@ -32,10 +32,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-# Firebase
-.firebase
-.firebaserc
-firebase-debug.log
 
 # Config files
 .env
