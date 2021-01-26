@@ -2,6 +2,16 @@ import { Notify, Loading } from 'quasar';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 import { executeRequest } from 'src/client/json-rpc';
 
+export async function loadProject({ commit }, projectId) {
+  try {
+    const project = await executeRequest('Project.Get', { id: projectId });
+
+    commit('setCurrentProject', project);
+  } catch (e) {
+    showErrorMessageWithTitle('Could not load project', e.message);
+  }
+}
+
 export async function loadProjects({ commit }) {
   try {
     const projects = await executeRequest('Project.All');
@@ -50,3 +60,5 @@ export async function updateProject({ dispatch }, project) {
     showErrorMessageWithTitle('Could not update project', e.message);
   }
 }
+
+export const resetCurrentProject = ({ commit }) => commit('setCurrentProject', null);
