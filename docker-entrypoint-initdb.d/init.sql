@@ -72,5 +72,11 @@ INSERT INTO user_has_project (user_id, project_id) VALUES (2, 1);
 
 INSERT INTO expenses (project_id, category_id, paid_by_user_id, name, date, price) 
 VALUES  (1, 1, 1, 'Courses', NOW(), 15.99),
-        (1, 2, 1, 'Loyer', NOW(), 900),
-        (1, 3, 1, 'Assurance voiture', NOW(), 30);
+        (1, 3, 1, 'Loyer', '2020-01-10', 900),
+        (1, 3, 1, 'Assurance voiture', '2020-01-10', 900),
+        (1, 3, 1, 'Loyer', '2020-02-10', 900),
+        (1, 3, 1, 'Loyer', '2020-03-10', 900),
+        (1, 3, 1, 'Loyer', '2020-04-10', 900),
+        (1, 3, 1, 'Loyer', '2020-05-10', 900),
+        (1, 3, 1, 'Assurance voiture', NOW(), 30)
+        ;

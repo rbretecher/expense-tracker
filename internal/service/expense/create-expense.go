@@ -9,7 +9,7 @@ import (
 )
 
 type CreateArgs struct {
-	ProjectID    int     `json:"projectID" validate:"required"`
+	ProjectID    int     `json:"projectId" validate:"required"`
 	CategoryID   int     `json:"categoryId" validate:"required"`
 	PaidByUserID int     `json:"paidByUserId" validate:"required"`
 	Name         string  `json:"name" validate:"required"`
