@@ -37,7 +37,8 @@ func (s *ProjectService) GetMonth(r *http.Request, args *GetMonthArgs, reply *Ge
 	if err := s.DB.Select(&reply.Expenses, `
 		SELECT *
 		FROM expenses
-		WHERE project_id = $1 AND to_char(date, 'YYYY-MM') = $2;
+		WHERE project_id = $1 AND to_char(date, 'YYYY-MM') = $2
+		ORDER BY date ASC;
 	`, args.ID, args.Month); err != nil {
 		return err
 	}
