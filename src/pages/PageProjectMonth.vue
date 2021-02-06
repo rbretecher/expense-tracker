@@ -83,13 +83,14 @@ export default {
     ExpenseSummary,
     ProjectBreadcrumbs,
   },
+  created() {
+    this.resetCurrentProjectMonth();
+    this.loadProjectMonth({ projectId: this.projectId, month: this.month });
+  },
   watch: {
-    projectId: {
-      immediate: true,
-      handler() {
-        this.resetCurrentProjectMonth();
-        this.loadProjectMonth({ projectId: parseInt(this.projectId, 10), month: this.month });
-      },
+    month() {
+      this.resetCurrentProjectMonth();
+      this.loadProjectMonth({ projectId: this.projectId, month: this.month });
     },
   },
 };

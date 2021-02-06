@@ -87,13 +87,14 @@ export default {
       }
     },
   },
+  created() {
+    this.resetCurrentProject();
+    this.loadProject(this.projectId);
+  },
   watch: {
-    projectId: {
-      immediate: true,
-      handler() {
-        this.resetCurrentProject();
-        this.loadProject(this.projectId);
-      },
+    projectId() {
+      this.resetCurrentProject();
+      this.loadProject(this.projectId);
     },
   },
 };
