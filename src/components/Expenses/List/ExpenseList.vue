@@ -6,6 +6,7 @@
       :expense="expense"
       :month="month"
       :projectId="projectId"
+      :users="users"
     />
 
     <expense-list-item-total :count="count" :amount="amount" />
@@ -17,7 +18,7 @@ import ExpenseListItem from 'src/components/Expenses/List/ExpenseListItem';
 import ExpenseListItemTotal from 'src/components/Expenses/List/ExpenseListItemTotal';
 
 export default {
-  props: ['projectId', 'month', 'expenses'],
+  props: ['projectId', 'month', 'expenses', 'users'],
   components: {
     ExpenseListItem,
     ExpenseListItemTotal,

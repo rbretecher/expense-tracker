@@ -1,7 +1,6 @@
 <template>
   <scroll-page title="Dashboard">
     <div class="dashboard-item-list">
-
       <dashboard-item icon="euro_symbol">
         {{ expenseCount }} expenses
       </dashboard-item>
@@ -28,7 +27,6 @@ export default {
     DashboardItem,
   },
   computed: {
-    ...mapState('users', ['currentUser']),
     ...mapState('categories', ['categories']),
     ...mapState('projects', ['projects']),
     expenseCount() {

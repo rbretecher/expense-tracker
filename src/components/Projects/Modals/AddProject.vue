@@ -1,8 +1,5 @@
 <template>
-  <modal
-    title="Add project"
-    @success="saveProject"
-  >
+  <modal title="Add project" @success="saveProject">
     <modal-name-input
       :name.sync="formData.name"
       :autofocus="$q.platform.is.desktop"
@@ -12,15 +9,12 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions } from 'vuex';
 import mixinAddEditProject from 'src/mixins/mixin-add-edit-project';
 
 export default {
   mixins: [mixinAddEditProject],
   props: ['projectId'],
-  computed: {
-    ...mapState('users', ['currentUser']),
-  },
   methods: {
     ...mapActions('projects', ['addProject']),
     saveProject() {
