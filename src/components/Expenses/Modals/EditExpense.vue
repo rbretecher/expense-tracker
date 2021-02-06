@@ -17,14 +17,10 @@
 
 <script>
 import mixinAddEditExpense from 'src/mixins/mixin-add-edit-expense';
-import { mapState } from 'vuex';
 
 export default {
   mixins: [mixinAddEditExpense],
-  props: ['expense', 'projectId'],
-  computed: {
-    ...mapState('users', ['users']),
-  },
+  props: ['expense', 'projectId', 'users'],
   methods: {
     saveExpense() {
       this.$emit('save', this.formData);

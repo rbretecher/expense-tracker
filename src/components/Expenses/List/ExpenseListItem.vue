@@ -29,6 +29,7 @@
       <edit-expense
         :expense="expense"
         :projectId="projectId"
+        :users="users"
         @save="handleUpdateExpense"
       />
     </app-dialog>
@@ -45,7 +46,7 @@ import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 
 export default {
   mixins: [mixinPrice],
-  props: ['expense', 'projectId', 'month'],
+  props: ['expense', 'projectId', 'month', 'users'],
   data() {
     return {
       showEditExpense: false,
@@ -53,7 +54,6 @@ export default {
   },
   computed: {
     ...mapState('categories', ['categories']),
-    ...mapState('users', ['users']),
     paidByName() {
       const paidByUser = this
         .users

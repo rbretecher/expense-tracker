@@ -1,14 +1,7 @@
 <template>
-  <q-item
-    clickable
-    v-ripple
-    @click="exploreProject"
-  >
+  <q-item clickable v-ripple @click="exploreProject">
     <q-item-section avatar>
-      <q-icon
-        :name="project.iconName"
-        :color="project.iconColor"
-      />
+      <q-icon :name="project.iconName" :color="project.iconColor" />
     </q-item-section>
     <q-item-section>{{ project.name }}</q-item-section>
     <q-item-section side>
@@ -33,16 +26,13 @@
     </q-item-section>
 
     <app-dialog :showDialog.sync="showEditProject">
-      <edit-project
-        :project="project"
-        @close="showEditProject = false"
-      />
+      <edit-project :project="project" @close="showEditProject = false" />
     </app-dialog>
   </q-item>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions } from 'vuex';
 import EditProject from 'src/components/Projects/Modals/EditProject';
 import AppDialog from 'src/components/Shared/Dialog/Dialog';
 
@@ -52,9 +42,6 @@ export default {
     return {
       showEditProject: false,
     };
-  },
-  computed: {
-    ...mapState('users', ['currentUser']),
   },
   components: {
     EditProject,

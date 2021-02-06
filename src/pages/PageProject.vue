@@ -29,7 +29,11 @@
       </no-resource-banner>
 
       <app-dialog :showDialog.sync="showAddExpense">
-        <add-expense @save="handleAddExpense" :projectId="projectId" />
+        <add-expense
+          @save="handleAddExpense"
+          :projectId="projectId"
+          :users="currentProject.users"
+        />
       </app-dialog>
     </scroll-page>
   </div>
