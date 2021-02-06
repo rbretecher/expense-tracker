@@ -8,6 +8,10 @@
       actionName="Add new expense"
       :actionModel.sync="showAddExpense"
     >
+      <template v-slot:breadcrumbs>
+        <project-breadcrumbs :project="currentProject" />
+      </template>
+
       <div v-if="currentProject.count" class="q-mb-xl">
         <div v-for="year in years" :key="year">
           <medium-title>{{ year }}</medium-title>
@@ -39,9 +43,12 @@ import ProjectByMonthList from 'src/components/Projects/List/ProjectByMonthList.
 import MediumTitle from 'src/components/Shared/Titles/MediumTitle.vue';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
+import ProjectBreadcrumbs from 'src/components/Projects/ProjectBreadcrumbs';
 
 export default {
-  components: { ProjectByMonthList, MediumTitle, AddExpense },
+  components: {
+    ProjectByMonthList, MediumTitle, AddExpense, ProjectBreadcrumbs,
+  },
   mixins: [mixinPage],
   props: ['projectId'],
   data() {

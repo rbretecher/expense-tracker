@@ -19,6 +19,8 @@
             @click="$emit('update:actionModel', true)"
           />
 
+          <slot name="breadcrumbs"></slot>
+
           <big-title>{{ title }}</big-title>
         </div>
         <slot></slot>
