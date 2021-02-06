@@ -1,8 +1,5 @@
 <template>
-  <modal
-    :title="formData.name || 'Edit expense'"
-    @success="saveExpense"
-  >
+  <modal :title="formData.name || 'Edit expense'" @success="saveExpense">
     <modal-name-input
       :name.sync="formData.name"
       :autofocus="$q.platform.is.desktop"
@@ -20,7 +17,7 @@
 
 <script>
 import mixinAddEditExpense from 'src/mixins/mixin-add-edit-expense';
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   mixins: [mixinAddEditExpense],
@@ -29,10 +26,8 @@ export default {
     ...mapState('users', ['users']),
   },
   methods: {
-    ...mapActions('expenses', ['updateExpense']),
     saveExpense() {
-      this.updateExpense(this.formData);
-      this.$emit('close');
+      this.$emit('save', this.formData);
     },
   },
   mounted() {

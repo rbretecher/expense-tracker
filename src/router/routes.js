@@ -13,9 +13,16 @@ const routes = [
         component: () => import('pages/PageDashboard.vue'),
       },
       {
-        path: '/expenses/:projectIdParam',
+        path: '/projects/:projectId',
         component: () => import('pages/PageProject.vue'),
-        props: true,
+        props: ({ params }) => ({ projectId: Number.parseInt(params.projectId, 10) || 0 }),
+      },
+      {
+        path: '/projects/:projectId/:month',
+        component: () => import('pages/PageProjectMonth.vue'),
+        props: ({ params }) => (
+          { projectId: Number.parseInt(params.projectId, 10) || 0, month: params.month }
+        ),
       },
       {
         path: '/categories',
@@ -37,7 +44,6 @@ const routes = [
     ],
   },
 ];
-
 
 // Always leave this as last one
 if (process.env.MODE !== 'ssr') {

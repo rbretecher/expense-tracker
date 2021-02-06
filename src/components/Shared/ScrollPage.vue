@@ -9,7 +9,7 @@
     >
       <q-scroll-area
         class="q-scroll-area"
-        :class="{'q-pr-lg': $q.platform.is.desktop}"
+        :class="{ 'q-pr-lg': $q.platform.is.desktop }"
       >
         <div v-if="$q.platform.is.desktop">
           <right-side-button
@@ -29,7 +29,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import BigTitle from 'src/components/Shared/BigTitle';
+import BigTitle from 'src/components/Shared/Titles/BigTitle';
 import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
 
 export default {
