@@ -8,13 +8,16 @@
       actionName="Add new expense"
       :actionModel.sync="showAddExpense"
     >
+      <template v-slot:breadcrumbs>
+        <project-breadcrumbs :project="currentProjectMonth" :month="month" />
+      </template>
+
       <div v-if="currentProjectMonth.expenses.length" class="q-mb-xl">
         <expense-list
           :projectId="projectId"
           :month="month"
           :expenses="currentProjectMonth.expenses"
           class="q-mb-xl"
-          @updateExpense="handleUpdateExpense"
         />
 
         <big-title>Summary</big-title>
@@ -44,6 +47,7 @@ import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import ExpenseList from 'src/components/Expenses/List/ExpenseList';
 import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
+import ProjectBreadcrumbs from 'src/components/Projects/ProjectBreadcrumbs';
 
 export default {
   mixins: [mixinPage],
@@ -77,6 +81,7 @@ export default {
     AddExpense,
     ExpenseList,
     ExpenseSummary,
+    ProjectBreadcrumbs,
   },
   watch: {
     projectId: {
