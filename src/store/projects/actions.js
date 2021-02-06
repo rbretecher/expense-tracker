@@ -4,11 +4,21 @@ import { executeRequest } from 'src/client/json-rpc';
 
 export async function loadProject({ commit }, projectId) {
   try {
-    const project = await executeRequest('Project.Get', { id: projectId });
+    const project = await executeRequest('Project.GetSummary', { id: projectId });
 
     commit('setCurrentProject', project);
   } catch (e) {
     showErrorMessageWithTitle('Could not load project', e.message);
+  }
+}
+
+export async function loadProjectMonth({ commit }, { projectId, month }) {
+  try {
+    const project = await executeRequest('Project.GetMonth', { id: projectId, month });
+
+    commit('setCurrentProjectMonth', project);
+  } catch (e) {
+    showErrorMessageWithTitle('Could not load project month', e.message);
   }
 }
 
@@ -62,3 +72,5 @@ export async function updateProject({ dispatch }, project) {
 }
 
 export const resetCurrentProject = ({ commit }) => commit('setCurrentProject', null);
+
+export const resetCurrentProjectMonth = ({ commit }) => commit('setCurrentProjectMonth', null);

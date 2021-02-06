@@ -1,19 +1,14 @@
 <template>
-  <q-list
-    bordered
-    separator
-  >
+  <q-list bordered separator>
     <expense-list-item
       v-for="expense in expenses"
       :key="expense.id"
       :expense="expense"
+      :month="month"
       :projectId="projectId"
     />
 
-    <expense-list-item-total
-      :count="count"
-      :amount="amount"
-    />
+    <expense-list-item-total :count="count" :amount="amount" />
   </q-list>
 </template>
 
@@ -22,7 +17,7 @@ import ExpenseListItem from 'src/components/Expenses/List/ExpenseListItem';
 import ExpenseListItemTotal from 'src/components/Expenses/List/ExpenseListItemTotal';
 
 export default {
-  props: ['projectId', 'expenses'],
+  props: ['projectId', 'month', 'expenses'],
   components: {
     ExpenseListItem,
     ExpenseListItemTotal,

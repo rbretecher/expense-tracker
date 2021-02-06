@@ -1,15 +1,7 @@
 <template>
-  <q-item
-    clickable
-    v-ripple
-    @click="showEditExpense = true"
-  >
+  <q-item clickable v-ripple @click="showEditExpense = true">
     <q-item-section avatar>
-      <q-icon
-        :name="category.iconName"
-        :color="category.iconColor"
-      />
-
+      <q-icon :name="category.iconName" :color="category.iconColor" />
     </q-item-section>
 
     <q-item-section>
@@ -37,22 +29,23 @@
       <edit-expense
         :expense="expense"
         :projectId="projectId"
-        @close="showEditExpense = false"
+        @save="handleUpdateExpense"
       />
     </app-dialog>
   </q-item>
 </template>
 
 <script>
-import { date } from 'quasar';
+import { date, Loading, Notify } from 'quasar';
 import { mapState, mapActions } from 'vuex';
 import EditExpense from 'src/components/Expenses/Modals/EditExpense';
 import mixinPrice from 'src/mixins/mixin-price';
 import AppDialog from 'src/components/Shared/Dialog/Dialog';
+import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 
 export default {
   mixins: [mixinPrice],
-  props: ['expense', 'projectId'],
+  props: ['expense', 'projectId', 'month'],
   data() {
     return {
       showEditExpense: false,
@@ -97,7 +90,21 @@ export default {
     },
   },
   methods: {
-    ...mapActions('expenses', ['deleteExpense']),
+    ...mapActions('expenses', ['updateExpense', 'deleteExpense']),
+    ...mapActions('projects', ['loadProjects', 'loadProjectMonth']),
+    async handleUpdateExpense(expense) {
+      try {
+        Loading.show();
+        await this.updateExpense(expense);
+        await this.loadProjectMonth({ projectId: this.projectId, month: this.month });
+        await this.loadProjects();
+        Loading.hide();
+        this.showEditExpense = false;
+        Notify.create('Expense updated!');
+      } catch (e) {
+        showErrorMessageWithTitle('Could not update expense', e.message);
+      }
+    },
     confirmDeleteExpense() {
       this.$q.dialog({
         icon: 'delete',
@@ -105,8 +112,17 @@ export default {
         message: 'Are you sure you want to delete this expense ?',
         ok: true,
         cancel: true,
-      }).onOk(() => {
-        this.deleteExpense(this.expense);
+      }).onOk(async () => {
+        try {
+          Loading.show();
+          await this.deleteExpense(this.expense);
+          await this.loadProjectMonth({ projectId: this.projectId, month: this.month });
+          await this.loadProjects();
+          Loading.hide();
+          Notify.create('Expense deleted!');
+        } catch (e) {
+          showErrorMessageWithTitle('Could not delete expense', e.message);
+        }
       });
     },
   },

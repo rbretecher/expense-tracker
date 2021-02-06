@@ -1,27 +1,32 @@
 <template>
   <div>
-    <page-spinner v-if="!currentProject" />
+    <page-spinner v-if="!currentProjectMonth" />
 
     <scroll-page
       v-else
-      :title="currentProject.name"
+      title="Expenses"
       actionName="Add new expense"
       :actionModel.sync="showAddExpense"
     >
-      <div v-if="currentProject.count" class="q-mb-xl">
-        <div v-for="year in years" :key="year">
-          <medium-title>{{ year }}</medium-title>
+      <div v-if="currentProjectMonth.expenses.length" class="q-mb-xl">
+        <expense-list
+          :projectId="projectId"
+          :month="month"
+          :expenses="currentProjectMonth.expenses"
+          class="q-mb-xl"
+          @updateExpense="handleUpdateExpense"
+        />
 
-          <project-by-month-list
-            :projectId="currentProject.id"
-            :expensesByMonth="months(year)"
-          />
-        </div>
+        <big-title>Summary</big-title>
+        <expense-summary
+          :users="currentProjectMonth.users"
+          :expenses="currentProjectMonth.expenses"
+        />
       </div>
 
       <no-resource-banner :showAddExpense.sync="showAddExpense" v-else>
-        There is no expense in this project. Add a new expense and it will show
-        up here.
+        There is no expense in this month. Add a new expense and it will show up
+        here.
       </no-resource-banner>
 
       <app-dialog :showDialog.sync="showAddExpense">
@@ -35,42 +40,30 @@
 import { Loading, Notify } from 'quasar';
 import { mapActions, mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
-import ProjectByMonthList from 'src/components/Projects/List/ProjectByMonthList.vue';
-import MediumTitle from 'src/components/Shared/Titles/MediumTitle.vue';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
+import ExpenseList from 'src/components/Expenses/List/ExpenseList';
+import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 
 export default {
-  components: { ProjectByMonthList, MediumTitle, AddExpense },
   mixins: [mixinPage],
-  props: ['projectId'],
+  props: ['projectId', 'month'],
   data() {
     return {
       showAddExpense: false,
     };
   },
   computed: {
-    ...mapState('projects', ['currentProject']),
-    years() {
-      return this.currentProject.expensesByMonth.reduce((years, expense) => {
-        if (!years.includes(expense.year)) {
-          years.push(expense.year);
-        }
-        return years;
-      }, []);
-    },
+    ...mapState('projects', ['currentProjectMonth']),
   },
   methods: {
-    ...mapActions('projects', ['loadProject', 'loadProjects', 'resetCurrentProject']),
     ...mapActions('expenses', ['addExpense']),
-    months(year) {
-      return this.currentProject.expensesByMonth.filter((month) => (month.year === year));
-    },
+    ...mapActions('projects', ['loadProjects', 'loadProjectMonth', 'resetCurrentProjectMonth']),
     async handleAddExpense(expense) {
       try {
         Loading.show();
         await this.addExpense(expense);
-        await this.loadProject(this.projectId);
+        await this.loadProjectMonth({ projectId: this.projectId, month: this.month });
         await this.loadProjects();
         Loading.hide();
         this.showAddExpense = false;
@@ -80,12 +73,17 @@ export default {
       }
     },
   },
+  components: {
+    AddExpense,
+    ExpenseList,
+    ExpenseSummary,
+  },
   watch: {
     projectId: {
       immediate: true,
       handler() {
-        this.resetCurrentProject();
-        this.loadProject(this.projectId);
+        this.resetCurrentProjectMonth();
+        this.loadProjectMonth({ projectId: parseInt(this.projectId, 10), month: this.month });
       },
     },
   },

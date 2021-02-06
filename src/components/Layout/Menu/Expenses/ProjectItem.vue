@@ -2,15 +2,11 @@
   <q-item
     clickable
     tag="a"
-    :to="`/expenses/${project.id}`"
-    exact
+    :to="`/projects/${project.id}`"
     active-class="active"
   >
     <q-item-section avatar>
-      <q-icon
-        :name="project.iconName"
-        :color="project.iconColor"
-      />
+      <q-icon :name="project.iconName" :color="project.iconColor" />
     </q-item-section>
 
     <q-item-section>
