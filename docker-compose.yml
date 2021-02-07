@@ -3,14 +3,14 @@ services:
   app:
     build: .
     environment:
-      HTTP_PORT: ${HTTP_PORT}
+      PORT: ${PORT}
       JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
       DATABASE_URL: ${DATABASE_URL}
     volumes:
       - .:/app
     command: sh -c "/wait-for-it db:5432 -- modd"
     ports:
-      - '${HTTP_PORT}:${HTTP_PORT}'
+      - '${PORT}:${PORT}'
   db:
     image: postgres
     environment:
