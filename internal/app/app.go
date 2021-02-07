@@ -45,5 +45,5 @@ func (a app) Start() {
 	chain := alice.New(cors.AllowAll().Handler)
 
 	http.Handle("/rpc", chain.Then(a.server))
-	http.ListenAndServe(":"+os.Getenv("HTTP_PORT"), nil)
+	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
