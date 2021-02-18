@@ -2,9 +2,9 @@ package app
 
 import (
 	"github.com/gorilla/rpc/v2"
-	"github.com/rbretecher/expense-tracker-back/internal/auth"
-	"github.com/rbretecher/expense-tracker-back/internal/domain"
-	"github.com/rbretecher/expense-tracker-back/pkg/validator"
+	"github.com/rbretecher/expense-tracker/server/internal/auth"
+	"github.com/rbretecher/expense-tracker/server/internal/domain"
+	"github.com/rbretecher/expense-tracker/server/pkg/validator"
 )
 
 func middleware(r *rpc.RequestInfo, i interface{}) error {

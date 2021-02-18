@@ -3,8 +3,8 @@ package expense
 import (
 	"net/http"
 
-	"github.com/rbretecher/expense-tracker-back/internal/auth"
-	"github.com/rbretecher/expense-tracker-back/internal/service"
+	"github.com/rbretecher/expense-tracker/server/internal/auth"
+	"github.com/rbretecher/expense-tracker/server/internal/service"
 )
 
 type DeleteArgs struct {
