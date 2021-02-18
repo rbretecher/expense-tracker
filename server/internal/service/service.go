@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/jmoiron/sqlx"
-	"github.com/rbretecher/expense-tracker-back/internal/domain"
+	"github.com/rbretecher/expense-tracker/server/internal/domain"
 )
 
 type Service struct {

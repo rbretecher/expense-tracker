@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/rpc/v2"
-	"github.com/rbretecher/expense-tracker-back/internal/domain"
+	"github.com/rbretecher/expense-tracker/server/internal/domain"
 )
 
 // Middleware asserts provided JWT token is valid if method requires authorization.

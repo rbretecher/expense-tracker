@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/rbretecher/expense-tracker-back/internal/app"
+	"github.com/rbretecher/expense-tracker/server/internal/app"
 )
 
 func main() {
