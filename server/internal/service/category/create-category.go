@@ -3,8 +3,8 @@ package category
 import (
 	"net/http"
 
-	"github.com/rbretecher/expense-tracker-back/internal/domain"
-	"github.com/rbretecher/expense-tracker-back/internal/service"
+	"github.com/rbretecher/expense-tracker/server/internal/domain"
+	"github.com/rbretecher/expense-tracker/server/internal/service"
 )
 
 type CreateArgs struct {

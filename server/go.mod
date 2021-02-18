@@ -1,4 +1,4 @@
-module github.com/rbretecher/expense-tracker-back
+module github.com/rbretecher/expense-tracker/server
 
 go 1.16
 

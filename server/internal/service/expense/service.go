@@ -2,7 +2,7 @@ package expense
 
 import (
 	"github.com/jmoiron/sqlx"
-	"github.com/rbretecher/expense-tracker-back/internal/service"
+	"github.com/rbretecher/expense-tracker/server/internal/service"
 )
 
 type ExpenseService struct {

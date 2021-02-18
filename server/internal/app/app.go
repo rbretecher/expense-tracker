@@ -9,12 +9,12 @@ import (
 	"github.com/gorilla/rpc/v2"
 	"github.com/gorilla/rpc/v2/json2"
 	"github.com/jmoiron/sqlx"
-	"github.com/rbretecher/expense-tracker-back/internal/auth"
-	"github.com/rbretecher/expense-tracker-back/internal/infrastructure/database"
-	"github.com/rbretecher/expense-tracker-back/internal/service/category"
-	"github.com/rbretecher/expense-tracker-back/internal/service/expense"
-	"github.com/rbretecher/expense-tracker-back/internal/service/project"
-	"github.com/rbretecher/expense-tracker-back/internal/service/user"
+	"github.com/rbretecher/expense-tracker/server/internal/auth"
+	"github.com/rbretecher/expense-tracker/server/internal/infrastructure/database"
+	"github.com/rbretecher/expense-tracker/server/internal/service/category"
+	"github.com/rbretecher/expense-tracker/server/internal/service/expense"
+	"github.com/rbretecher/expense-tracker/server/internal/service/project"
+	"github.com/rbretecher/expense-tracker/server/internal/service/user"
 	"github.com/rs/cors"
 )
 
