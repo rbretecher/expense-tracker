@@ -1,8 +1,6 @@
-FROM golang:1.15
+FROM golang:1.16
 
 WORKDIR /app
-
-ENV GO111MODULE on
 
 # Download modd for app hot reloading
 RUN go get -u github.com/cortesi/modd/cmd/modd

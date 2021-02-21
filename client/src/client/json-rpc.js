@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const host = 'http://localhost:1234/rpc';
-
 export function executeRequest(method, params) {
-  return axios.post(host, {
+  return axios.post(process.env.SERVER_API_URL, {
     id: 1,
     jsonrpc: '2.0',
     method,
