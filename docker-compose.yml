@@ -1,26 +1,26 @@
 version: '3'
 services:
   client:
-    build: ./client
+    build: ./web
     container_name: expensetracker_client
     environment:
       SERVER_API_URL: ${SERVER_API_URL}
     volumes:
-      - ./client:/app
+      - ./web:/app
     command: sh -c "npm install && quasar dev"
     ports:
       - '8080:8080'
     depends_on:
       - 'server'
   server:
-    build: ./server
+    build: .
     container_name: expensetracker_server
     environment:
       PORT: ${SERVER_PORT}
       JWT_PRIVATE_KEY: ${SERVER_JWT_PRIVATE_KEY}
       DATABASE_URL: ${SERVER_DATABASE_URL}
     volumes:
-      - ./server:/app
+      - .:/app
     command: sh -c "/wait-for-it db:5432 -- modd"
     ports:
       - '${SERVER_PORT}:${SERVER_PORT}'
@@ -34,6 +34,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - ./server/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+      - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
     ports:
       - ${POSTGRES_PORT}:5432
