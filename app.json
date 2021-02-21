@@ -2,5 +2,8 @@
     "name": "Expense Tracker",
     "description": "A simple application to track expenses and split bills",
     "repository": "https://github.com/rbretecher/expense-tracker",
-    "addons": ["heroku-postgresql:hobby-dev"]
+    "addons": ["heroku-postgresql:hobby-dev"],
+    "env": {
+        "GOVERSION":"1.16"
+    }
 }
