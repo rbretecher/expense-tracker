@@ -44,6 +44,8 @@ func New() app {
 func (a app) Start() {
 	chain := alice.New(cors.AllowAll().Handler)
 
+	http.Handle("/", http.FileServer(http.Dir("./web/dist/spa/")))
 	http.Handle("/rpc", chain.Then(a.server))
+
 	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
