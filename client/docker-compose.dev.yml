@@ -1,8 +1,0 @@
-version: '3.5'
-services:
-  app:
-    volumes:
-      - .:/app
-    command: sh -c "npm install && quasar dev"
-    ports:
-      - '8080:8080'
