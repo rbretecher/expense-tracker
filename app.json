@@ -3,16 +3,5 @@
     "description": "A simple application to track expenses and split bills",
     "repository": "https://github.com/rbretecher/expense-tracker",
     "addons": ["heroku-postgresql:hobby-dev"],
-    "env": {
-        "GOVERSION":"1.16",
-        "SERVER_API_URL": "https://XXXXXXXXXX.herokuapp.com/rpc"
-    },
-    "buildpacks": [
-        {
-            "url": "heroku/nodejs"
-        },
-        {
-            "url": "heroku/go"
-        }
-    ]
+    "stack": "container"
 }
