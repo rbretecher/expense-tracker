@@ -1,26 +1,26 @@
 version: '3'
 services:
   client:
-    build: ./web
+    build: ./client
     container_name: expensetracker_client
     environment:
       SERVER_API_URL: ${SERVER_API_URL}
     volumes:
-      - ./web:/app
+      - ./client:/app
     command: sh -c "npm install && quasar dev"
     ports:
       - '8080:8080'
     depends_on:
       - 'server'
   server:
-    build: .
+    build: ./server
     container_name: expensetracker_server
     environment:
       PORT: ${SERVER_PORT}
       JWT_PRIVATE_KEY: ${SERVER_JWT_PRIVATE_KEY}
       DATABASE_URL: ${SERVER_DATABASE_URL}
     volumes:
-      - .:/app
+      - ./server:/app
     command: sh -c "/wait-for-it db:5432 -- modd"
     ports:
       - '${SERVER_PORT}:${SERVER_PORT}'
