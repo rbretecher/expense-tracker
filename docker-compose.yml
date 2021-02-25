@@ -4,7 +4,7 @@ services:
     build: ./client
     container_name: expensetracker_client
     environment:
-      SERVER_API_URL: ${SERVER_API_URL}
+      SERVER_API_URL: http://server:${SERVER_PORT}
     volumes:
       - ./client:/app
     command: sh -c "npm install && quasar dev"
