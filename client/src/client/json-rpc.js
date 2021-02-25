@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export function executeRequest(method, params) {
-  return axios.post(process.env.SERVER_API_URL, {
+  return axios.post('/rpc', {
     id: 1,
     jsonrpc: '2.0',
     method,

@@ -57,10 +57,6 @@ module.exports = function (ctx) {
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
-      env: {
-        SERVER_API_URL: JSON.stringify(process.env.SERVER_API_URL),
-      },
-
       // rtl: false, // https://quasar.dev/options/rtl-support
       // showProgress: false,
       // gzip: true,
@@ -89,6 +85,13 @@ module.exports = function (ctx) {
       https: false,
       port: 8080,
       open: true, // opens browser window automatically
+      proxy: {
+        '/rpc': {
+          target: process.env.SERVER_API_URL,
+          changeOrigin: true,
+          secure: false
+        }
+      }
     },
 
     // animations: 'all', // --- includes all animations
