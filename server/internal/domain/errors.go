@@ -2,6 +2,8 @@ package domain
 
 import "github.com/gorilla/rpc/v2/json2"
 
+/// Generic errors.
+
 // AuthenticationRequiredError is the error when a user try to access a ressource that requires authentication and did not provide it.
 func AuthenticationRequiredError(err error) *json2.Error {
 	return &json2.Error{
@@ -69,6 +71,17 @@ func CouldNotCreateEntityError(err error) *json2.Error {
 	return &json2.Error{
 		Code:    -32023,
 		Message: "Could not create entity",
+		Data:    err.Error(),
+	}
+}
+
+/// Custom errors.
+
+// InvalidCredentialsError is the error when a user provides a bad login/password.
+func InvalidCredentialsError(err error) *json2.Error {
+	return &json2.Error{
+		Code:    -32100,
+		Message: "Invalid credentials",
 		Data:    err.Error(),
 	}
 }
