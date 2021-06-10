@@ -13,14 +13,14 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
+    "@quasar/extras": "^1.10.6",
     "axios": "^0.21.0",
-    "quasar": "^1.0.0",
+    "quasar": "^1.15.20",
     "vuexfire": "^3.2.2"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0",
-    "@quasar/quasar-app-extension-dotenv": "^1.0.0",
+    "@quasar/app": "^1.9.6",
+    "@quasar/quasar-app-extension-dotenv": "^1.1.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
