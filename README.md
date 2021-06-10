@@ -6,7 +6,17 @@ It is mostly an experiment for my personal use and also to discover new tools/fr
 
 If you want to give it a try, you can install it for free.
 
-## Usage
+## How to use
+
+### Deploy on Heroku
+
+Create a free account on Heroku and deploy a free instance of this application just by hitting the Deploy to Heroku button.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+### Start locally
+
+You must have Docker and Docker Compose installed.
 
 Clone the repository and execute :
 
