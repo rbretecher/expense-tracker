@@ -1,3 +1,5 @@
+CREATE EXTENSION pgcrypto;
+
 CREATE TABLE users
 (
     id INT GENERATED ALWAYS AS IDENTITY,
@@ -52,8 +54,8 @@ CREATE TABLE user_has_project
     PRIMARY KEY(user_id, project_id)
 );
 
-INSERT INTO users (name, email, password, admin, icon_name, icon_color) VALUES ('Bob', 'bob@demo.com', 'azerty', true, 'face', 'blue-10');
-INSERT INTO users (name, email, password, admin, icon_name, icon_color) VALUES ('Alice', 'alice@demo.com', 'azerty', true, 'sentiment_satisfied_alt', 'pink-10');
+INSERT INTO users (name, email, password, admin, icon_name, icon_color) VALUES ('Bob', 'bob@demo.com', '$2a$06$uLh3Grumtw461OEI5R4EAuqJ.649jnXEl./Z6v58bG9Rz4dkbpgae', true, 'face', 'blue-10');
+INSERT INTO users (name, email, password, admin, icon_name, icon_color) VALUES ('Alice', 'alice@demo.com', '$2a$06$uLh3Grumtw461OEI5R4EAuqJ.649jnXEl./Z6v58bG9Rz4dkbpgae', true, 'sentiment_satisfied_alt', 'pink-10');
 
 INSERT INTO categories (name, icon_name, icon_color) VALUES ('Groceries', 'local_grocery_store', 'blue-10');
 INSERT INTO categories (name, icon_name, icon_color) VALUES ('Housing', 'hotel', 'red-10');

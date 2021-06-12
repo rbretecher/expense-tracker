@@ -20,7 +20,7 @@ func (s *UserService) Create(r *http.Request, args *CreateArgs, reply *domain.Us
 	err := s.db.
 		QueryRow(`
 			INSERT INTO users (name, email, password, admin, icon_name, icon_color)
-			VALUES ($1, $2, $3, $4, $5, $6)
+			VALUES ($1, $2, crypt($3, gen_salt('bf')), $4, $5, $6)
 			RETURNING id, name, email, password, admin, icon_name, icon_color
 		`, args.Name, args.Email, args.Password, args.Admin, args.IconName, args.IconColor).
 		Scan(&reply.ID, &reply.Name, &reply.Email, &reply.Password, &reply.Admin, &reply.IconName, &reply.IconColor)

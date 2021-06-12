@@ -14,7 +14,7 @@ type LoginArgs struct {
 }
 
 func (s *UserService) Login(r *http.Request, args *LoginArgs, reply *domain.User) error {
-	err := s.db.Get(reply, "SELECT * FROM users WHERE email = $1 AND password = $2", args.Email, args.Password)
+	err := s.db.Get(reply, "SELECT * FROM users WHERE email = $1 AND password = crypt($2, password)", args.Email, args.Password)
 
 	if err == sql.ErrNoRows {
 		return domain.InvalidCredentialsError(err)
