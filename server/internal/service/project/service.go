@@ -28,10 +28,10 @@ func (s *ProjectService) getProject(projectID int) (project domain.Project, err 
 	return
 }
 
-func (s *ProjectService) getProjectUsers(projectID int) ([]*domain.User, error) {
-	users := make([]*domain.User, 0)
+func (s *ProjectService) getProjectUsers(projectID int) ([]*domain.UserHasProject, error) {
+	users := make([]*domain.UserHasProject, 0)
 	err := s.DB.Select(&users, `
-		SELECT u.*
+		SELECT u.*, uhp.weight
 		FROM users u
 		JOIN user_has_project uhp ON (u.id = uhp.user_id)
 		WHERE uhp.project_id = $1;

@@ -1,8 +1,5 @@
 <template>
-  <q-list
-    bordered
-    separator
-  >
+  <q-list bordered separator>
     <expense-summary-item
       v-for="expenseSummary in expenseSummaryPerUser"
       :key="expenseSummary.user.id"
@@ -31,8 +28,7 @@ export default {
           shouldHavePaid: 0,
         };
 
-        // For now, all users have the same weight.
-        totalWeight += 0.5;
+        totalWeight += user.weight;
       });
 
       this.expenses.forEach((expense) => {
@@ -42,7 +38,7 @@ export default {
           expensesPerUser[expense.paidByUserId].paid += price;
 
           Object.keys(expensesPerUser).forEach((userId) => {
-            const shouldHavePaid = (price / totalWeight) * 0.5;
+            const shouldHavePaid = (price / totalWeight) * expensesPerUser[userId].user.weight;
             expensesPerUser[userId].shouldHavePaid += shouldHavePaid;
           });
         }

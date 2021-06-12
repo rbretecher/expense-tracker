@@ -20,8 +20,8 @@ type ExpensesByMonth struct {
 
 type GetSummaryReply struct {
 	domain.Project
-	ExpensesByMonth []*ExpensesByMonth `json:"expensesByMonth"`
-	Users           []*domain.User     `json:"users"`
+	ExpensesByMonth []*ExpensesByMonth       `json:"expensesByMonth"`
+	Users           []*domain.UserHasProject `json:"users"`
 }
 
 func (s *ProjectService) GetSummary(r *http.Request, args *GetSummaryArgs, reply *GetSummaryReply) error {
