@@ -50,6 +50,7 @@ CREATE TABLE user_has_project
 (
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     project_id INT REFERENCES projects(id) ON DELETE CASCADE,
+    weight NUMERIC(3, 2) NOT NULL,
 
     PRIMARY KEY(user_id, project_id)
 );
@@ -64,8 +65,8 @@ INSERT INTO categories (name, icon_name, icon_color) VALUES ('Food', 'local_pizz
 
 INSERT INTO projects (name, icon_name, icon_color) VALUES ('Shared expenses', 'calendar_today', 'blue-10');
 
-INSERT INTO user_has_project (user_id, project_id) VALUES (1, 1);
-INSERT INTO user_has_project (user_id, project_id) VALUES (2, 1);
+INSERT INTO user_has_project (user_id, project_id, weight) VALUES (1, 1, 0.4);
+INSERT INTO user_has_project (user_id, project_id, weight) VALUES (2, 1, 0.6);
 
 INSERT INTO expenses (project_id, category_id, paid_by_user_id, name, date, price) 
 VALUES  (1, 1, 1, 'Groceries', NOW(), 15.99),
