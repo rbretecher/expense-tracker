@@ -25,6 +25,12 @@ type User struct {
 }
 
 type UserHasProject struct {
+	UserID    int     `json:"userId" db:"user_id"`
+	ProjectID int     `json:"projectId" db:"project_id"`
+	Weight    float32 `json:"weight" db:"weight"`
+}
+
+type ProjectUser struct {
 	User
 	Weight float32 `json:"weight" db:"weight"`
 }
