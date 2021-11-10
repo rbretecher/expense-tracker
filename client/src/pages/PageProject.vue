@@ -28,6 +28,8 @@
         up here.
       </no-resource-banner>
 
+      <project-users :project="currentProject"></project-users>
+
       <app-dialog :showDialog.sync="showAddExpense">
         <add-expense
           @save="handleAddExpense"
@@ -48,10 +50,15 @@ import MediumTitle from 'src/components/Shared/Titles/MediumTitle.vue';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 import ProjectBreadcrumbs from 'src/components/Projects/ProjectBreadcrumbs';
+import ProjectUsers from '../components/Projects/ProjectUsers/ProjectUsers.vue';
 
 export default {
   components: {
-    ProjectByMonthList, MediumTitle, AddExpense, ProjectBreadcrumbs,
+    ProjectByMonthList,
+    MediumTitle,
+    AddExpense,
+    ProjectBreadcrumbs,
+    ProjectUsers,
   },
   mixins: [mixinPage],
   props: ['projectId'],

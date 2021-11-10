@@ -74,3 +74,17 @@ export async function updateProject({ dispatch }, project) {
 export const resetCurrentProject = ({ commit }) => commit('setCurrentProject', null);
 
 export const resetCurrentProjectMonth = ({ commit }) => commit('setCurrentProjectMonth', null);
+
+
+export async function removeProjectUser({ dispatch }, userHasProject) {
+  try {
+    Loading.show();
+    await executeRequest('Project.RemoveUser', userHasProject);
+    await dispatch('loadProject', userHasProject.projectId);
+    Loading.hide();
+
+    Notify.create('Project user removed!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not remove project user', e.message);
+  }
+}
