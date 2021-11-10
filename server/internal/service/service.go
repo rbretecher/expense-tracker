@@ -40,3 +40,18 @@ func (s *Service) CheckUserHasProject(userID int, projectID int) error {
 
 	return nil
 }
+
+func (s *Service) CheckUserIsAdmin(userID int) error {
+	var count int
+	err := s.DB.Get(&count, `
+		SELECT COUNT(*)
+		FROM users
+		WHERE id = $1 AND admin = true
+	`, userID)
+
+	if err != nil || count != 1 {
+		return domain.ForbiddenAccessToEntityError()
+	}
+
+	return nil
+}

@@ -14,8 +14,8 @@ type GetMonthArgs struct {
 
 type GetMonthReply struct {
 	domain.Project
-	Expenses []*domain.Expense        `json:"expenses"`
-	Users    []*domain.UserHasProject `json:"users"`
+	Expenses []*domain.Expense     `json:"expenses"`
+	Users    []*domain.ProjectUser `json:"users"`
 }
 
 func (s *ProjectService) GetMonth(r *http.Request, args *GetMonthArgs, reply *GetMonthReply) error {

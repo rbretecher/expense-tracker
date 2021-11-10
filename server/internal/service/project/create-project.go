@@ -29,8 +29,8 @@ func (s *ProjectService) Create(r *http.Request, args *CreateArgs, reply *domain
 	`, args.Name, args.IconName, args.IconColor).Scan(&reply.ID, &reply.Name, &reply.IconName, &reply.IconColor)
 
 	tx.Exec(`
-		INSERT INTO user_has_project (user_id, project_id)
-		VALUES ($1, $2)
+		INSERT INTO user_has_project (user_id, project_id, weight)
+		VALUES ($1, $2, 1)
 	`, session.UserID, reply.ID)
 
 	return tx.Commit()
