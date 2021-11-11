@@ -34,7 +34,8 @@ func (s *ProjectService) getProjectUsers(projectID int) ([]*domain.ProjectUser, 
 		SELECT u.*, uhp.weight
 		FROM users u
 		JOIN user_has_project uhp ON (u.id = uhp.user_id)
-		WHERE uhp.project_id = $1;
+		WHERE uhp.project_id = $1
+		ORDER BY u.name;
 	`, projectID)
 
 	return users, err
