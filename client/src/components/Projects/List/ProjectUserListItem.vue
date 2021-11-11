@@ -10,7 +10,7 @@
           <q-badge
             color="white"
             text-color="primary"
-            :label="`${getWeight(user) * 100}%`"
+            :label="`${getPercentage(user)}%`"
           />
         </div>
       </q-linear-progress>
@@ -73,7 +73,10 @@ export default {
       });
     },
     getWeight(user) {
-      return Math.round((user.weight / this.totalWeight) * 100) / 100;
+      return (user.weight / this.totalWeight);
+    },
+    getPercentage(user) {
+      return Math.round(this.getWeight(user) * 10000) / 100;
     },
   },
 };
