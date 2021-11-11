@@ -76,6 +76,19 @@ export const resetCurrentProject = ({ commit }) => commit('setCurrentProject', n
 export const resetCurrentProjectMonth = ({ commit }) => commit('setCurrentProjectMonth', null);
 
 
+export async function addProjectUser({ dispatch }, userHasProject) {
+  try {
+    Loading.show();
+    await executeRequest('Project.AddUser', userHasProject);
+    await dispatch('loadProject', userHasProject.projectId);
+    Loading.hide();
+
+    Notify.create('User has been added to project!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not add user to project', e.message);
+  }
+}
+
 export async function removeProjectUser({ dispatch }, userHasProject) {
   try {
     Loading.show();
