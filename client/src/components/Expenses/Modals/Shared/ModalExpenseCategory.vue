@@ -6,26 +6,19 @@
     :options="selectOptions"
     map-options
     emit-value
-    :rules="[val => !!val || 'Please choose a value']"
+    :rules="[(val) => !!val || 'Please choose a value']"
     label="Category"
   >
     <template v-slot:prepend>
       <q-icon name="category" />
     </template>
     <template v-slot:option="scope">
-      <q-item
-        v-bind="scope.itemProps"
-        v-on="scope.itemEvents"
-      >
+      <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
         <q-item-section avatar>
-          <q-icon
-            :name="scope.opt.iconName"
-            :color="scope.opt.iconColor"
-          />
+          <q-icon :name="scope.opt.iconName" :color="scope.opt.iconColor" />
         </q-item-section>
         <q-item-section>
-          <q-item-label v-html="scope.opt.label" />
-          <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+          <q-item-label>{{ scope.opt.label }}</q-item-label>
         </q-item-section>
       </q-item>
     </template>
