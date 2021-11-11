@@ -1,8 +1,7 @@
 <template>
   <modal title="Add user to project" @success="addUserToProject">
     <modal-project-user-select
-      :users="users"
-      :projectUsers="project.users"
+      :users="availableUsers"
       :userId.sync="formData.userId"
       :autofocus="$q.platform.is.desktop"
     />
@@ -27,6 +26,11 @@ export default {
   },
   computed: {
     ...mapGetters('users', ['users']),
+    availableUsers() {
+      return this.users.filter(
+        (user) => !this.project.users.some((projectUser) => (user.id === projectUser.id)),
+      );
+    },
   },
 };
 </script>

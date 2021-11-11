@@ -1,15 +1,11 @@
 <template>
   <q-select
     outlined
+    :value="userId"
+    @input="$emit('update:userId', $event)"
+    :options="options"
     map-options
     emit-value
-    use-input
-    fill-input
-    hide-selected
-    :value="userId"
-    :options="filterOptions"
-    @input="$emit('update:userId', $event)"
-    @filter="filter"
     :rules="[(val) => !!val || 'Please choose a value']"
     label="User"
   >
@@ -31,16 +27,10 @@
 
 <script>
 export default {
-  props: ['userId', 'users', 'projectUsers'],
-  data() {
-    return {
-      filterOptions: [],
-    };
-  },
+  props: ['userId', 'users'],
   computed: {
     options() {
       return this.users
-        .filter((user) => !this.projectUsers.some((projectUser) => (user.id === projectUser.id)))
         .map(
           (user) => ({
             label: user.name,
@@ -49,16 +39,6 @@ export default {
             iconColor: user.iconColor,
           }),
         );
-    },
-  },
-  methods: {
-    filter(val, update) {
-      update(() => {
-        const needle = val.toLowerCase();
-        this.filterOptions = this.options.filter(
-          (option) => option.label.toLowerCase().indexOf(needle) > -1,
-        );
-      });
     },
   },
 };

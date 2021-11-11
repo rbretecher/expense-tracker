@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable v-ripple @click="showEditUser = true">
+  <q-item clickable v-ripple @click="showEditProjectUser = true">
     <q-item-section avatar>
       <q-icon :name="user.iconName" :color="user.iconColor" />
     </q-item-section>
@@ -29,14 +29,33 @@
         />
       </div>
     </q-item-section>
+
+    <app-dialog :showDialog.sync="showEditProjectUser">
+      <edit-project-user
+        :user="user"
+        :projectId="projectId"
+        @close="showEditProjectUser = false"
+      />
+    </app-dialog>
   </q-item>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import AppDialog from 'src/components/Shared/Dialog/Dialog';
+import EditProjectUser from '../Modals/EditProjectUser.vue';
 
 export default {
   props: ['user', 'projectId', 'totalWeight'],
+  data() {
+    return {
+      showEditProjectUser: false,
+    };
+  },
+  components: {
+    AppDialog,
+    EditProjectUser,
+  },
   computed: {
     ...mapGetters('users', ['currentUser']),
   },

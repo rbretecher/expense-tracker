@@ -23,7 +23,11 @@
         </div>
       </div>
 
-      <no-resource-banner :showAddExpense.sync="showAddExpense" v-else>
+      <no-resource-banner
+        :showAddExpense.sync="showAddExpense"
+        v-else
+        class="q-mb-xl"
+      >
         There is no expense in this project. Add a new expense and it will show
         up here.
       </no-resource-banner>
