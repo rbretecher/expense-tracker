@@ -3,18 +3,15 @@
     <scroll-page
       title="Users"
       actionName="Add new user"
-      :actionModel.sync="showAddUser"
+      v-model:actionModel="showAddUser"
     >
-      <user-list
-        v-if="users.length"
-        :users="users"
-      />
+      <user-list v-if="users.length" :users="users" />
 
       <no-resource-banner v-else>
         There is no user. Add a user and it will have access to your projects.
       </no-resource-banner>
 
-      <app-dialog :showDialog.sync="showAddUser">
+      <app-dialog v-model:showDialog="showAddUser">
         <add-user @close="showAddUser = false" />
       </app-dialog>
     </scroll-page>

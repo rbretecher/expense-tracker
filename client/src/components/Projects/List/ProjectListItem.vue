@@ -25,7 +25,7 @@
       </div>
     </q-item-section>
 
-    <app-dialog :showDialog.sync="showEditProject">
+    <app-dialog v-model:showDialog="showEditProject">
       <edit-project :project="project" @close="showEditProject = false" />
     </app-dialog>
   </q-item>

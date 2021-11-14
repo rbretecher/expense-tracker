@@ -1,18 +1,15 @@
 <template>
-  <modal
-    title="Edit user"
-    @success="saveUser"
-  >
+  <modal title="Edit user" @success="saveUser">
     <modal-name-input
-      :name.sync="formData.name"
+      v-model:name="formData.name"
       :autofocus="$q.platform.is.desktop"
     />
 
-    <modal-email-input :email.sync="formData.email" />
+    <modal-email-input v-model:email="formData.email" />
 
     <modal-icon-color-input
-      :iconName.sync="formData.iconName"
-      :iconColor.sync="formData.iconColor"
+      v-model:iconName="formData.iconName"
+      v-model:iconColor="formData.iconColor"
     />
   </modal>
 </template>

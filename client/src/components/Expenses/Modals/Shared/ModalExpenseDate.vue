@@ -2,26 +2,18 @@
   <q-input
     outlined
     label="Date"
-    v-model="internalDate"
-    @input="onDateUpdated"
-    :rules="[ validateDate ]"
-    mask="##/##/####"
+    v-model="model"
+    :rules="[validateDate]"
+    mask="####-##-##"
   >
     <template v-slot:prepend>
-      <q-icon
-        name="event"
-        class="cursor-pointer"
-      >
+      <q-icon name="event" class="cursor-pointer">
         <q-popup-proxy
           ref="qDateProxy"
           transition-show="scale"
           transition-hide="scale"
         >
-          <q-date
-            mask="DD/MM/YYYY"
-            v-model="internalDate"
-            @input="onDateSelected"
-          />
+          <q-date mask="YYYY-MM-DD" v-model="model" />
         </q-popup-proxy>
       </q-icon>
     </template>
@@ -33,41 +25,30 @@ import { date } from 'quasar';
 
 export default {
   props: ['date'],
-  data() {
-    return {
-      // This is used as the "date" prop cannot be muted.
-      internalDate: null,
-    };
+  emits: ['update:date'],
+  computed: {
+    model: {
+      get() {
+        return this.date;
+      },
+      set(val) {
+        this.$emit('update:date', val);
+        this.$refs.qDateProxy.hide();
+      },
+    },
   },
   methods: {
-    onDateUpdated(updatedDate) {
-      if (this.dateIsValid(updatedDate)) {
-        this.$emit('update:date', this.convertDate(updatedDate, 'DD/MM/YYYY', 'YYYY-MM-DD'));
-      }
-    },
-    onDateSelected(selectedDate) {
-      this.$refs.qDateProxy.hide();
-      this.$emit('update:date', this.convertDate(selectedDate, 'DD/MM/YYYY', 'YYYY-MM-DD'));
-    },
-    convertDate(aDate, inputMask, outputMask) {
-      const dateExtracted = date.extractDate(aDate, inputMask);
-      return date.formatDate(dateExtracted, outputMask);
-    },
     validateDate(value) {
-      if (!this.dateIsValid(value)) {
+      if (!/^\d{4}-(((0)[0-9])|((1)[0-2]))-([0-2][0-9]|(3)[0-1])$/.test(value)) {
         return 'Please enter a valid date';
       }
       return true;
-    },
-    // DD/MM/YYYY validation
-    dateIsValid(value) {
-      return /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/.test(value);
     },
   },
   created() {
     this.$nextTick(() => {
       if (this.date) {
-        this.internalDate = date.formatDate(Date.parse(this.date), 'DD/MM/YYYY');
+        this.model = date.formatDate(Date.parse(this.date), 'YYYY-MM-DD');
       }
     });
   },

@@ -1,8 +1,7 @@
 <template>
   <q-select
     outlined
-    :value="userId"
-    @input="$emit('update:userId', $event)"
+    v-model="model"
     :options="options"
     map-options
     emit-value
@@ -13,7 +12,7 @@
       <q-icon name="face" />
     </template>
     <template v-slot:option="scope">
-      <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
+      <q-item v-bind="scope.itemProps">
         <q-item-section avatar>
           <q-icon :name="scope.opt.iconName" :color="scope.opt.iconColor" />
         </q-item-section>
@@ -28,6 +27,7 @@
 <script>
 export default {
   props: ['userId', 'users'],
+  emits: ['update:userId'],
   computed: {
     options() {
       return this.users
@@ -39,6 +39,14 @@ export default {
             iconColor: user.iconColor,
           }),
         );
+    },
+    model: {
+      get() {
+        return this.userId;
+      },
+      set(val) {
+        this.$emit('update:userId', val);
+      },
     },
   },
 };

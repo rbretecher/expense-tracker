@@ -1,14 +1,7 @@
 <template>
-  <q-item
-    clickable
-    v-ripple
-    @click="showEditUser = true"
-  >
+  <q-item clickable v-ripple @click="showEditUser = true">
     <q-item-section avatar>
-      <q-icon
-        :name="user.iconName"
-        :color="user.iconColor"
-      />
+      <q-icon :name="user.iconName" :color="user.iconColor" />
     </q-item-section>
     <q-item-section>{{ user.name }}</q-item-section>
     <q-item-section side>
@@ -24,11 +17,8 @@
       </div>
     </q-item-section>
 
-    <app-dialog :showDialog.sync="showEditUser">
-      <edit-user
-        :user="user"
-        @close="showEditUser = false"
-      />
+    <app-dialog v-model:showDialog="showEditUser">
+      <edit-user :user="user" @close="showEditUser = false" />
     </app-dialog>
   </q-item>
 </template>

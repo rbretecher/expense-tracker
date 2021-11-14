@@ -1,8 +1,7 @@
 <template>
   <q-input
     outlined
-    :value="weight"
-    @input="$emit('update:weight', parseFloat($event))"
+    v-model="model"
     lazy-rules
     :rules="[(val) => (val && val != 0) || 'Please enter a valid weight']"
     type="number"
@@ -18,5 +17,16 @@
 <script>
 export default {
   props: ['weight'],
+  emits: ['update:weight'],
+  computed: {
+    model: {
+      get() {
+        return this.weight;
+      },
+      set(val) {
+        this.$emit('update:weight', parseFloat(val));
+      },
+    },
+  },
 };
 </script>

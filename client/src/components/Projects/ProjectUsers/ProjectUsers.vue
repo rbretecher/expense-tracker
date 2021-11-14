@@ -10,7 +10,7 @@
 
     <project-user-list :users="project.users" :projectId="project.id" />
 
-    <app-dialog :showDialog.sync="showAddProjectUser">
+    <app-dialog v-model:showDialog="showAddProjectUser">
       <add-project-user
         @close="showAddProjectUser = false"
         :project="project"

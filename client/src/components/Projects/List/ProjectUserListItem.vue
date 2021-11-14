@@ -30,7 +30,7 @@
       </div>
     </q-item-section>
 
-    <app-dialog :showDialog.sync="showEditProjectUser">
+    <app-dialog v-model:showDialog="showEditProjectUser">
       <edit-project-user
         :user="user"
         :projectId="projectId"

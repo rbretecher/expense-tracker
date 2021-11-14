@@ -71,8 +71,8 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      email: 'admin@demo.com',
-      password: 'azerty',
+      email: null,
+      password: null,
     };
   },
   methods: {

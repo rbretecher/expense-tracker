@@ -1,10 +1,9 @@
 <template>
   <q-input
     outlined
-    :value="price"
-    @input="$emit('update:price', parseFloat($event))"
+    v-model="model"
     lazy-rules
-    :rules="[ val => val && val != 0 || 'Please enter a valid price']"
+    :rules="[(val) => (val && val != 0) || 'Please enter a valid price']"
     type="number"
     step="0.01"
     label="Price"
@@ -19,5 +18,16 @@
 <script>
 export default {
   props: ['price'],
+  emits: ['update:price'],
+  computed: {
+    model: {
+      get() {
+        return this.price;
+      },
+      set(val) {
+        this.$emit('update:price', parseFloat(val));
+      },
+    },
+  },
 };
 </script>

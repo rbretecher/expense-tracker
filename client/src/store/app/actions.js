@@ -13,7 +13,7 @@ export async function login({ dispatch }, { email, password }) {
 
     dispatch('loggedIn', user);
 
-    if (this.$router.currentRoute.fullPath === '/login') {
+    if (this.$router.currentRoute.value.fullPath === '/login') {
       this.$router.push('/').catch(() => { });
     }
   } catch (e) {

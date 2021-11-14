@@ -9,8 +9,8 @@
       <q-item-label caption>Paid by {{ paidByName }}</q-item-label>
     </q-item-section>
     <q-item-section side>
-      <q-item-label>{{ expense.price | formatPrice }}</q-item-label>
-      <q-item-label caption>{{ expense.date | formatDate }}</q-item-label>
+      <q-item-label>{{ formatPrice(expense.price) }}</q-item-label>
+      <q-item-label caption>{{ formatDate(expense.date) }}</q-item-label>
     </q-item-section>
     <q-item-section side>
       <div class="row">
@@ -25,7 +25,7 @@
       </div>
     </q-item-section>
 
-    <app-dialog :showDialog.sync="showEditExpense">
+    <app-dialog v-model:showDialog="showEditExpense">
       <edit-expense
         :expense="expense"
         :projectId="projectId"
@@ -84,11 +84,6 @@ export default {
     EditExpense,
     AppDialog,
   },
-  filters: {
-    formatDate(value) {
-      return date.formatDate(value, 'DD/MM/YYYY');
-    },
-  },
   methods: {
     ...mapActions('expenses', ['updateExpense', 'deleteExpense']),
     ...mapActions('projects', ['loadProjects', 'loadProjectMonth']),
@@ -124,6 +119,9 @@ export default {
           showErrorMessageWithTitle('Could not delete expense', e.message);
         }
       });
+    },
+    formatDate(value) {
+      return date.formatDate(value, 'DD/MM/YYYY');
     },
   },
 };

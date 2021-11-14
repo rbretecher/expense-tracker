@@ -6,7 +6,7 @@
       v-else
       title="Expenses"
       actionName="Add new expense"
-      :actionModel.sync="showAddExpense"
+      v-model:actionModel="showAddExpense"
     >
       <template v-slot:breadcrumbs>
         <project-breadcrumbs :project="currentProjectMonth" :month="month" />
@@ -28,12 +28,12 @@
         />
       </div>
 
-      <no-resource-banner :showAddExpense.sync="showAddExpense" v-else>
+      <no-resource-banner v-model:showAddExpense="showAddExpense" v-else>
         There is no expense in this month. Add a new expense and it will show up
         here.
       </no-resource-banner>
 
-      <app-dialog :showDialog.sync="showAddExpense">
+      <app-dialog v-model:showDialog="showAddExpense">
         <add-expense
           @save="handleAddExpense"
           :projectId="projectId"
