@@ -1,7 +1,6 @@
 <template>
   <q-dialog
-    :value="showDialog"
-    @input="$emit('update:showDialog', $event)"
+    v-model="model"
     :full-width="!$q.platform.is.desktop"
     :position="position"
     no-refocus
@@ -13,9 +12,18 @@
 <script>
 export default {
   props: ['showDialog'],
+  emits: ['update:showDialog'],
   computed: {
     position() {
       return this.$q.platform.is.desktop ? 'top' : 'standard';
+    },
+    model: {
+      get() {
+        return this.showDialog;
+      },
+      set(val) {
+        this.$emit('update:showDialog', val);
+      },
     },
   },
 };

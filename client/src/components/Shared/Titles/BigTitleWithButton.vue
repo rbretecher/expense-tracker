@@ -15,7 +15,7 @@
           :label="buttonLabel"
           :icon="buttonIcon"
           class="q-mt-sm float-right"
-          @click="$emit('click')"
+          @click="$emit('click', $event)"
         />
       </div>
     </div>
@@ -27,6 +27,7 @@
 <script>
 export default {
   props: ['buttonLabel', 'buttonIcon', 'buttonAction'],
+  emits: ['click'],
 };
 </script>
 

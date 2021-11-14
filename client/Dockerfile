@@ -1,4 +1,4 @@
-FROM node:lts-alpine as base
+FROM node:17 as base
 
 RUN npm install -g @quasar/cli
 

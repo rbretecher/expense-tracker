@@ -2,18 +2,15 @@
   <scroll-page
     title="Categories"
     actionName="Add new category"
-    :actionModel.sync="showAddCategory"
+    v-model:actionModel="showAddCategory"
   >
-    <category-list
-      :categories="categories"
-      v-if="categories.length"
-    />
+    <category-list :categories="categories" v-if="categories.length" />
 
     <no-resource-banner v-else>
       There is no category yet. Add a first category to sort your expenses.
     </no-resource-banner>
 
-    <app-dialog :showDialog.sync="showAddCategory">
+    <app-dialog v-model:showDialog="showAddCategory">
       <add-category @close="showAddCategory = false" />
     </app-dialog>
   </scroll-page>

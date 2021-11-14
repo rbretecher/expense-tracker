@@ -1,10 +1,9 @@
 <template>
   <q-input
     outlined
-    :value="name"
-    @input="$emit('update:name', $event)"
+    v-model="model"
     lazy-rules
-    :rules="[ val => val && val.length > 0 || 'Please enter a name']"
+    :rules="[(val) => (val && val.length > 0) || 'Please enter a name']"
     label="Name"
   >
     <template v-slot:prepend>
@@ -16,5 +15,16 @@
 <script>
 export default {
   props: ['name'],
+  emits: ['update:name'],
+  computed: {
+    model: {
+      get() {
+        return this.name;
+      },
+      set(val) {
+        this.$emit('update:name', val);
+      },
+    },
+  },
 };
 </script>

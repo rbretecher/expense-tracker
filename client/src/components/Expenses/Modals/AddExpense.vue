@@ -1,16 +1,16 @@
 <template>
   <modal title="Add expense" @success="saveExpense">
     <modal-name-input
-      :name.sync="formData.name"
+      v-model:name="formData.name"
       :autofocus="$q.platform.is.desktop"
     />
-    <modal-expense-price :price.sync="formData.price" />
-    <modal-expense-date :date.sync="formData.date" />
+    <modal-expense-price v-model:price="formData.price" />
+    <modal-expense-date v-model:date="formData.date" />
     <modal-expense-paid-by
-      :paidByUserId.sync="formData.paidByUserId"
+      v-model:paidByUserId="formData.paidByUserId"
       :users="users"
     />
-    <modal-expense-category :category.sync="formData.categoryId" />
+    <modal-expense-category v-model:category="formData.categoryId" />
   </modal>
 </template>
 

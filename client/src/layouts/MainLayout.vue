@@ -1,16 +1,8 @@
-
 <template>
-  <q-layout
-    view="hHh lpR fFf"
-    v-if="appReady"
-  >
-    <app-header :leftDrawerOpen.sync="leftDrawerOpen" />
+  <q-layout view="hHh lpR fFf" v-if="appReady">
+    <app-header v-model:leftDrawerOpen="leftDrawerOpen" />
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <app-menu class="q-mt-sm" />
     </q-drawer>
 

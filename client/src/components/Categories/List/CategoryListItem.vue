@@ -1,15 +1,7 @@
 <template>
-  <q-item
-    clickable
-    v-ripple
-    @click="showEditCategory = true"
-  >
+  <q-item clickable v-ripple @click="showEditCategory = true">
     <q-item-section avatar>
-      <q-icon
-        :name="category.iconName"
-        :color="category.iconColor"
-      />
-
+      <q-icon :name="category.iconName" :color="category.iconColor" />
     </q-item-section>
     <q-item-section>{{ category.name }}</q-item-section>
     <q-item-section side>
@@ -25,11 +17,8 @@
       </div>
     </q-item-section>
 
-    <app-dialog :showDialog.sync="showEditCategory">
-      <edit-category
-        :category="category"
-        @close="showEditCategory = false"
-      />
+    <app-dialog v-model:showDialog="showEditCategory">
+      <edit-category :category="category" @close="showEditCategory = false" />
     </app-dialog>
   </q-item>
 </template>

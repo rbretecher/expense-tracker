@@ -1,16 +1,10 @@
 <template>
   <q-item class="no-padding">
     <q-item-section>
-      <modal-icon-input
-        :name.sync="iconNameSync"
-        :color="iconColorSync"
-      />
+      <modal-icon-input v-model:name="iconNameSync" :color="iconColorSync" />
     </q-item-section>
     <q-item-section>
-      <modal-color-input
-        :color.sync="iconColorSync"
-        :name="iconNameSync"
-      />
+      <modal-color-input v-model:color="iconColorSync" :name="iconNameSync" />
     </q-item-section>
   </q-item>
 </template>

@@ -12,17 +12,15 @@
     </q-item-section>
 
     <q-item-section>
-      <q-item-label>
-        Paid {{ expenseSummary.paid | formatPrice }}
-      </q-item-label>
+      <q-item-label> Paid {{ formatPrice(expenseSummary.paid) }} </q-item-label>
       <q-item-label caption>
-        Should have paid {{ expenseSummary.shouldHavePaid | formatPrice }}
+        Should have paid {{ formatPrice(expenseSummary.shouldHavePaid) }}
       </q-item-label>
     </q-item-section>
 
     <q-item-section side>
       <q-item-label>
-        <q-badge :color="color">{{ toPay | abs | formatPrice }}</q-badge>
+        <q-badge :color="color">{{ formatPrice(abs(toPay)) }}</q-badge>
       </q-item-label>
     </q-item-section>
   </q-item>

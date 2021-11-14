@@ -1,5 +1,5 @@
 export default {
-  filters: {
+  methods: {
     abs(value) {
       return Math.abs(value);
     },

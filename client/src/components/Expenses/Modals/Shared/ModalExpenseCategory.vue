@@ -1,8 +1,7 @@
 <template>
   <q-select
     outlined
-    :value="category"
-    @input="$emit('update:category', $event)"
+    v-model="model"
     :options="selectOptions"
     map-options
     emit-value
@@ -13,7 +12,7 @@
       <q-icon name="category" />
     </template>
     <template v-slot:option="scope">
-      <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
+      <q-item v-bind="scope.itemProps">
         <q-item-section avatar>
           <q-icon :name="scope.opt.iconName" :color="scope.opt.iconColor" />
         </q-item-section>
@@ -30,6 +29,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   props: ['category'],
+  emits: ['update:category'],
   computed: {
     ...mapGetters('categories', ['categories']),
     selectOptions() {
@@ -41,6 +41,14 @@ export default {
           iconColor: category.iconColor,
         }),
       );
+    },
+    model: {
+      get() {
+        return this.category;
+      },
+      set(val) {
+        this.$emit('update:category', val);
+      },
     },
   },
 };

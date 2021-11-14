@@ -6,7 +6,7 @@
       v-else
       :title="currentProject.name"
       actionName="Add new expense"
-      :actionModel.sync="showAddExpense"
+      v-model:actionModel="showAddExpense"
     >
       <template v-slot:breadcrumbs>
         <project-breadcrumbs :project="currentProject" />
@@ -24,7 +24,7 @@
       </div>
 
       <no-resource-banner
-        :showAddExpense.sync="showAddExpense"
+        v-model:showAddExpense="showAddExpense"
         v-else
         class="q-mb-xl"
       >
@@ -34,7 +34,7 @@
 
       <project-users :project="currentProject"></project-users>
 
-      <app-dialog :showDialog.sync="showAddExpense">
+      <app-dialog v-model:showDialog="showAddExpense">
         <add-expense
           @save="handleAddExpense"
           :projectId="projectId"

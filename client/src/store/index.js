@@ -1,14 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
-import { vuexfireMutations } from 'vuexfire';
 import app from './app';
 import projects from './projects';
 import expenses from './expenses';
 import users from './users';
 import categories from './categories';
-
-Vue.use(Vuex);
 
 /*
  * If not building with SSR mode, you can
@@ -20,17 +16,13 @@ Vue.use(Vuex);
  */
 
 export default function (/* { ssrContext } */) {
-  const Store = new Vuex.Store({
+  const Store = createStore({
     modules: {
       app,
       projects,
       expenses,
       users,
       categories,
-    },
-
-    mutations: {
-      ...vuexfireMutations,
     },
 
     // enable strict mode (adds overhead!)

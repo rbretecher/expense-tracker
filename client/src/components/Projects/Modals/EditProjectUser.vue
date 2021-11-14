@@ -2,11 +2,11 @@
   <modal title="Edit project user" @success="saveProjectUser">
     <modal-project-user-select
       :users="[user]"
-      :userId.sync="formData.userId"
+      v-model:userId="formData.userId"
       :autofocus="$q.platform.is.desktop"
     />
 
-    <modal-project-user-weight :weight.sync="formData.weight" />
+    <modal-project-user-weight v-model:weight="formData.weight" />
   </modal>
 </template>
 

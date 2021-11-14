@@ -1,8 +1,5 @@
 <template>
-  <q-list
-    bordered
-    separator
-  >
+  <q-list bordered separator>
     <category-list-item
       v-for="category in categories"
       :key="category.id"

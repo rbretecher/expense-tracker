@@ -1,10 +1,10 @@
 <template>
   <modal title="Add project" @success="saveProject">
     <modal-name-input
-      :name.sync="formData.name"
+      v-model:name="formData.name"
       :autofocus="$q.platform.is.desktop"
     />
-    <modal-icon-input :name.sync="formData.iconName" />
+    <modal-icon-input v-model:name="formData.iconName" />
   </modal>
 </template>
 
