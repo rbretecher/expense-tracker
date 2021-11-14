@@ -55,26 +55,4 @@ CREATE TABLE user_has_project
     PRIMARY KEY(user_id, project_id)
 );
 
-INSERT INTO users (name, email, password, admin, icon_name, icon_color) VALUES ('Bob', 'bob@demo.com', '$2a$06$uLh3Grumtw461OEI5R4EAuqJ.649jnXEl./Z6v58bG9Rz4dkbpgae', true, 'face', 'blue-10');
-INSERT INTO users (name, email, password, admin, icon_name, icon_color) VALUES ('Alice', 'alice@demo.com', '$2a$06$uLh3Grumtw461OEI5R4EAuqJ.649jnXEl./Z6v58bG9Rz4dkbpgae', true, 'sentiment_satisfied_alt', 'pink-10');
-
-INSERT INTO categories (name, icon_name, icon_color) VALUES ('Groceries', 'local_grocery_store', 'blue-10');
-INSERT INTO categories (name, icon_name, icon_color) VALUES ('Housing', 'hotel', 'red-10');
-INSERT INTO categories (name, icon_name, icon_color) VALUES ('Car', 'local_taxi', 'green-10');
-INSERT INTO categories (name, icon_name, icon_color) VALUES ('Food', 'local_pizza', 'brown-10');
-
-INSERT INTO projects (name, icon_name, icon_color) VALUES ('Shared expenses', 'calendar_today', 'blue-10');
-
-INSERT INTO user_has_project (user_id, project_id, weight) VALUES (1, 1, 0.4);
-INSERT INTO user_has_project (user_id, project_id, weight) VALUES (2, 1, 0.6);
-
-INSERT INTO expenses (project_id, category_id, paid_by_user_id, name, date, price) 
-VALUES  (1, 1, 1, 'Groceries', NOW(), 15.99),
-        (1, 3, 1, 'Loyer', '2020-01-10', 900),
-        (1, 3, 1, 'Car insurance', '2020-01-10', 900),
-        (1, 3, 1, 'Rent', '2020-02-10', 900),
-        (1, 3, 1, 'Rent', '2020-03-10', 900),
-        (1, 3, 1, 'Rent', '2020-04-10', 900),
-        (1, 3, 1, 'Rent', '2020-05-10', 900),
-        (1, 3, 1, 'Car insurance', NOW(), 30)
-        ;
+INSERT INTO users (name, email, password, admin, icon_name, icon_color) VALUES ('Admin', 'admin@demo.com', '$2a$06$uLh3Grumtw461OEI5R4EAuqJ.649jnXEl./Z6v58bG9Rz4dkbpgae', true, 'face', 'blue-10');
