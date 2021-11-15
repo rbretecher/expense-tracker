@@ -4,7 +4,7 @@
 
     <scroll-page
       v-else
-      title="Expenses"
+      :title="formatDate(month)"
       actionName="Add new expense"
       v-model:actionModel="showAddExpense"
     >
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { Loading, Notify } from 'quasar';
+import { Loading, Notify, date } from 'quasar';
 import { mapActions, mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
 import AddExpense from 'src/components/Expenses/Modals/AddExpense';
@@ -80,6 +80,9 @@ export default {
       } catch (e) {
         showErrorMessageWithTitle('Could not create expense', e.message);
       }
+    },
+    formatDate(value) {
+      return date.formatDate(value, 'MMMM YYYY');
     },
   },
   components: {
