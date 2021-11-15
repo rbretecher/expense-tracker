@@ -12,16 +12,19 @@
 </template>
 
 <script>
-import { date } from 'quasar';
-
 export default {
   props: ['projectId', 'month'],
+  data() {
+    return {
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    };
+  },
   methods: {
     openProjectMonth() {
       this.$router.push(`/projects/${this.projectId}/${this.month.year}-${this.month.month}`).catch(() => { });
     },
-    formatDate(value) {
-      return date.formatDate(value.month, 'MMMM');
+    formatDate(val) {
+      return this.months[parseInt(val.month, 10) - 1];
     },
   },
 };
