@@ -1,12 +1,12 @@
 <template>
-  <q-item class="no-padding">
-    <q-item-section>
+  <div class="row q-col-gutter-sm">
+    <div class="col">
       <modal-icon-input v-model:name="iconNameSync" :color="iconColorSync" />
-    </q-item-section>
-    <q-item-section>
+    </div>
+    <div class="col">
       <modal-color-input v-model:color="iconColorSync" :name="iconNameSync" />
-    </q-item-section>
-  </q-item>
+    </div>
+  </div>
 </template>
 
 <script>
