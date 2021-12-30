@@ -10,7 +10,7 @@ require (
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/justinas/alice v1.2.0
 	github.com/lib/pq v1.10.4
-	github.com/rs/cors v1.8.0
+	github.com/rs/cors v1.8.2
 )
 
 require (
@@ -20,7 +20,7 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	golang.org/x/crypto v0.0.0-20211108221036-ceb1ce70b4fa // indirect
-	golang.org/x/sys v0.0.0-20211110154304-99a53858aa08 // indirect
+	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3 // indirect
+	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e // indirect
 	golang.org/x/text v0.3.7 // indirect
 )
