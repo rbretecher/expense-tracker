@@ -1,5 +1,5 @@
 # Build the Go API
-FROM golang:1.17.3 AS builder
+FROM golang:1.25.5 AS builder
 ADD . /app
 WORKDIR /app/server
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w" -a -o /main cmd/expense-tracker/main.go
