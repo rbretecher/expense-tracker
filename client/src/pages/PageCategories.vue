@@ -19,8 +19,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
-import CategoryList from 'src/components/Categories/List/CategoryList';
-import AddCategory from 'src/components/Categories/Modals/AddCategory';
+import CategoryList from 'src/components/Categories/List/CategoryList.vue';
+import AddCategory from 'src/components/Categories/Modals/AddCategory.vue';
 
 export default {
   mixins: [mixinPage],

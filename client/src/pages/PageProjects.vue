@@ -19,8 +19,8 @@
 <script>
 import { mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
-import ProjectList from 'src/components/Projects/List/ProjectList';
-import AddProject from 'src/components/Projects/Modals/AddProject';
+import ProjectList from 'src/components/Projects/List/ProjectList.vue';
+import AddProject from 'src/components/Projects/Modals/AddProject.vue';
 
 export default {
   mixins: [mixinPage],

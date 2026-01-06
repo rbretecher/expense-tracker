@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import AppHeader from 'components/Layout/Header/Header';
-import AppMenu from 'components/Layout/Menu/Menu';
+import AppHeader from 'components/Layout/Header/Header.vue';
+import AppMenu from 'components/Layout/Menu/Menu.vue';
 import { mapGetters } from 'vuex';
 
 export default {

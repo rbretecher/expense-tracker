@@ -48,11 +48,11 @@
 import { Loading, Notify, date } from 'quasar';
 import { mapActions, mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
-import AddExpense from 'src/components/Expenses/Modals/AddExpense';
-import ExpenseList from 'src/components/Expenses/List/ExpenseList';
-import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary';
+import AddExpense from 'src/components/Expenses/Modals/AddExpense.vue';
+import ExpenseList from 'src/components/Expenses/List/ExpenseList.vue';
+import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary.vue';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
-import ProjectBreadcrumbs from 'src/components/Projects/ProjectBreadcrumbs';
+import ProjectBreadcrumbs from 'src/components/Projects/ProjectBreadcrumbs.vue';
 
 export default {
   mixins: [mixinPage],

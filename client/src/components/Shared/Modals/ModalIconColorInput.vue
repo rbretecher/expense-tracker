@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import ModalIconInput from 'src/components/Shared/Modals/ModalIconInput';
-import ModalColorInput from 'src/components/Shared/Modals/ModalColorInput';
+import ModalIconInput from 'src/components/Shared/Modals/ModalIconInput.vue';
+import ModalColorInput from 'src/components/Shared/Modals/ModalColorInput.vue';
 
 export default {
   props: ['iconName', 'iconColor'],

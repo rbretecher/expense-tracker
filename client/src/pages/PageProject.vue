@@ -51,9 +51,9 @@ import { mapActions, mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
 import ProjectByMonthList from 'src/components/Projects/List/ProjectByMonthList.vue';
 import MediumTitle from 'src/components/Shared/Titles/MediumTitle.vue';
-import AddExpense from 'src/components/Expenses/Modals/AddExpense';
+import AddExpense from 'src/components/Expenses/Modals/AddExpense.vue';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
-import ProjectBreadcrumbs from 'src/components/Projects/ProjectBreadcrumbs';
+import ProjectBreadcrumbs from 'src/components/Projects/ProjectBreadcrumbs.vue';
 import ProjectUsers from '../components/Projects/ProjectUsers/ProjectUsers.vue';
 
 export default {

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import CategoryListItem from 'src/components/Categories/List/CategoryListItem';
+import CategoryListItem from 'src/components/Categories/List/CategoryListItem.vue';
 
 export default {
   props: ['categories'],

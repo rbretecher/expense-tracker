@@ -21,8 +21,8 @@
 <script>
 import { mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
-import UserList from 'src/components/Users/List/UserList';
-import AddUser from 'src/components/Users/Modals/AddUser';
+import UserList from 'src/components/Users/List/UserList.vue';
+import AddUser from 'src/components/Users/Modals/AddUser.vue';
 
 export default {
   mixins: [mixinPage],

@@ -1,6 +1,6 @@
-import Modal from 'src/components/Shared/Modals/Modal';
-import ModalProjectUserWeight from 'src/components/Projects/Modals/Shared/ModalProjectUserWeight';
-import ModalProjectUserSelect from 'src/components/Projects/Modals/Shared/ModalProjectUserSelect';
+import Modal from 'src/components/Shared/Modals/Modal.vue';
+import ModalProjectUserWeight from 'src/components/Projects/Modals/Shared/ModalProjectUserWeight.vue';
+import ModalProjectUserSelect from 'src/components/Projects/Modals/Shared/ModalProjectUserSelect.vue';
 
 export default {
   data() {
