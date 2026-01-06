@@ -20,8 +20,9 @@ type ExpensesByMonth struct {
 
 type GetSummaryReply struct {
 	domain.Project
-	ExpensesByMonth []*ExpensesByMonth    `json:"expensesByMonth"`
-	Users           []*domain.ProjectUser `json:"users"`
+	ExpensesByMonth   []*ExpensesByMonth         `json:"expensesByMonth"`
+	Users             []*domain.ProjectUser      `json:"users"`
+	RecurringExpenses []*domain.RecurringExpense `json:"recurringExpenses"`
 }
 
 func (s *ProjectService) GetSummary(r *http.Request, args *GetSummaryArgs, reply *GetSummaryReply) error {
@@ -56,6 +57,13 @@ func (s *ProjectService) GetSummary(r *http.Request, args *GetSummaryArgs, reply
 		return err
 	}
 	reply.Users = users
+
+	// Get project recurring expenses.
+	recurringExpenses, err := s.getProjectRecurringExpenses(args.ID)
+	if err != nil {
+		return err
+	}
+	reply.RecurringExpenses = recurringExpenses
 
 	return nil
 }

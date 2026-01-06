@@ -26,6 +26,23 @@ func (s *Service) CheckUserHasExpense(userID int, expenseID int) error {
 	return nil
 }
 
+func (s *Service) CheckUserHasRecurringExpense(userID int, recurringExpenseID int) error {
+	var count int
+	err := s.DB.Get(&count, `
+		SELECT COUNT(*)
+		FROM recurring_expenses re
+		JOIN projects p ON (p.id = re.project_id)
+		JOIN user_has_project uhp ON (uhp.project_id = p.id)
+		WHERE uhp.user_id = $1 AND re.id = $2
+	`, userID, recurringExpenseID)
+
+	if err != nil || count != 1 {
+		return domain.ForbiddenAccessToEntityError()
+	}
+
+	return nil
+}
+
 func (s *Service) CheckUserHasProject(userID int, projectID int) error {
 	var count int
 	err := s.DB.Get(&count, `

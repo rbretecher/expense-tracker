@@ -40,3 +40,15 @@ func (s *ProjectService) getProjectUsers(projectID int) ([]*domain.ProjectUser, 
 
 	return users, err
 }
+
+func (s *ProjectService) getProjectRecurringExpenses(projectID int) ([]*domain.RecurringExpense, error) {
+	recurringExpenses := make([]*domain.RecurringExpense, 0)
+	err := s.DB.Select(&recurringExpenses, `
+		SELECT re.*
+		FROM recurring_expenses re
+		WHERE re.project_id = $1
+		ORDER BY re.name;
+	`, projectID)
+
+	return recurringExpenses, err
+}
