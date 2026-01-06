@@ -32,6 +32,8 @@
         up here.
       </no-resource-banner>
 
+      <project-recurring-expenses :project="currentProject" class="q-mb-xl" />
+
       <project-users :project="currentProject"></project-users>
 
       <app-dialog v-model:showDialog="showAddExpense">
@@ -55,6 +57,7 @@ import AddExpense from 'src/components/Expenses/Modals/AddExpense.vue';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 import ProjectBreadcrumbs from 'src/components/Projects/ProjectBreadcrumbs.vue';
 import ProjectUsers from '../components/Projects/ProjectUsers/ProjectUsers.vue';
+import ProjectRecurringExpenses from 'src/components/Projects/ProjectRecurringExpenses/ProjectRecurringExpenses.vue';
 
 export default {
   components: {
@@ -63,6 +66,7 @@ export default {
     AddExpense,
     ProjectBreadcrumbs,
     ProjectUsers,
+    ProjectRecurringExpenses,
   },
   mixins: [mixinPage],
   props: ['projectId'],

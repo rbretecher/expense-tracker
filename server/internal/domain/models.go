@@ -62,3 +62,14 @@ func (e *Expense) MarshalJSON() ([]byte, error) {
 		Alias: (*Alias)(e),
 	})
 }
+
+type RecurringExpense struct {
+	ID           int        `json:"id" db:"id"`
+	ProjectID    int        `json:"projectId" db:"project_id"`
+	CategoryID   int        `json:"categoryId" db:"category_id"`
+	PaidByUserID int        `json:"paidByUserId" db:"paid_by_user_id"`
+	Name         string     `json:"name" db:"name"`
+	Price        float32    `json:"price" db:"price"`
+	StartPeriod  time.Time  `json:"startPeriod" db:"start_period"`
+	EndPeriod    *time.Time `json:"endPeriod,omitempty" db:"end_period"`
+}

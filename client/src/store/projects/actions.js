@@ -113,3 +113,42 @@ export async function removeProjectUser({ dispatch }, userHasProject) {
     showErrorMessageWithTitle('Could not remove user from user', e.message);
   }
 }
+
+export async function addProjectRecurringExpense({ dispatch }, recurringExpense) {
+  try {
+    Loading.show();
+    await executeRequest('Project.AddRecurringExpense', recurringExpense);
+    await dispatch('loadProject', recurringExpense.projectId);
+    Loading.hide();
+
+    Notify.create('Recurring expense has been added to project!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not add recurring expense to project', e.message);
+  }
+}
+
+export async function updateProjectRecurringExpense({ dispatch }, recurringExpense) {
+  try {
+    Loading.show();
+    await executeRequest('Project.UpdateRecurringExpense', recurringExpense);
+    await dispatch('loadProject', recurringExpense.projectId);
+    Loading.hide();
+
+    Notify.create('Recurring expense has been updated!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not update recurring expense for project', e.message);
+  }
+}
+
+export async function removeProjectRecurringExpense({ dispatch }, recurringExpense) {
+  try {
+    Loading.show();
+    await executeRequest('Project.DeleteRecurringExpense', {id: recurringExpense.id});
+    await dispatch('loadProject', recurringExpense.projectId);
+    Loading.hide();
+
+    Notify.create('Recurring expense has been removed from project!');
+  } catch (e) {
+    showErrorMessageWithTitle('Could not remove recurring expense from project', e.message);
+  }
+}
