@@ -19,7 +19,7 @@
 <script>
 import { mapActions } from 'vuex';
 import mixinAddEditUser from 'src/mixins/mixin-add-edit-user';
-import ModalPasswordInput from 'src/components/Shared/Modals/ModalPasswordInput';
+import ModalPasswordInput from 'src/components/Shared/Modals/ModalPasswordInput.vue';
 
 export default {
   mixins: [mixinAddEditUser],

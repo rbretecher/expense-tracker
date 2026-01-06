@@ -39,9 +39,9 @@
 <script>
 import { date, Loading, Notify } from 'quasar';
 import { mapState, mapActions } from 'vuex';
-import EditExpense from 'src/components/Expenses/Modals/EditExpense';
+import EditExpense from 'src/components/Expenses/Modals/EditExpense.vue';
 import mixinPrice from 'src/mixins/mixin-price';
-import AppDialog from 'src/components/Shared/Dialog/Dialog';
+import AppDialog from 'src/components/Shared/Dialog/Dialog.vue';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 
 export default {

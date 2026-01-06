@@ -1,4 +1,4 @@
-FROM node:17 as base
+FROM node:24 as base
 
 RUN npm install -g @quasar/cli
 

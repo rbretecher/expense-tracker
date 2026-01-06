@@ -25,8 +25,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import EditUser from 'src/components/Users/Modals/EditUser';
-import AppDialog from 'src/components/Shared/Dialog/Dialog';
+import EditUser from 'src/components/Users/Modals/EditUser.vue';
+import AppDialog from 'src/components/Shared/Dialog/Dialog.vue';
 
 export default {
   props: ['user'],

@@ -19,7 +19,7 @@
 <script>
 import { mapState } from 'vuex';
 import mixinPage from 'src/mixins/mixin-page';
-import DashboardItem from 'src/components/Dashboard/DashboardItem';
+import DashboardItem from 'src/components/Dashboard/DashboardItem.vue';
 
 export default {
   mixins: [mixinPage],

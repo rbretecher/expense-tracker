@@ -42,7 +42,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import AppDialog from 'src/components/Shared/Dialog/Dialog';
+import AppDialog from 'src/components/Shared/Dialog/Dialog.vue';
 import EditProjectUser from '../Modals/EditProjectUser.vue';
 
 export default {

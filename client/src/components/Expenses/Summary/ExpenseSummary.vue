@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ExpenseSummaryItem from 'src/components/Expenses/Summary/ExpenseSummaryItem';
+import ExpenseSummaryItem from 'src/components/Expenses/Summary/ExpenseSummaryItem.vue';
 
 export default {
   props: ['users', 'expenses'],

@@ -31,8 +31,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import BigTitle from 'src/components/Shared/Titles/BigTitle';
-import RightSideButton from 'src/components/Shared/Buttons/RightSideButton';
+import BigTitle from 'src/components/Shared/Titles/BigTitle.vue';
+import RightSideButton from 'src/components/Shared/Buttons/RightSideButton.vue';
 
 export default {
   props: ['title', 'actionName', 'actionModel'],

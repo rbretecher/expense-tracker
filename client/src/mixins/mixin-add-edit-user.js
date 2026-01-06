@@ -1,7 +1,7 @@
-import Modal from 'src/components/Shared/Modals/Modal';
-import ModalNameInput from 'src/components/Shared/Modals/ModalNameInput';
-import ModalIconColorInput from 'src/components/Shared/Modals/ModalIconColorInput';
-import ModalEmailInput from 'src/components/Shared/Modals/ModalEmailInput';
+import Modal from 'src/components/Shared/Modals/Modal.vue';
+import ModalNameInput from 'src/components/Shared/Modals/ModalNameInput.vue';
+import ModalIconColorInput from 'src/components/Shared/Modals/ModalIconColorInput.vue';
+import ModalEmailInput from 'src/components/Shared/Modals/ModalEmailInput.vue';
 
 export default {
   data() {

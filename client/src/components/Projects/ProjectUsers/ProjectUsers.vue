@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import AppDialog from 'src/components/Shared/Dialog/Dialog';
+import AppDialog from 'src/components/Shared/Dialog/Dialog.vue';
 import BigTitleWithButton from '../../Shared/Titles/BigTitleWithButton.vue';
 import ProjectUserList from '../List/ProjectUserList.vue';
 import AddProjectUser from '../Modals/AddProjectUser.vue';

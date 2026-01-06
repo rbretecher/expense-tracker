@@ -5,7 +5,7 @@ WORKDIR /app/server
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w" -a -o /main cmd/expense-tracker/main.go
 
 # Build the VueJS application
-FROM node:17 AS node_builder
+FROM node:24 AS node_builder
 WORKDIR /app/client
 COPY --from=builder /app/client .
 RUN npm install -g @quasar/cli

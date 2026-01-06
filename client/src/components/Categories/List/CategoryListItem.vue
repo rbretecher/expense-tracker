@@ -25,8 +25,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import EditCategory from 'src/components/Categories/Modals/EditCategory';
-import AppDialog from 'src/components/Shared/Dialog/Dialog';
+import EditCategory from 'src/components/Categories/Modals/EditCategory.vue';
+import AppDialog from 'src/components/Shared/Dialog/Dialog.vue';
 
 export default {
   props: ['category'],

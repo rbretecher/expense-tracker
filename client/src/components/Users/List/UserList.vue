@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import UserListItem from 'src/components/Users/List/UserListItem';
+import UserListItem from 'src/components/Users/List/UserListItem.vue';
 
 export default {
   props: ['users'],

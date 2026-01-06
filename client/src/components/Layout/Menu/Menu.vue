@@ -49,8 +49,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import ProjectItem from 'components/Layout/Menu/Expenses/ProjectItem';
-import MenuItem from 'components/Layout/Menu/MenuItem';
+import ProjectItem from 'components/Layout/Menu/Expenses/ProjectItem.vue';
+import MenuItem from 'components/Layout/Menu/MenuItem.vue';
 
 export default {
   components: {

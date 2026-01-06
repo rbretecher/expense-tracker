@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import ExpenseListItem from 'src/components/Expenses/List/ExpenseListItem';
-import ExpenseListItemTotal from 'src/components/Expenses/List/ExpenseListItemTotal';
+import ExpenseListItem from 'src/components/Expenses/List/ExpenseListItem.vue';
+import ExpenseListItemTotal from 'src/components/Expenses/List/ExpenseListItemTotal.vue';
 
 export default {
   props: ['projectId', 'month', 'expenses', 'users'],

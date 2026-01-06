@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import ModalActions from 'src/components/Shared/Modals/ModalActions';
-import ModalHeader from 'src/components/Shared/Modals/ModalHeader';
+import ModalActions from 'src/components/Shared/Modals/ModalActions.vue';
+import ModalHeader from 'src/components/Shared/Modals/ModalHeader.vue';
 
 export default {
   props: ['title'],

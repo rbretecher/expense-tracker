@@ -1,9 +1,12 @@
-import { LocalStorage } from 'quasar';
+import { defineBoot } from '#q-app/wrappers'
+import { LocalStorage } from 'quasar'
+import { store } from 'boot/store'
 
-export default async ({ router, store }) => {
-  const user = LocalStorage.getItem('user');
-  if (user !== null) {
-    store.dispatch('app/loggedIn', user, { root: true });
+export default defineBoot(({ router }) => {
+  const user = LocalStorage.getItem('user')
+
+  if (user) {
+    store.dispatch('app/loggedIn', user)
   }
 
   router.beforeEach((to, from, next) => {
@@ -16,5 +19,5 @@ export default async ({ router, store }) => {
     } else {
       next();
     }
-  });
-};
+  })
+})

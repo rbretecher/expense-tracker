@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ProjectListItem from 'src/components/Projects/List/ProjectListItem';
+import ProjectListItem from 'src/components/Projects/List/ProjectListItem.vue';
 
 export default {
   props: ['projects'],

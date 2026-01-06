@@ -33,8 +33,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import EditProject from 'src/components/Projects/Modals/EditProject';
-import AppDialog from 'src/components/Shared/Dialog/Dialog';
+import EditProject from 'src/components/Projects/Modals/EditProject.vue';
+import AppDialog from 'src/components/Shared/Dialog/Dialog.vue';
 
 export default {
   props: ['project'],
