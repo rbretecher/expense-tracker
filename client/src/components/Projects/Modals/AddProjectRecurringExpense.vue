@@ -5,7 +5,7 @@
       :autofocus="$q.platform.is.desktop"
     />
     <modal-expense-price v-model:price="formData.price" />
-    <modal-expense-date v-model:date="formData.startPeriod" />
+    <modal-expense-date v-model:date="formData.startPeriod" required />
     <modal-expense-date v-model:date="formData.endPeriod" />
     <modal-expense-paid-by
       v-model:paidByUserId="formData.paidByUserId"
@@ -35,7 +35,3 @@ export default {
   },
 };
 </script>
-
-
-
-

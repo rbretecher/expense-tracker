@@ -24,26 +24,34 @@
 import { date } from 'quasar';
 
 export default {
-  props: ['date'],
+props: {
+    date: { type: [String, null], default: null },
+    required: Boolean
+  },
   emits: ['update:date'],
   computed: {
     model: {
       get() {
-        return this.date;
+        return this.date ?? null;
       },
       set(val) {
-        this.$emit('update:date', val);
+        this.$emit('update:date', val == null || val === '' ? null : val);
         this.$refs.qDateProxy.hide();
       },
     },
   },
   methods: {
     validateDate(value) {
+      if (!value) {
+        return this.required ? 'Date is required' : true;
+      }
+
       if (!/^\d{4}-(((0)[0-9])|((1)[0-2]))-([0-2][0-9]|(3)[0-1])$/.test(value)) {
         return 'Please enter a valid date';
       }
+
       return true;
-    },
+    }
   },
   created() {
     this.$nextTick(() => {
