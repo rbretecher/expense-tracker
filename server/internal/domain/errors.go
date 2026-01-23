@@ -80,7 +80,7 @@ func CouldNotCreateEntityError(err error) *json2.Error {
 // InvalidCredentialsError is the error when a user provides a bad login/password.
 func InvalidCredentialsError(err error) *json2.Error {
 	return &json2.Error{
-		Code:    -32100,
+		Code:    1000,
 		Message: "Invalid credentials",
 		Data:    err.Error(),
 	}
@@ -88,7 +88,7 @@ func InvalidCredentialsError(err error) *json2.Error {
 
 func CategoryIsUsedError(err error) *json2.Error {
 	return &json2.Error{
-		Code:    -32101,
+		Code:    1001,
 		Message: "Category is used and cannot be deleted",
 		Data:    err.Error(),
 	}
