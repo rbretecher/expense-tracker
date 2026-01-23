@@ -85,3 +85,11 @@ func InvalidCredentialsError(err error) *json2.Error {
 		Data:    err.Error(),
 	}
 }
+
+func CategoryIsUsedError(err error) *json2.Error {
+	return &json2.Error{
+		Code:    -32101,
+		Message: "Category is used and cannot be deleted",
+		Data:    err.Error(),
+	}
+}

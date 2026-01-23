@@ -1,9 +1,16 @@
 package category
 
 import (
+	"errors"
 	"net/http"
 
+	"github.com/lib/pq"
+	"github.com/rbretecher/expense-tracker/internal/domain"
 	"github.com/rbretecher/expense-tracker/internal/service"
+)
+
+const (
+	pqRestrictViolation pq.ErrorCode = "23001"
 )
 
 type DeleteArgs struct {
@@ -17,5 +24,13 @@ func (s *CategoryService) Delete(r *http.Request, args *DeleteArgs, reply *servi
 		WHERE id = $1
 	`, args.ID)
 
-	return service.HandleDelete(result, err)
+	if err != nil {
+		var pqErr *pq.Error
+		if errors.As(err, &pqErr) && pqErr.Code == pqRestrictViolation {
+			return domain.CategoryIsUsedError(err)
+		}
+		return domain.CouldNotDeleteEntityError(err)
+	}
+
+	return service.HandleDelete(result, nil)
 }
