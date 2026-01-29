@@ -27,14 +27,12 @@ func (s *ProjectService) GetMonth(r *http.Request, args *GetMonthArgs, reply *Ge
 		return err
 	}
 
-	// Get project.
 	project, err := s.getProject(args.ID)
 	if err != nil {
 		return err
 	}
 	reply.Project = project
 
-	// Get expenses.
 	reply.Expenses = make([]*domain.Expense, 0)
 	if err := s.DB.Select(&reply.Expenses, `
 		SELECT *
@@ -45,14 +43,12 @@ func (s *ProjectService) GetMonth(r *http.Request, args *GetMonthArgs, reply *Ge
 		return err
 	}
 
-	// Get users.
 	users, err := s.getProjectUsers(args.ID)
 	if err != nil {
 		return err
 	}
 	reply.Users = users
 
-	// Get suggested expenses.
 	period, err := time.Parse("2006-01", args.Month)
 	if err != nil {
 		return err

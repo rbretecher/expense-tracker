@@ -32,14 +32,12 @@ func (s *ProjectService) GetSummary(r *http.Request, args *GetSummaryArgs, reply
 		return err
 	}
 
-	// Get project.
 	project, err := s.getProject(args.ID)
 	if err != nil {
 		return err
 	}
 	reply.Project = project
 
-	// Get expenses by month.
 	reply.ExpensesByMonth = make([]*ExpensesByMonth, 0)
 	if err := s.DB.Select(&reply.ExpensesByMonth, `
 		SELECT to_char(date, 'YYYY') AS year, to_char(date, 'MM') AS month, COUNT(*) AS count, SUM(price) AS price
@@ -51,14 +49,12 @@ func (s *ProjectService) GetSummary(r *http.Request, args *GetSummaryArgs, reply
 		return err
 	}
 
-	// Get users.
 	users, err := s.getProjectUsers(args.ID)
 	if err != nil {
 		return err
 	}
 	reply.Users = users
 
-	// Get project recurring expenses.
 	recurringExpenses, err := s.getProjectRecurringExpenses(args.ID)
 	if err != nil {
 		return err
