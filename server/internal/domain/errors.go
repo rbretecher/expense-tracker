@@ -93,3 +93,10 @@ func CategoryIsUsedError(err error) *json2.Error {
 		Data:    err.Error(),
 	}
 }
+
+func SuggestedExpenseAlreadyCreatedError() *json2.Error {
+	return &json2.Error{
+		Code:    1002,
+		Message: "Suggested expense already created for this period",
+	}
+}

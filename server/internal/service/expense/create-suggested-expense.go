@@ -1,7 +1,6 @@
 package expense
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -51,7 +50,7 @@ func (s *ExpenseService) CreateSuggested(r *http.Request, args *CreateSuggestedA
 		return service.HandleCreate(err)
 	}
 	if exists {
-		return service.HandleCreate(fmt.Errorf("suggested expense already created for this period"))
+		return domain.SuggestedExpenseAlreadyCreatedError()
 	}
 
 	err = tx.QueryRow(`
