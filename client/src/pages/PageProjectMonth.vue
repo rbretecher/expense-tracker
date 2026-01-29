@@ -21,6 +21,18 @@
           class="q-mb-xl"
         />
 
+        <big-title>Suggested expenses</big-title>
+        <project-suggested-expense-list
+          v-if="currentProjectMonth.suggestedExpenses.length"
+          :suggestedExpenses="currentProjectMonth.suggestedExpenses"
+          :project="currentProjectMonth"
+          :month="month"
+          class="q-mb-xl"
+        />
+        <no-resource-banner class="q-mb-xl" v-else>
+          There is no remaining suggested expense for this month.
+        </no-resource-banner>
+
         <big-title>Summary</big-title>
         <expense-summary
           :users="currentProjectMonth.users"
@@ -53,6 +65,7 @@ import ExpenseList from 'src/components/Expenses/List/ExpenseList.vue';
 import ExpenseSummary from 'src/components/Expenses/Summary/ExpenseSummary.vue';
 import { showErrorMessageWithTitle } from 'src/functions/show-error-message';
 import ProjectBreadcrumbs from 'src/components/Projects/ProjectBreadcrumbs.vue';
+import ProjectSuggestedExpenseList from 'src/components/Projects/List/ProjectSuggestedExpenseList.vue';
 
 export default {
   mixins: [mixinPage],
@@ -90,6 +103,7 @@ export default {
     ExpenseList,
     ExpenseSummary,
     ProjectBreadcrumbs,
+    ProjectSuggestedExpenseList,
   },
   created() {
     this.resetCurrentProjectMonth();

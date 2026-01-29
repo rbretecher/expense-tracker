@@ -8,6 +8,10 @@ export function addExpense(context, expense) {
   return executeRequest('Expense.Create', expense);
 }
 
+export function addSuggestedExpense(context, expense) {
+  return executeRequest('Expense.CreateSuggested', expense);
+}
+
 export function deleteExpense(context, expense) {
   return executeRequest('Expense.Delete', { id: expense.id });
 }

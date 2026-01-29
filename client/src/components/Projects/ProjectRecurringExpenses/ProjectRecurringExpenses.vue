@@ -11,7 +11,6 @@
     <project-recurring-expense-list v-if="project.recurringExpenses.length" :recurringExpenses="project.recurringExpenses" :project="project" />
 
     <no-resource-banner
-        v-model:showAddExpense="showAddExpense"
         v-else
         class="q-mb-xl"
       >

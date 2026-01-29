@@ -2,6 +2,7 @@ package project
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/rbretecher/expense-tracker/internal/auth"
 	"github.com/rbretecher/expense-tracker/internal/domain"
@@ -14,8 +15,9 @@ type GetMonthArgs struct {
 
 type GetMonthReply struct {
 	domain.Project
-	Expenses []*domain.Expense     `json:"expenses"`
-	Users    []*domain.ProjectUser `json:"users"`
+	Expenses          []*domain.Expense          `json:"expenses"`
+	Users             []*domain.ProjectUser      `json:"users"`
+	SuggestedExpenses []*domain.RecurringExpense `json:"suggestedExpenses"`
 }
 
 func (s *ProjectService) GetMonth(r *http.Request, args *GetMonthArgs, reply *GetMonthReply) error {
@@ -49,6 +51,19 @@ func (s *ProjectService) GetMonth(r *http.Request, args *GetMonthArgs, reply *Ge
 		return err
 	}
 	reply.Users = users
+
+	// Get suggested expenses.
+	period, err := time.Parse("2006-01", args.Month)
+	if err != nil {
+		return err
+	}
+	period = time.Date(period.Year(), period.Month(), 1, 0, 0, 0, 0, time.UTC)
+
+	suggested, err := s.getProjectSuggestedExpenses(args.ID, period)
+	if err != nil {
+		return err
+	}
+	reply.SuggestedExpenses = suggested
 
 	return nil
 }
