@@ -19,5 +19,5 @@ export default defineBoot(({ router }) => {
     } else {
       next();
     }
-  })
-})
+  });
+});
