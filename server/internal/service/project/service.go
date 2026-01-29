@@ -1,6 +1,8 @@
 package project
 
 import (
+	"time"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/rbretecher/expense-tracker/internal/domain"
 	"github.com/rbretecher/expense-tracker/internal/service"
@@ -51,4 +53,27 @@ func (s *ProjectService) getProjectRecurringExpenses(projectID int) ([]*domain.R
 	`, projectID)
 
 	return recurringExpenses, err
+}
+
+func (s *ProjectService) getProjectSuggestedExpenses(projectID int, monthStart time.Time) ([]*domain.RecurringExpense, error) {
+	suggested := make([]*domain.RecurringExpense, 0)
+
+	nextMonthStart := time.Date(monthStart.Year(), monthStart.Month()+1, 1, 0, 0, 0, 0, monthStart.Location())
+
+	err := s.DB.Select(&suggested, `
+		SELECT re.*
+		FROM recurring_expenses re
+		WHERE re.project_id = $1
+		  AND re.start_period < $3
+		  AND (re.end_period IS NULL OR re.end_period >= $2)
+		  AND NOT EXISTS (
+			  SELECT 1
+			  FROM recurring_expense_instances rei
+			  WHERE rei.recurring_expense_id = re.id
+			    AND rei.period = $2
+		  )
+		ORDER BY re.name;
+	`, projectID, monthStart, nextMonthStart)
+
+	return suggested, err
 }
